@@ -3,8 +3,17 @@ import Aside from "~/routes/_index.($doctype)/aside"
 import * as path from "node:path"
 import * as fs from "node:fs"
 import { type LoaderFunctionArgs, redirect } from "@remix-run/node"
-import { type Category, getDirectoryStructure, getLabel } from '~/utils'
-import Content from '~/routes/_index.($doctype)/content'
+import {
+  type Category,
+  type FileStructure,
+  type FolderStructure,
+  getDirectoryStructure,
+  getLabel,
+  processPaths,
+  readDirectoryRecursive
+} from "~/utils"
+import Content from "~/routes/_index.($doctype)/content"
+import _ from 'lodash'
 
 export interface Framework {
   label: string
@@ -12,8 +21,7 @@ export interface Framework {
   path: string
 }
 
-export interface Doctype extends Framework{
-}
+export interface Doctype extends Framework {}
 
 export interface DocInformation {
   path: string
@@ -21,7 +29,9 @@ export interface DocInformation {
   categoryList: Category[]
 }
 
-const getCurrentDoctypeInformation = (currentDoctype: Doctype): DocInformation => {
+const getCurrentDoctypeInformation = (
+  currentDoctype: Doctype
+): DocInformation => {
   const frameworkList = fs
     .readdirSync(currentDoctype.path)
     .map((frameworkDir) => ({
@@ -40,7 +50,7 @@ const getCurrentDoctypeInformation = (currentDoctype: Doctype): DocInformation =
   }
 }
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const contentDir = path.join(process.cwd(), "content")
   const doctypeList: Doctype[] = fs.readdirSync(contentDir).map((item) => ({
     label: item.substring(item.indexOf("-") + 1),
@@ -48,20 +58,39 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     path: path.join(contentDir, item)
   }))
   let currentDocInformation: DocInformation | null = null
+  let contentDirList: FolderStructure[] = []
+  let fileList: FileStructure[] = []
+  let fileListGroup: { [key: string]: FileStructure[] } = {}
   if (params.doctype) {
     const currentDoctype = doctypeList.find(
       (item) => item.value === params.doctype
     )
     if (currentDoctype) {
       currentDocInformation = getCurrentDoctypeInformation(currentDoctype)
+      const frameworksParam = new URL(request.url).searchParams.getAll(
+        "frameworks"
+      )
+      const selectFrameworks = currentDocInformation.frameworkList.filter(
+        (framework) => frameworksParam.includes(framework.value)
+      )
+      const frameworkDir = selectFrameworks.map((framework) =>
+        readDirectoryRecursive(framework.path, currentDoctype.path)
+      )
+      contentDirList = frameworkDir[0] ?? []
+      fileList = processPaths(selectFrameworks.map((dir) => dir.path), currentDoctype.path)
+      fileListGroup = _.groupBy(fileList, item => `${item.framework}-${item.relative}`);
     } else {
       return redirect("/")
     }
   }
+
   return {
     doctype: params.doctype,
     doctypeList,
-    currentDocInformation
+    currentDocInformation,
+    contentDirList,
+    fileList,
+    fileListGroup
   }
 }
 

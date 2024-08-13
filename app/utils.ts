@@ -43,3 +43,92 @@ export const getDirectoryStructure = (dirPath: string): Category[] => {
     value: path.basename(folder.path)
   }))
 }
+
+export interface FolderStructure {
+  label: string
+  value: string
+  path: string
+  framework: string
+  relativePath: string
+  children: FolderStructure[]
+}
+
+export const readDirectoryRecursive = (dirPath: string, currentParent: string): FolderStructure[] => {
+  return fs
+    .readdirSync(dirPath)
+    .filter((fileOrFolder) =>
+      fs.statSync(path.join(dirPath, fileOrFolder)).isDirectory()
+    )
+    .map((fileOrFolder) => {
+      const fullPath = path.join(dirPath, fileOrFolder)
+      const isDirectory = fs.statSync(fullPath).isDirectory()
+      const relativePath = fullPath.replace(currentParent, '').split(path.sep)
+      const framework = relativePath[1]
+      relativePath.shift()
+      relativePath.shift()
+      const structure: FolderStructure = {
+        label: getLabel(fileOrFolder),
+        value: fileOrFolder,
+        path: fullPath,
+        framework,
+        relativePath: relativePath.join(path.sep),
+        children: isDirectory ? readDirectoryRecursive(fullPath, currentParent) : []
+      }
+
+      return structure
+    })
+}
+
+export interface FileStructure {
+  label: string
+  value: string
+  suffix: string
+  parent: string
+  framework: string
+  path: string
+  relative: string
+  content: string
+}
+
+const readFilesRecursive = (dirPath: string, currentParent: string): FileStructure[] => {
+  const result: FileStructure[] = []
+
+  const readDir = (currentPath: string) => {
+    const items = fs.readdirSync(currentPath)
+    for (const item of items) {
+      const fullPath = path.join(currentPath, item)
+      const stat = fs.statSync(fullPath)
+
+      if (stat.isDirectory()) {
+        readDir(fullPath)
+      } else {
+        const suffix = path.extname(item)
+        const content = fs.readFileSync(fullPath, "utf-8")
+        const relativePath = currentPath.replace(currentParent, '').split(path.sep)
+        const framework = relativePath[1]
+        relativePath.shift()
+        relativePath.shift()
+
+        result.push({
+          label: item,
+          value: item,
+          suffix: suffix,
+          parent: currentPath,
+          framework,
+          relative: relativePath.join(path.sep),
+          path: fullPath,
+          content: content
+        })
+      }
+    }
+  }
+
+  readDir(dirPath)
+
+  return result
+}
+
+// 传入 path 数组并读取所有文件
+export const processPaths = (paths: string[], currentParent: string): FileStructure[] => {
+  return paths.flatMap((dirPath) => readFilesRecursive(dirPath, currentParent))
+}
