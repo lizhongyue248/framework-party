@@ -1,8 +1,10 @@
 import { Link, useLoaderData, useLocation } from '@remix-run/react'
 import type { loader } from "~/routes/_index.($doctype)/route"
+import { useTranslation } from 'react-i18next'
 
 const Aside = () => {
   const location = useLocation()
+  const { t } = useTranslation();
 
   const { currentDocInformation } = useLoaderData<typeof loader>()
   if (!currentDocInformation) {
@@ -25,14 +27,14 @@ const Aside = () => {
       <ul className="menu rounded-box w-56">
         {currentDocInformation.categoryList.map((category) => (
           <li key={category.value}>
-            <h2 className="menu-title text-base-content">{category.label}</h2>
+            <h2 className="menu-title text-base-content">{t(category.value)}</h2>
             <ul>
               {category.children.map((subCategory) => (
                 <li key={`sub-${subCategory.value}`}>
                   <Link
                     preventScrollReset
                     to={{ search: location.search, hash: `#${subCategory.value}` }}
-                  >{subCategory.label}</Link>
+                  >{t(subCategory.value)}</Link>
                 </li>
               ))}
             </ul>
