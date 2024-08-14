@@ -96,11 +96,11 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
 const App = () => {
   return (
-    <div className={"flex flex-col h-screen"}>
+    <div className={"flex flex-col h-screen w-full"}>
       <Header />
-      <div className={"flex flex-1 flex-row"}>
+      <div className={"flex flex-1 flex-row"} style={{ height: "calc(100% - 64px)"}}>
         <Aside />
-        <div className={"w-full h-full"}>
+        <div className={"w-full h-full overflow-auto pb-6 scroll-smooth snap-y "}>
           <Content />
         </div>
       </div>

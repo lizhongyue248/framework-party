@@ -1,5 +1,6 @@
 import * as fs from "node:fs"
 import * as path from "node:path"
+import _ from "lodash"
 
 export const getLabel = (
   name: string | undefined | null,
@@ -53,7 +54,10 @@ export interface FolderStructure {
   children: FolderStructure[]
 }
 
-export const readDirectoryRecursive = (dirPath: string, currentParent: string): FolderStructure[] => {
+export const readDirectoryRecursive = (
+  dirPath: string,
+  currentParent: string
+): FolderStructure[] => {
   return fs
     .readdirSync(dirPath)
     .filter((fileOrFolder) =>
@@ -62,7 +66,7 @@ export const readDirectoryRecursive = (dirPath: string, currentParent: string): 
     .map((fileOrFolder) => {
       const fullPath = path.join(dirPath, fileOrFolder)
       const isDirectory = fs.statSync(fullPath).isDirectory()
-      const relativePath = fullPath.replace(currentParent, '').split(path.sep)
+      const relativePath = fullPath.replace(currentParent, "").split(path.sep)
       const framework = relativePath[1]
       relativePath.shift()
       relativePath.shift()
@@ -72,7 +76,9 @@ export const readDirectoryRecursive = (dirPath: string, currentParent: string): 
         path: fullPath,
         framework,
         relativePath: relativePath.join(path.sep),
-        children: isDirectory ? readDirectoryRecursive(fullPath, currentParent) : []
+        children: isDirectory
+          ? readDirectoryRecursive(fullPath, currentParent)
+          : []
       }
 
       return structure
@@ -90,7 +96,10 @@ export interface FileStructure {
   content: string
 }
 
-const readFilesRecursive = (dirPath: string, currentParent: string): FileStructure[] => {
+const readFilesRecursive = (
+  dirPath: string,
+  currentParent: string
+): FileStructure[] => {
   const result: FileStructure[] = []
 
   const readDir = (currentPath: string) => {
@@ -104,7 +113,9 @@ const readFilesRecursive = (dirPath: string, currentParent: string): FileStructu
       } else {
         const suffix = path.extname(item)
         const content = fs.readFileSync(fullPath, "utf-8")
-        const relativePath = currentPath.replace(currentParent, '').split(path.sep)
+        const relativePath = currentPath
+          .replace(currentParent, "")
+          .split(path.sep)
         const framework = relativePath[1]
         relativePath.shift()
         relativePath.shift()
@@ -129,6 +140,43 @@ const readFilesRecursive = (dirPath: string, currentParent: string): FileStructu
 }
 
 // 传入 path 数组并读取所有文件
-export const processPaths = (paths: string[], currentParent: string): FileStructure[] => {
+export const processPaths = (
+  paths: string[],
+  currentParent: string
+): FileStructure[] => {
   return paths.flatMap((dirPath) => readFilesRecursive(dirPath, currentParent))
+}
+
+export interface GroupContent {
+  framework: string
+  relative: string
+  key: string
+  files: FileStructure[]
+}
+
+export const getGroupContent = (
+  folder: FolderStructure,
+  fileList: FileStructure[],
+  fileListGroup: {
+    [p: string]: FileStructure[]
+  }
+) => {
+  return _.uniqBy(
+    fileList.filter(
+      (item) =>
+        item.relative === folder.relativePath &&
+        Object.keys(fileListGroup).includes(
+          `${item.framework}-${item.relative}`
+        )
+    ),
+    (item) => `${item.framework}-${item.relative}`
+  ).map(
+    (item) =>
+      ({
+        framework: item.framework,
+        relative: item.relative,
+        key: `${item.framework}-${item.relative}`,
+        files: fileListGroup[`${item.framework}-${item.relative}`]
+      }) as GroupContent
+  )
 }
