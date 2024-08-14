@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className="navbar bg-base-100 border-b backdrop-blur z-50">
       <div className="flex-1">
-        <div className="btn btn-ghost text-xl">Framework Party</div>
+        <div className="btn btn-ghost text-xl">🥳 Framework Party</div>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-bottom dropdown-end">

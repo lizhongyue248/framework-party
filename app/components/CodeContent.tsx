@@ -5,8 +5,9 @@ import classNames from 'classnames'
 export interface CodeContentProps {
   group: GroupContent
 }
-const CodeContent: FC<CodeContentProps> = ({ group }) => (
-  <div>
+
+const CodeContent: FC<CodeContentProps> = ({ group }) => {
+  return <div>
     <div className="flex flex-col h-full">
       <h3 className={"font-bold"}>{getLabel(group.framework)}</h3>
       <div className={"not-prose"}>
@@ -24,10 +25,11 @@ const CodeContent: FC<CodeContentProps> = ({ group }) => (
               <div
                 role="tabpanel"
                 className={classNames(
-                  "tab-content bg-base-100 border-base-300 rounded-box p-6 overflow-x-auto"
+                  'tab-content bg-base-100 border-base-300 rounded-box p-6 overflow-x-auto'
                 )}
               >
-                <pre>{item.content}</pre>
+                {/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+                <div dangerouslySetInnerHTML={{__html: item.content}}/>
               </div>
             </Fragment>
           ))}
@@ -35,7 +37,7 @@ const CodeContent: FC<CodeContentProps> = ({ group }) => (
       </div>
     </div>
   </div>
-)
+}
 
 
 export default CodeContent

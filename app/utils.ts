@@ -1,6 +1,8 @@
 import * as fs from "node:fs"
 import * as path from "node:path"
 import _ from "lodash"
+import { codeToHtml } from "shiki"
+import languageSuffix from '~/languages'
 
 export const getLabel = (
   name: string | undefined | null,
@@ -96,23 +98,29 @@ export interface FileStructure {
   content: string
 }
 
-const readFilesRecursive = (
+const readFilesRecursive = async (
   dirPath: string,
   currentParent: string
-): FileStructure[] => {
+): Promise<FileStructure[]> => {
   const result: FileStructure[] = []
 
-  const readDir = (currentPath: string) => {
+  const readDir = async (currentPath: string) => {
     const items = fs.readdirSync(currentPath)
     for (const item of items) {
       const fullPath = path.join(currentPath, item)
       const stat = fs.statSync(fullPath)
 
       if (stat.isDirectory()) {
-        readDir(fullPath)
+        await readDir(fullPath)
       } else {
         const suffix = path.extname(item)
-        const content = fs.readFileSync(fullPath, "utf-8")
+        const contentPromise: Promise<string> = codeToHtml(fs.readFileSync(fullPath, "utf-8"), {
+          lang: languageSuffix[suffix],
+          themes: {
+            light: "min-light",
+            dark: "nord"
+          }
+        })
         const relativePath = currentPath
           .replace(currentParent, "")
           .split(path.sep)
@@ -128,23 +136,27 @@ const readFilesRecursive = (
           framework,
           relative: relativePath.join(path.sep),
           path: fullPath,
-          content: content
+          content: await contentPromise
         })
       }
     }
   }
 
-  readDir(dirPath)
+  await readDir(dirPath)
 
   return result
 }
 
 // 传入 path 数组并读取所有文件
-export const processPaths = (
+export const processPaths = async (
   paths: string[],
   currentParent: string
-): FileStructure[] => {
-  return paths.flatMap((dirPath) => readFilesRecursive(dirPath, currentParent))
+): Promise<FileStructure[]> => {
+  const promiseList = paths.flatMap((dirPath) =>
+    readFilesRecursive(dirPath, currentParent)
+  )
+  const result = await Promise.all(promiseList)
+  return _.flatten(result)
 }
 
 export interface GroupContent {

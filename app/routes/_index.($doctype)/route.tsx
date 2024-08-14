@@ -77,7 +77,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
         readDirectoryRecursive(framework.path, currentDoctype.path)
       )
       contentDirList = frameworkDir[0] ?? []
-      fileList = processPaths(selectFrameworks.map((dir) => dir.path), currentDoctype.path)
+      fileList = await processPaths(selectFrameworks.map((dir) => dir.path), currentDoctype.path)
       fileListGroup = _.groupBy(fileList, item => `${item.framework}-${item.relative}`);
     } else {
       return redirect("/")
