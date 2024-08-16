@@ -5,5 +5,7 @@
   "2-Request": "Request",
   "2-Configuration": "Configuration",
   "3-HandleError": "Handle Error",
-  "1-Application": "Application"
+  "1-Application": "Application",
+  "changeTheme": "Change Theme",
+  "changeLanguage": "Change Language"
 }

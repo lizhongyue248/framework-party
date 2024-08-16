@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html.dark .shiki,
+html.dark .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    /* 可选，用于定义字体样式 */
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+.shiki  {
+    padding: 20px;
+    overflow: auto;
+}
+@layer base {
+    *,
+    ::before,
+    ::after {
+        @apply dark:border-gray-600;
+    }
+}
+

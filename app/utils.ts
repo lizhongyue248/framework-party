@@ -117,8 +117,8 @@ const readFilesRecursive = async (
         const contentPromise: Promise<string> = codeToHtml(fs.readFileSync(fullPath, "utf-8"), {
           lang: languageSuffix[suffix],
           themes: {
-            light: "min-light",
-            dark: "nord"
+            light: "github-light",
+            dark: "dark-plus"
           }
         })
         const relativePath = currentPath

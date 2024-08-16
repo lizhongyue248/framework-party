@@ -7,7 +7,15 @@ export default {
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: ["light", "business"]
+    themes: [
+      "light",
+      {
+        black: {
+          ...require("daisyui/src/theming/themes").black,
+          "base-300": "rgb(115,115,115)",
+        }
+      }
+    ]
   },
-  darkMode: ["class", '[data-theme="business"]']
+  darkMode: ["class"]
 } satisfies Config

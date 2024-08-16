@@ -25,7 +25,7 @@ const CodeContent: FC<CodeContentProps> = ({ group }) => {
               <div
                 role="tabpanel"
                 className={classNames(
-                  'tab-content bg-base-100 border-base-300 rounded-box p-6 overflow-x-auto'
+                  'tab-content bg-base-100 border-base-300 rounded-box overflow-hidden'
                 )}
               >
                 {/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}

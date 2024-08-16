@@ -2,7 +2,11 @@ import Header from "~/routes/_index.($doctype)/header"
 import Aside from "~/routes/_index.($doctype)/aside"
 import * as path from "node:path"
 import * as fs from "node:fs"
-import { type LoaderFunctionArgs, redirect } from "@remix-run/node"
+import {
+  type ActionFunctionArgs,
+  type LoaderFunctionArgs,
+  redirect
+} from "@remix-run/node"
 import {
   type Category,
   type FileStructure,
@@ -13,7 +17,8 @@ import {
   readDirectoryRecursive
 } from "~/utils"
 import Content from "~/routes/_index.($doctype)/content"
-import _ from 'lodash'
+import _ from "lodash"
+import { applicationConfig } from "~/server/cookies.server"
 
 export interface Framework {
   label: string
@@ -77,12 +82,21 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
         readDirectoryRecursive(framework.path, currentDoctype.path)
       )
       contentDirList = frameworkDir[0] ?? []
-      fileList = await processPaths(selectFrameworks.map((dir) => dir.path), currentDoctype.path)
-      fileListGroup = _.groupBy(fileList, item => `${item.framework}-${item.relative}`);
+      fileList = await processPaths(
+        selectFrameworks.map((dir) => dir.path),
+        currentDoctype.path
+      )
+      fileListGroup = _.groupBy(
+        fileList,
+        (item) => `${item.framework}-${item.relative}`
+      )
     } else {
       return redirect("/")
     }
   }
+
+  const cookieHeader = request.headers.get("Cookie")
+  const cookie = (await applicationConfig.parse(cookieHeader)) || {}
 
   return {
     doctype: params.doctype,
@@ -90,7 +104,8 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     currentDocInformation,
     contentDirList,
     fileList,
-    fileListGroup
+    fileListGroup,
+    dark: cookie.dark
   }
 }
 
@@ -98,13 +113,33 @@ const App = () => {
   return (
     <div className={"flex flex-col h-screen w-full"}>
       <Header />
-      <div className={"flex flex-1 flex-row"} style={{ height: "calc(100% - 64px)"}}>
+      <div
+        className={"flex flex-1 flex-row"}
+        style={{ height: "calc(100% - 64px)" }}
+      >
         <Aside />
-        <div className={"w-full h-full overflow-auto pb-6 scroll-smooth snap-y "}>
+        <div
+          className={"w-full h-full overflow-auto pb-6 scroll-smooth snap-y "}
+        >
           <Content />
         </div>
       </div>
     </div>
   )
 }
+
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const cookieHeader = request.headers.get("Cookie")
+  const cookie = (await applicationConfig.parse(cookieHeader)) || {}
+  cookie.dark = !cookie.dark
+  return new Response(null, {
+    headers: { "Set-Cookie": await applicationConfig.serialize(cookie) },
+    status: 204
+  })
+}
+
+export const shouldRevalidate = () => {
+  return true
+}
+
 export default App

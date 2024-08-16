@@ -1,6 +1,7 @@
 import { Link, useLoaderData, useLocation } from '@remix-run/react'
 import type { loader } from "~/routes/_index.($doctype)/route"
 import { useTranslation } from 'react-i18next'
+import classNames from 'classnames'
 
 const Aside = () => {
   const location = useLocation()
@@ -34,6 +35,9 @@ const Aside = () => {
                   <Link
                     preventScrollReset
                     to={{ search: location.search, hash: `#${subCategory.value}` }}
+                    className={classNames(
+                      location.hash === `#${subCategory.value}` && 'active'
+                    )}
                   >{t(subCategory.value)}</Link>
                 </li>
               ))}

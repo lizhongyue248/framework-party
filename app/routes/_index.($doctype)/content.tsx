@@ -26,9 +26,9 @@ const Content = () => {
           <button
             type={"button"}
             className={classNames(
-              "border px-2 py-1 text-sm rounded-md text-base-content/60 cursor-pointer transition",
-              "hover:bg-base-200",
-              selectFrameworkParams.includes(framework.value) && "bg-base-200"
+              "border px-2 py-1 text-sm rounded-md text-base-content/60 cursor-pointer transition dark:border-gray-600",
+              "hover:bg-base-300",
+              selectFrameworkParams.includes(framework.value) && "bg-base-200 text-base-content text-black dark:text-gray-200"
             )}
             key={framework.value}
             onClick={() => {

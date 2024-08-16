@@ -9,13 +9,17 @@ import {
 import "./tailwind.css"
 import { useChangeLanguage } from "remix-i18next/react";
 import type React from "react"
-import type { LoaderFunctionArgs } from "@remix-run/node"
+import type { LoaderFunctionArgs } from '@remix-run/node'
 import i18next from "~/server/i18next.server"
 import { useTranslation } from 'react-i18next'
+import classNames from 'classnames'
+import { applicationConfig } from '~/server/cookies.server'
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const locale = await i18next.getLocale(request)
-  return json({ locale })
+  const cookieHeader = request.headers.get("Cookie")
+  const cookie = (await applicationConfig.parse(cookieHeader)) || {}
+  return json({ locale, dark: cookie.dark ?? false })
 }
 
 export const handle = {
@@ -28,7 +32,7 @@ export const handle = {
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   // Get the locale from the loader
-  const { locale } = useLoaderData<typeof loader>()
+  const { locale, dark } = useLoaderData<typeof loader>()
 
   const { i18n } = useTranslation()
 
@@ -39,7 +43,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   useChangeLanguage(locale)
 
   return (
-    <html lang={locale} dir={i18n.dir()}>
+    <html lang={locale} dir={i18n.dir()}
+          className={classNames(dark ? "dark" : "light")}
+          data-theme={dark ? "black" : "light"}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
