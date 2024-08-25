@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "remix vite:build",
+    "icons": "bunx @svgr/cli --typescript --out-dir app/components/icons -- icons",
     "dev": "remix vite:dev",
     "lint": "bunx biome format --write ",
     "start": "remix-serve ./build/server/index.js",
@@ -31,6 +32,10 @@
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@remix-run/dev": "^2.10.1",
+    "@svgr/cli": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-prettier": "^8.1.0",
+    "@svgr/plugin-svgo": "^8.1.0",
     "@types/lodash": "^4.17.7",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
