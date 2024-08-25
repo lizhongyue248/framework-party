@@ -8,6 +8,7 @@ import {
 } from "~/utils"
 import CodeContent from "~/components/CodeContent"
 import classNames from "classnames"
+import { useTranslation } from 'react-i18next'
 
 interface FolderStructureProps {
   folders: FolderStructure[]
@@ -23,6 +24,8 @@ const FolderContent: FC<FolderStructureProps> = ({
   fileList
 }) => {
   const location = useLocation()
+  const { t } = useTranslation()
+
   return (
     <div>
       {folders.map((folder) => {
@@ -46,7 +49,7 @@ const FolderContent: FC<FolderStructureProps> = ({
               >
                 #
               </Link>
-              {folder.label}
+              {t(folder.value)}
             </HeadingTag>
             <div className={"grid grid-cols-2 gap-4"}>
               {groupContent.map((group) => (

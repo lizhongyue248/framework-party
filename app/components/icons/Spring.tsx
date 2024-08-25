@@ -2,6 +2,7 @@ import * as React from "react"
 import type { SVGProps } from "react"
 const SvgSpring = (props: SVGProps<SVGSVGElement>) => (
   <svg
+    fill="#6DB33F"
     role="img"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
