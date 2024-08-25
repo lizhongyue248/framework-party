@@ -4,18 +4,51 @@ import type React from "react"
 import { useMemo } from "react"
 import type { loader } from "~/routes/_index.($doctype)/route"
 import FolderContent from "~/components/FolderContent"
-import Spring from "~/components/icons/Spring"
+import { Helidon, Micronaut, MicronautDark, Quarkus, SpringBoot, Vertx } from '~/components/icons'
 
 const FrameworkIcon = [
   {
-    name: "spring",
-    icon: <Spring />
+    name: "SpringBoot",
+    icon: <SpringBoot />
+  },
+  {
+    name: "Vertx",
+    icon: <Vertx />
+  },
+  {
+    name: "HelidonSE",
+    icon: <Helidon  fill={"#fff"}/>,
+    dark: true
+  },
+  {
+    name: "HelidonSE",
+    icon: <Helidon  fill={"#000"}/>,
+    dark: false
+  },
+  {
+    name: "Micronaut",
+    icon: <Micronaut />,
+    dark: false
+  },
+  {
+    name: "Micronaut",
+    icon: <MicronautDark />,
+    dark: true
+  },
+  {
+    name: "Quarkus",
+    icon: <Quarkus />
   }
 ]
 
 const Content = () => {
-  const { currentDocInformation, contentDirList, fileListGroup, fileList } =
-    useLoaderData<typeof loader>()
+  const {
+    currentDocInformation,
+    contentDirList,
+    fileListGroup,
+    fileList,
+    dark
+  } = useLoaderData<typeof loader>()
   if (!currentDocInformation) {
     return <div>Aside</div>
   }
@@ -34,7 +67,8 @@ const Content = () => {
           const currentIcon = FrameworkIcon.find(
             (item) =>
               item.name.toLowerCase().toLowerCase() ===
-              framework.label.toLowerCase().replace(" ", "")
+                framework.label.toLowerCase().replace(" ", "") &&
+              (!("dark" in item) || item.dark === dark)
           )
           return (
             <button
