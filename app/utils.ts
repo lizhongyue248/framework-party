@@ -96,6 +96,7 @@ export interface FileStructure {
   path: string
   relative: string
   content: string
+  code: string
 }
 
 const readFilesRecursive = async (
@@ -114,7 +115,8 @@ const readFilesRecursive = async (
         await readDir(fullPath)
       } else {
         const suffix = path.extname(item)
-        const contentPromise: Promise<string> = codeToHtml(fs.readFileSync(fullPath, "utf-8"), {
+        const code = fs.readFileSync(fullPath, "utf-8")
+        const contentPromise: Promise<string> = codeToHtml(code, {
           lang: languageSuffix[suffix],
           themes: {
             light: "github-light",
@@ -136,7 +138,8 @@ const readFilesRecursive = async (
           framework,
           relative: relativePath.join(path.sep),
           path: fullPath,
-          content: await contentPromise
+          content: await contentPromise,
+          code
         })
       }
     }
