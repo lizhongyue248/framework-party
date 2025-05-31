@@ -1,7 +1,7 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router"
 
-export const Route = createFileRoute('/users/')({
-  component: UsersIndexComponent,
+export const Route = createFileRoute("/users/")({
+  component: UsersIndexComponent
 })
 
 function UsersIndexComponent() {

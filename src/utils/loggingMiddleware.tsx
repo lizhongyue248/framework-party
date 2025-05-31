@@ -1,4 +1,4 @@
-import { createMiddleware } from '@tanstack/react-start'
+import { createMiddleware } from "@tanstack/react-start"
 
 const preLogMiddleware = createMiddleware()
   .client(async (ctx) => {
@@ -6,11 +6,11 @@ const preLogMiddleware = createMiddleware()
 
     return ctx.next({
       context: {
-        clientTime,
+        clientTime
       },
       sendContext: {
-        clientTime,
-      },
+        clientTime
+      }
     })
   })
   .server(async (ctx) => {
@@ -19,9 +19,8 @@ const preLogMiddleware = createMiddleware()
     return ctx.next({
       sendContext: {
         serverTime,
-        durationToServer:
-          serverTime.getTime() - ctx.context.clientTime.getTime(),
-      },
+        durationToServer: serverTime.getTime() - ctx.context.clientTime.getTime()
+      }
     })
   })
 
@@ -31,10 +30,10 @@ export const logMiddleware = createMiddleware()
     const res = await ctx.next()
 
     const now = new Date()
-    console.log('Client Req/Res:', {
+    console.log("Client Req/Res:", {
       duration: res.context.clientTime.getTime() - now.getTime(),
       durationToServer: res.context.durationToServer,
-      durationFromServer: now.getTime() - res.context.serverTime.getTime(),
+      durationFromServer: now.getTime() - res.context.serverTime.getTime()
     })
 
     return res
