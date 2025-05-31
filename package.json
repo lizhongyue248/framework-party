@@ -1,54 +1,30 @@
 {
-  "name": "framework-party",
+  "name": "tanstack-start-example-basic",
   "private": true,
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
-    "icons": "bunx @svgr/cli --typescript --out-dir app/components/icons -- icons",
-    "dev": "remix vite:dev",
-    "lint": "bunx biome format --write ",
-    "start": "remix-serve ./build/server/index.js",
-    "typecheck": "tsc"
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start"
   },
   "dependencies": {
-    "@remix-run/node": "^2.10.1",
-    "@remix-run/react": "^2.10.1",
-    "@remix-run/serve": "^2.10.1",
-    "@tailwindcss/typography": "^0.5.14",
-    "classnames": "^2.5.1",
-    "i18next": "^23.12.3",
-    "i18next-browser-languagedetector": "^8.0.0",
-    "i18next-fs-backend": "^2.3.2",
-    "i18next-http-backend": "^2.5.2",
-    "isbot": "^4.1.0",
-    "lodash": "^4.17.21",
-    "lucide-react": "^0.427.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-i18next": "^15.0.1",
-    "remix-i18next": "^6.3.0"
+    "@tanstack/react-router": "^1.120.13",
+    "@tanstack/react-router-devtools": "^1.120.13",
+    "@tanstack/react-start": "^1.120.13",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.6.0",
+    "vinxi": "0.5.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.3",
-    "@remix-run/dev": "^2.10.1",
-    "@svgr/cli": "^8.1.0",
-    "@svgr/plugin-jsx": "^8.1.0",
-    "@svgr/plugin-prettier": "^8.1.0",
-    "@svgr/plugin-svgo": "^8.1.0",
-    "@types/lodash": "^4.17.7",
-    "@types/react": "^18.2.20",
-    "@types/react-dom": "^18.2.7",
-    "autoprefixer": "^10.4.19",
-    "daisyui": "^4.12.10",
-    "postcss": "^8.4.38",
-    "shiki": "^1.12.1",
-    "tailwindcss": "^3.4.4",
-    "typescript": "^5.1.6",
-    "vite": "^5.1.0",
-    "vite-tsconfig-paths": "^4.2.1"
-  },
-  "engines": {
-    "node": ">=20.0.0"
+    "@tailwindcss/postcss": "^4.1.8",
+    "@types/node": "^22.5.4",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.7.2",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
