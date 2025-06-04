@@ -1,72 +1,81 @@
-# Welcome to TanStack.com!
-
-This site is built with TanStack Router!
-
-- [TanStack Router Docs](https://tanstack.com/router)
-
-It's deployed automagically with Netlify!
-
-- [Netlify](https://netlify.com/)
-
-## Development
-
-From your terminal:
+Generated with [vike.dev/new](https://vike.dev/new) ([version 442](https://www.npmjs.com/package/create-vike/v/0.0.442)) using this command:
 
 ```sh
-pnpm install
-pnpm dev
+bun create vike@latest --react --tailwindcss --shadcn-ui --biome
 ```
 
-This starts your app in development mode, rebuilding assets on file changes.
+## Contents
 
-## Editing and previewing the docs of TanStack projects locally
+* [React](#react)
 
-The documentations for all TanStack projects except for `React Charts` are hosted on [https://tanstack.com](https://tanstack.com), powered by this TanStack Router app.
-In production, the markdown doc pages are fetched from the GitHub repos of the projects, but in development they are read from the local file system.
+  * [`/pages/+config.ts`](#pagesconfigts)
+  * [Routing](#routing)
+  * [`/pages/_error/+Page.jsx`](#pages_errorpagejsx)
+  * [`/pages/+onPageTransitionStart.ts` and `/pages/+onPageTransitionEnd.ts`](#pagesonpagetransitionstartts-and-pagesonpagetransitionendts)
+  * [SSR](#ssr)
+  * [HTML Streaming](#html-streaming)
 
-Follow these steps if you want to edit the doc pages of a project (in these steps we'll assume it's [`TanStack/form`](https://github.com/tanstack/form)) and preview them locally :
+* [shadcn/ui](#shadcnui)
 
-1. Create a new directory called `tanstack`.
+  * [Configuration](#configuration)
+  * [Add Components to Your Project](#add-components-to-your-project)
 
-```sh
-mkdir tanstack
-```
+## React
 
-2. Enter the directory and clone this repo and the repo of the project there.
+This app is ready to start. It's powered by [Vike](https://vike.dev) and [React](https://react.dev/learn).
 
-```sh
-cd tanstack
-git clone git@github.com:TanStack/tanstack.com.git
-git clone git@github.com:TanStack/form.git
-```
+### `/pages/+config.ts`
 
-> [!NOTE]
-> Your `tanstack` directory should look like this:
->
-> ```
-> tanstack/
->    |
->    +-- form/
->    |
->    +-- tanstack.com/
-> ```
+Such `+` files are [the interface](https://vike.dev/config) between Vike and your code. It defines:
 
-> [!WARNING]
-> Make sure the name of the directory in your local file system matches the name of the project's repo. For example, `tanstack/form` must be cloned into `form` (this is the default) instead of `some-other-name`, because that way, the doc pages won't be found.
+* A default [`<Layout>` component](https://vike.dev/Layout) (that wraps your [`<Page>` components](https://vike.dev/Page)).
+* A default [`title`](https://vike.dev/title).
+* Global [`<head>` tags](https://vike.dev/head-tags).
 
-3. Enter the `tanstack/tanstack.com` directory, install the dependencies and run the app in dev mode:
+### Routing
 
-```sh
-cd tanstack.com
-pnpm i
-# The app will run on https://localhost:3000 by default
-pnpm dev
-```
+[Vike's built-in router](https://vike.dev/routing) lets you choose between:
 
-4. Now you can visit http://localhost:3000/form/latest/docs/overview in the browser and see the changes you make in `tanstack/form/docs`.
+* [Filesystem Routing](https://vike.dev/filesystem-routing) (the URL of a page is determined based on where its `+Page.jsx` file is located on the filesystem)
+* [Route Strings](https://vike.dev/route-string)
+* [Route Functions](https://vike.dev/route-function)
 
-> [!NOTE]
-> The updated pages need to be manually reloaded in the browser.
+### `/pages/_error/+Page.jsx`
 
-> [!WARNING]
-> You will need to update the `docs/config.json` file (in the project's repo) if you add a new doc page!
+The [error page](https://vike.dev/error-page) which is rendered when errors occur.
+
+### `/pages/+onPageTransitionStart.ts` and `/pages/+onPageTransitionEnd.ts`
+
+The [`onPageTransitionStart()` hook](https://vike.dev/onPageTransitionStart), together with [`onPageTransitionEnd()`](https://vike.dev/onPageTransitionEnd), enables you to implement page transition animations.
+
+### SSR
+
+SSR is enabled by default. You can [disable it](https://vike.dev/ssr) for all your pages or only for some pages.
+
+### HTML Streaming
+
+You can enable/disable [HTML streaming](https://vike.dev/stream) for all your pages, or only for some pages while still using it for others.
+
+## shadcn/ui
+
+Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
+
+### Configuration
+
+see [shadcn/ui theming](https://ui.shadcn.com/docs/theming)
+
+Base Configuration can be found in `components.json` file.
+
+> \[!NOTE]
+> changes to the `components.json` file **will not** be reflected in existing components. Only new components will be affected.
+
+### Add Components to Your Project
+
+**Example:** add a component to your project.
+`pnpm shadcn add button`
+
+use the `<Button />` component in your project:
+`import { Button } from "@/components/ui/button";`
+
+more [shadcn/ui components](https://ui.shadcn.com/docs/components/accordion)
+
