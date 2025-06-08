@@ -1,0 +1,106 @@
+definitions:
+  reactivity-group: &reactivity-group
+    type: "Reactivity"
+    description: >
+      Reactivity is the mechanism that allows the framework to detect when data used on the page is changed (mutated), 
+      and to update the page optimally to reflect these changes. It is therefore a crucial mechanism for any web framework, 
+      so we are going to analyze it to understand its strengths and limitations.
+  detail: &reactivity-detail
+    - name: "Declaring State"
+      description: "Use @RequestMapping to map web requests onto specific handler methods."
+      file:
+        - path: "apps/vue-party/src/components/reactivity/DeclareState.vue"
+          language: "typescript"
+  routing: &routing-group
+    type: Routing
+    description: Routing is the process of determining how an application responds to a client request to a particular endpoint.
+
+name: "Frontend Frameworks"
+repository: "https://github.com/lizhongyue248/framework-party-frontend"
+framework:
+  - name: "React"
+    description: "A JavaScript library for building user interfaces with a component-based architecture."
+    version: "18.2.0"
+    repository: "https://github.com/facebook/react"
+    website: "https://reactjs.org"
+    license: "MIT"
+    logo: "https://reactjs.org/logo-og.png"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - <<: *reactivity-detail
+            file:
+              - path: "apps/react-party/src/components/reactivity/DeclareState.tsx"
+                language: "typescript"
+                startLine: 10
+                endLine: 15
+  - name: "Vue"
+    description: "A progressive framework for building user interfaces with an approachable core library."
+    version: "3.3.4"
+    repository: "https://github.com/vuejs/vue"
+    website: "https://vuejs.org"
+    license: "MIT"
+    logo: "https://vuejs.org/images/logo.png"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - <<: *reactivity-detail
+            file:
+              - path: "apps/vue-party/src/components/reactivity/DeclareState.vue"
+                language: "vue"
+  - name: "Svelte"
+    description: "A radical new approach to building user interfaces that compiles your code to tiny, framework-less vanilla JS."
+    version: "4.1.2"
+    repository: "https://github.com/sveltejs/svelte"
+    website: "https://svelte.dev"
+    license: "MIT"
+    logo: "https://svelte.dev/svelte-logo.svg"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - <<: *reactivity-detail
+            file:
+              - path: "apps/svelte-party/src/components/reactivity/DeclareState.svelte"
+                language: "svelte"
+  - name: "Lit"
+    description: "A simple library for building fast, lightweight web components."
+    version: "3.0.0"
+    repository: "https://github.com/lit/lit"
+    website: "https://lit.dev"
+    license: "BSD-3-Clause"
+    logo: "https://lit.dev/images/logo.svg"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - <<: *reactivity-detail
+            file:
+              - path: "apps/lit-party/src/components/reactivity/declare-state.ts"
+                language: "typescript"
+  - name: "Solid"
+    description: "A declarative, efficient, and flexible JavaScript library for building user interfaces with fine-grained reactivity."
+    version: "1.7.11"
+    repository: "https://github.com/solidjs/solid"
+    website: "https://www.solidjs.com"
+    license: "MIT"
+    logo: "https://www.solidjs.com/img/logo.svg"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - <<: *reactivity-detail
+            file:
+              - path: "apps/solid-party/src/components/reactivity/DeclareState.tsx"
+                language: "typescript"
+  - name: "Qwik"
+    description: "A resumable framework for building instant web applications that focus on performance and scalability."
+    version: "1.2.12"
+    repository: "https://github.com/BuilderIO/qwik"
+    website: "https://qwik.builder.io"
+    license: "MIT"
+    logo: "https://qwik.builder.io/logos/qwik-logo.svg"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - <<: *reactivity-detail
+            file:
+              - path: "apps/qwik-party/src/components/reactivity/DeclareState.tsx"
+                language: "typescript"

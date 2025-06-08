@@ -1,18 +1,20 @@
 import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
 import vike from "vike/plugin"
-import { defineConfig } from "vite"
+import { defineConfig, loadEnv } from "vite"
+import contentPlugin from "./content/plugin"
 
-export default defineConfig({
-  plugins: [vike(), react({}), tailwindcss()],
+export default defineConfig(({ mode }) => {
+  return {
+    plugins: [vike(), react({}), tailwindcss(), contentPlugin(mode)],
 
-  build: {
-    target: "es2022"
-  },
-
-  resolve: {
-    alias: {
-      "@": new URL("./", import.meta.url).pathname
+    build: {
+      target: "es2022"
+    },
+    resolve: {
+      alias: {
+        "@": new URL("./", import.meta.url).pathname
+      }
     }
   }
 })
