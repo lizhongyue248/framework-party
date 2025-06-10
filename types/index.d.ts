@@ -49,3 +49,6 @@ export type NavData = {
   name: string
   id: string
 }
+
+export type ThemeType = "light" | "dark" | "system"
+export type LanguageOption = "zh" | "en"
