@@ -4,9 +4,9 @@ import vike from "vike/plugin"
 import { defineConfig, loadEnv } from "vite"
 import contentPlugin from "./content/plugin"
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(() => {
   return {
-    plugins: [vike(), react({}), tailwindcss(), contentPlugin(mode)],
+    plugins: [react(), vike(), tailwindcss(), contentPlugin()],
 
     build: {
       target: "es2022"

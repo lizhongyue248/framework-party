@@ -1,10 +1,11 @@
 import * as fs from "node:fs"
 import path from "node:path"
-import type { Content, Framework, TaskContext } from "@/types"
-import { type DefaultRenderer, Listr, type ListrTaskWrapper } from "listr2"
+import { Listr } from "listr2"
 import simpleGit from "simple-git"
-import { type EnvironmentOptions, type Plugin, type ResolvedConfig, loadEnv } from "vite"
+import type { EnvironmentOptions, Plugin } from "vite"
 import YAML from "yaml"
+import { getRepoName } from "../lib/utils"
+import type { Content, NavData } from "../types"
 
 const readContentFile = () => {
   const contentDir = path.resolve("content/repository")
@@ -32,52 +33,25 @@ const readContentFile = () => {
   return contents
 }
 
-const getRepoName = (repoUrl: string): string => {
-  const cleanUrl = repoUrl.endsWith("/") ? repoUrl.slice(0, -1) : repoUrl
-  let repoName = cleanUrl.split("/").pop() || ""
-  if (repoName.includes(":")) {
-    repoName = repoName.split(":").pop() || ""
-  }
-  return repoName.replace(/\.git$/, "")
-}
-
-const contentPlugin = async (mode: string): Promise<Plugin> => {
+const contentPlugin = async (): Promise<Plugin> => {
   return {
     name: "content-plugin",
     version: "1.0.0",
     configEnvironment(name: string, options: EnvironmentOptions) {},
     buildStart: async (options) => {
       const contentList = readContentFile()
-      const taskList = new Listr<TaskContext>([])
+      const taskList = new Listr([])
+      const navList: NavData[] = []
       for (const content of contentList) {
         const repoName = getRepoName(content.repository)
         const targetDir = `tmp/${repoName}`
-        const subTaskList = new Listr<TaskContext>([])
-        for (const framework of content.framework) {
-          subTaskList.add({
-            title: `Processing framework ${framework.name}`,
-            task: async (context, task) => {
-              for (const feature of framework.feature) {
-                for (const detail of feature.detail) {
-                  for (const file of detail.file) {
-                    const fileContentBuffer = fs.readFileSync(path.join(targetDir, file.path))
-                    let fileContent = fileContentBuffer.toString()
-                    if (file.startLine && file.endLine && file.endLine > file.startLine) {
-                      const lines = fileContent.split("\n")
-                      const updatedLines = lines.slice(file.startLine - 1, file.endLine)
-                      fileContent = updatedLines.join("\n")
-                    }
-                    file.content = fileContent
-                  }
-                }
-              }
-              fs.writeFileSync(`content/generateContent/${repoName}.json`, JSON.stringify(content, null, 2))
-            }
-          })
-        }
+        navList.push({
+          name: content.name,
+          id: repoName
+        })
         taskList.add({
           title: `Processing ${content.name}`,
-          task: async (context, task) => {
+          task: async (_, task) => {
             const git = simpleGit()
             try {
               if (fs.existsSync(targetDir)) {
@@ -88,16 +62,34 @@ const contentPlugin = async (mode: string): Promise<Plugin> => {
                 task.output = `Cloning repository ${repoName}...`
                 await git.clone(content.repository, targetDir, {})
               }
+              for (const framework of content.framework) {
+                for (const feature of framework.feature) {
+                  for (const detail of feature.detail) {
+                    for (const file of detail.file) {
+                      const fileContentBuffer = fs.readFileSync(path.join(targetDir, file.path))
+                      let fileContent = fileContentBuffer.toString()
+                      if (file.startLine && file.endLine && file.endLine > file.startLine) {
+                        const lines = fileContent.split("\n")
+                        const updatedLines = lines.slice(file.startLine - 1, file.endLine)
+                        fileContent = updatedLines.join("\n")
+                      }
+                      file.content = fileContent
+                    }
+                  }
+                }
+                fs.writeFileSync(`content/generateContent/${repoName}.json`, JSON.stringify(content, null, 2))
+              }
             } catch (e) {
               task.output = `Error: ${e}`
             }
-            return subTaskList
           }
         })
       }
+      fs.writeFileSync("content/generateContent/nav.json", JSON.stringify(navList, null, 2))
       await taskList.run()
     }
   }
 }
 
 export default contentPlugin
+readContentFile()

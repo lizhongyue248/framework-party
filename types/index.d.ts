@@ -9,11 +9,13 @@ export interface File {
 export interface DetailItem {
   name: string
   description: string
+  type: "detail"
   file: File[]
 }
 
 export interface Feature {
-  type: string
+  name: string
+  type: "group"
   description: string
   detail: DetailItem[]
 }
@@ -33,6 +35,17 @@ export interface Content {
   name: string
   repository: string
   framework: Framework[]
+  definitions?: Record<
+    string,
+    {
+      type: string
+      name: string
+      description: string
+    }
+  >
 }
 
-export type TaskContext = {}
+export type NavData = {
+  name: string
+  id: string
+}

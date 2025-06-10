@@ -1,21 +1,13 @@
 definitions:
   reactivity-group: &reactivity-group
-    type: "Reactivity"
+    type: "group"
+    name: "Reactivity"
     description: >
       Reactivity is the mechanism that allows the framework to detect when data used on the page is changed (mutated), 
       and to update the page optimally to reflect these changes. It is therefore a crucial mechanism for any web framework, 
       so we are going to analyze it to understand its strengths and limitations.
-  detail: &reactivity-detail
-    - name: "Declaring State"
-      description: "Use @RequestMapping to map web requests onto specific handler methods."
-      file:
-        - path: "apps/vue-party/src/components/reactivity/DeclareState.vue"
-          language: "typescript"
-  routing: &routing-group
-    type: Routing
-    description: Routing is the process of determining how an application responds to a client request to a particular endpoint.
 
-name: "Frontend Frameworks"
+name: "Frontend"
 repository: "https://github.com/lizhongyue248/framework-party-frontend"
 framework:
   - name: "React"
@@ -28,7 +20,8 @@ framework:
     feature:
       - <<: *reactivity-group
         detail:
-          - <<: *reactivity-detail
+          - name: "Declaring State"
+            description: "Use @RequestMapping to map web requests onto specific handler methods."
             file:
               - path: "apps/react-party/src/components/reactivity/DeclareState.tsx"
                 language: "typescript"
@@ -44,7 +37,8 @@ framework:
     feature:
       - <<: *reactivity-group
         detail:
-          - <<: *reactivity-detail
+          - name: "Declaring State"
+            description: "Use @RequestMapping to map web requests onto specific handler methods."
             file:
               - path: "apps/vue-party/src/components/reactivity/DeclareState.vue"
                 language: "vue"
@@ -58,7 +52,8 @@ framework:
     feature:
       - <<: *reactivity-group
         detail:
-          - <<: *reactivity-detail
+          - name: "Declaring State"
+            description: "Use @RequestMapping to map web requests onto specific handler methods."
             file:
               - path: "apps/svelte-party/src/components/reactivity/DeclareState.svelte"
                 language: "svelte"
@@ -72,7 +67,8 @@ framework:
     feature:
       - <<: *reactivity-group
         detail:
-          - <<: *reactivity-detail
+          - name: "Declaring State"
+            description: "Use @RequestMapping to map web requests onto specific handler methods."
             file:
               - path: "apps/lit-party/src/components/reactivity/declare-state.ts"
                 language: "typescript"
@@ -86,7 +82,8 @@ framework:
     feature:
       - <<: *reactivity-group
         detail:
-          - <<: *reactivity-detail
+          - name: "Declaring State"
+            description: "Use @RequestMapping to map web requests onto specific handler methods."
             file:
               - path: "apps/solid-party/src/components/reactivity/DeclareState.tsx"
                 language: "typescript"
@@ -100,7 +97,8 @@ framework:
     feature:
       - <<: *reactivity-group
         detail:
-          - <<: *reactivity-detail
+          - name: "Declaring State"
+            description: "Use @RequestMapping to map web requests onto specific handler methods."
             file:
               - path: "apps/qwik-party/src/components/reactivity/DeclareState.tsx"
                 language: "typescript"
