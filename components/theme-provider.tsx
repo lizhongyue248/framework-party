@@ -25,7 +25,6 @@ export function ThemeProvider({ children, defaultTheme = "system", storageKey = 
   const setTheme = useStore((state) => state.setTheme)
 
   useEffect(() => {
-    console.log("theme", theme)
     const root = window.document.documentElement
     root.classList.remove("light", "dark")
     if (theme === "system") {
@@ -38,10 +37,7 @@ export function ThemeProvider({ children, defaultTheme = "system", storageKey = 
 
   const value = {
     theme,
-    setTheme: (theme: ThemeType) => {
-      // localStorage.setItem(storageKey, theme)
-      setTheme(theme)
-    }
+    setTheme
   }
 
   return (
