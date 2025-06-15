@@ -22,3 +22,7 @@ export const readJsonFile = <T>(filename: string): T => {
   const fileContent = fs.readFileSync(filePath, "utf-8")
   return JSON.parse(fileContent) as T
 }
+
+export const getFileName = (path: string): string => {
+  return path.split("/").pop() || path
+}

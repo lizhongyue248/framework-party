@@ -1,4 +1,5 @@
 import { useStore } from "@/lib/store"
+import { getFileName } from "@/lib/utils"
 import type { ContentData } from "@/pages/@content/+data"
 import { useMemo } from "react"
 import { useData } from "vike-react/useData"
@@ -39,7 +40,14 @@ export const Page = () => {
                             <div>No data available</div>
                           ) : (
                             <>
-                              <div>{currentDetail.description}</div>
+                              <small className="text-sm leading-none font-medium">{currentDetail.description}</small>
+                              {currentDetail.file.map((file) => (
+                                <div key={`file-${file.path}`}>
+                                  <div className={"text-sm "}>{getFileName(file.path)}</div>
+                                  {/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+                                  <div className="code-block overflow-auto rounded-md my-2" dangerouslySetInnerHTML={{ __html: file.content ?? "" }} />
+                                </div>
+                              ))}
                             </>
                           )}
                         </div>

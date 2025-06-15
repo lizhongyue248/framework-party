@@ -1,6 +1,7 @@
 import * as fs from "node:fs"
 import path from "node:path"
 import { Listr } from "listr2"
+import { codeToHtml } from "shiki"
 import simpleGit from "simple-git"
 import type { EnvironmentOptions, Plugin } from "vite"
 import YAML from "yaml"
@@ -74,7 +75,13 @@ const contentPlugin = async (): Promise<Plugin> => {
                         const updatedLines = lines.slice(file.startLine - 1, file.endLine)
                         fileContent = updatedLines.join("\n")
                       }
-                      file.content = fileContent
+                      file.content = await codeToHtml(fileContent, {
+                        lang: file.language,
+                        themes: {
+                          light: "min-light",
+                          dark: "nord"
+                        }
+                      })
                     }
                   }
                 }
@@ -95,6 +102,7 @@ const contentPlugin = async (): Promise<Plugin> => {
                 description: content.description,
                 repository: content.repository
               })
+              fs.writeFileSync(`content/generateContent/${repoName}.json`, JSON.stringify(content, null, 2))
             } catch (e) {
               console.error(e)
               task.output = `Error: ${e}`

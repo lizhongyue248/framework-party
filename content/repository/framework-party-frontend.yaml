@@ -28,8 +28,6 @@ framework:
             file:
               - path: "apps/react-party/src/components/reactivity/DeclareState.tsx"
                 language: "typescript"
-                startLine: 10
-                endLine: 15
   - name: "Vue"
     description: "A progressive framework for building user interfaces with an approachable core library."
     version: "3.3.4"
