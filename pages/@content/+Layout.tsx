@@ -42,7 +42,7 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className={"w-full min-h-screen flex flex-col"}>
-      <header className={"flex justify-between p-4 items-center"}>
+      <header className={"flex justify-between p-4 items-center border-b-2"}>
         <h1 className={"text-xl font-bold"}>Framework Party</h1>
         <nav className={"flex flex-row gap-2"}>
           {(contentData.nav ?? []).map((item) => (
@@ -57,12 +57,11 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
           </Button>
         </div>
       </header>
-      <Separator />
 
       <div className={"flex-1 flex flex-row"}>
         <AppSidebar sidebarData={contentData.sidebar} />
         <div className={"h-full w-full"}>
-          <div className={"flex flex-row gap-4 py-2 overflow-x-auto px-8 border-b"}>
+          <div className={"flex flex-row gap-4 py-2 overflow-x-auto px-8 border-b-2 backdrop-blur-lg bg-background/30 scrollbar-thin"}>
             {contentData.currentContent?.framework.map((framework) => (
               <Toggle
                 variant={"outline"}
