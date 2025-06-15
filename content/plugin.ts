@@ -84,13 +84,16 @@ const contentPlugin = async (): Promise<Plugin> => {
                 const detailList = value["detail-list"].map((item) => ({ detail: item }) as SidebarItemData)
                 const feature: SidebarListData = {
                   feature: value.name,
-                  item: detailList
+                  item: detailList,
+                  description: value.description
                 }
                 contentSidebarData.push(feature)
               }
               sidebarContent.push({
                 content: repoName,
-                data: contentSidebarData
+                data: contentSidebarData,
+                description: content.description,
+                repository: content.repository
               })
             } catch (e) {
               console.error(e)

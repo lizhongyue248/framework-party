@@ -32,9 +32,13 @@ export interface Framework {
   feature: Feature[]
 }
 
-export interface Content {
+export interface ContentInformation {
   name: string
   repository: string
+  description: string
+}
+
+export interface Content extends ContentInformation {
   framework: Framework[]
   definitions?: Record<
     string,
@@ -52,15 +56,20 @@ export type NavData = {
   id: string
 }
 
-export type SidebarItemData = { detail: string }
+export type SidebarItemData = {
+  detail: string
+}
 
 export type SidebarListData = {
   feature: string
+  description: string
   item: SidebarItemData[]
 }
 
 export type ContentSidebarData = {
   content: string
+  description: string
+  repository: string
   data: SidebarListData[]
 }
 
