@@ -1,6 +1,7 @@
 export interface File {
   path: string
   language: string
+  code?: string
   content?: string
   startLine?: number
   endLine?: number

@@ -8,6 +8,6 @@ html.dark .shiki span {
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 .shiki-themes {
-  padding: 1rem;
+  padding: 2rem 1rem;
   overflow: auto;
 }

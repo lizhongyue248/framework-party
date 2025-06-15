@@ -60,12 +60,12 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
       <Separator />
 
       <ResizablePanelGroup className={"flex-1 flex flex-row"} direction="horizontal">
-        <ResizablePanel defaultSize={12}>
+        <ResizablePanel maxSize={20} minSize={12} defaultSize={12}>
           <AppSidebar sidebarData={contentData.sidebar} />
         </ResizablePanel>
         <ResizableHandle />
-        <ResizablePanel className={"h-full w-full px-8"}>
-          <div className={"flex flex-row gap-4 py-2 overflow-x-auto"}>
+        <ResizablePanel className={"h-full w-full"}>
+          <div className={"flex flex-row gap-4 py-2 overflow-x-auto px-8 border-b"}>
             {contentData.currentContent?.framework.map((framework) => (
               <Toggle
                 variant={"outline"}
@@ -77,7 +77,9 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
               </Toggle>
             ))}
           </div>
-          <div className={"flex-1 w-full h-full overflow-auto"}>{children}</div>
+          <div className={"flex-1 w-full overflow-auto px-8 scrollbar-thin"} style={{ height: "calc(100vh - 130px)" }}>
+            {children}
+          </div>
         </ResizablePanel>
       </ResizablePanelGroup>
     </div>

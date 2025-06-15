@@ -80,12 +80,21 @@ const contentPlugin = async (): Promise<Plugin> => {
                         const updatedLines = lines.slice(file.startLine - 1, file.endLine)
                         fileContent = updatedLines.join("\n")
                       }
+                      file.code = fileContent
                       file.content = highlighter.codeToHtml(fileContent, {
                         lang: file.language,
                         themes: {
                           light: "one-light",
                           dark: "one-dark-pro"
-                        }
+                        },
+                        transformers: [
+                          {
+                            pre(node) {
+                              node.properties.class = `${node.properties.class || ""} scrollbar-thin scrollbar-track-transparent`
+                              return node
+                            }
+                          }
+                        ]
                       })
                     }
                   }

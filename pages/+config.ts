@@ -19,5 +19,6 @@ export default {
   stream: true,
   // https://vike.dev/ssr - this line can be removed since `true` is the default
   ssr: true,
-  extends: [vikeReact, vikeReactZustand]
+  extends: [vikeReact, vikeReactZustand],
+  htmlAttributes: { class: "scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent" }
 } satisfies Config
