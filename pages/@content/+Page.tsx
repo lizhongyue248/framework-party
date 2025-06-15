@@ -22,19 +22,19 @@ export const Page = () => {
       <div>{currentContent.description}</div>
       {sidebar.data.map((feature) => {
         return (
-          <div key={`page-${feature.feature}`} className={"flex flex-col gap-2"}>
+          <div key={`page-${feature.feature}`} className={"flex flex-col gap-4"}>
             <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{feature.feature}</h3>
             <p>{feature.description}</p>
             {feature.item.map((detail) => {
               return (
-                <div key={`detail-${detail.detail}-content`}>
+                <div key={`detail-${detail.detail}-content`} className={"flex flex-col gap-4"}>
                   <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">{detail.detail}</h4>
-                  <div className={"grid grid-cols-2"}>
+                  <div className={"grid gap-4 grid-cols-2"}>
                     {filteredContent.map((framework) => {
                       const currentFeature = framework.feature.find((f) => f.name === feature.feature)
                       const currentDetail = currentFeature?.detail?.find((d) => d.name === detail.detail)
                       return (
-                        <div key={`framework-${framework.name}-data`}>
+                        <div key={`framework-${framework.name}-data`} className={"flex flex-col gap-4"}>
                           <div className="text-lg font-semibold">{framework.name}</div>
                           {!currentDetail ? (
                             <div>No data available</div>

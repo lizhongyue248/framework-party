@@ -1,9 +1,11 @@
 import { AppSidebar } from "@/components/app-sidebar"
+import { Button } from "@/components/ui/button"
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
 import { Separator } from "@/components/ui/separator"
 import { Toggle } from "@/components/ui/toggle"
 import { useStore } from "@/lib/store"
 import type { ContentData } from "@/pages/@content/+data"
+import { MoonIcon, SunIcon } from "lucide-react"
 import type React from "react"
 import { useEffect } from "react"
 import { useData } from "vike-react/useData"
@@ -12,7 +14,7 @@ const FRAMEWORK_KEY = "frameworks"
 
 const ContentLayout = ({ children }: { children: React.ReactNode }) => {
   const contentData = useData<ContentData>()
-  const { activeFrameworks, setActiveFrameworks } = useStore()
+  const { activeFrameworks, setActiveFrameworks, theme, setTheme } = useStore()
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const frameworks = urlParams.get("frameworks")
@@ -41,7 +43,7 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={"w-full min-h-screen flex flex-col"}>
       <header className={"flex justify-between p-4 items-center"}>
-        <h1 className={"text-3xl font-bold"}>Framework Party</h1>
+        <h1 className={"text-xl font-bold"}>Framework Party</h1>
         <nav className={"flex flex-row gap-2"}>
           {(contentData.nav ?? []).map((item) => (
             <a key={item.id} href={`/${item.id}`} className={"text-sm text-gray-600 hover:text-gray-900"}>
@@ -49,7 +51,11 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
             </a>
           ))}
         </nav>
-        <div>test</div>
+        <div className={"flex flex-row gap-2"}>
+          <Button variant="secondary" size="icon" className="size-8" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+            {theme === "dark" ? <SunIcon className="size-4" /> : <MoonIcon className="size-4" />}
+          </Button>
+        </div>
       </header>
       <Separator />
 

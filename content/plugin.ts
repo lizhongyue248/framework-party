@@ -1,7 +1,7 @@
 import * as fs from "node:fs"
 import path from "node:path"
 import { Listr } from "listr2"
-import { codeToHtml } from "shiki"
+import { bundledLanguages, bundledThemes, createHighlighter } from "shiki"
 import simpleGit from "simple-git"
 import type { EnvironmentOptions, Plugin } from "vite"
 import YAML from "yaml"
@@ -33,6 +33,11 @@ const readContentFile = () => {
 
   return contents
 }
+
+const highlighter = await createHighlighter({
+  themes: ["one-light", "one-dark-pro"],
+  langs: Object.keys(bundledLanguages)
+})
 
 const contentPlugin = async (): Promise<Plugin> => {
   return {
@@ -75,11 +80,11 @@ const contentPlugin = async (): Promise<Plugin> => {
                         const updatedLines = lines.slice(file.startLine - 1, file.endLine)
                         fileContent = updatedLines.join("\n")
                       }
-                      file.content = await codeToHtml(fileContent, {
+                      file.content = highlighter.codeToHtml(fileContent, {
                         lang: file.language,
                         themes: {
-                          light: "min-light",
-                          dark: "nord"
+                          light: "one-light",
+                          dark: "one-dark-pro"
                         }
                       })
                     }
