@@ -1,15 +1,24 @@
 import fs from "node:fs"
 import path from "node:path"
-import type { NavData } from "@/types"
+import type { ContentSidebarData, NavData } from "@/types"
 import type { PageContextServer } from "vike/types"
-const onBeforeRender = async (pageContext: PageContextServer) => {
+
+const readJsonFile = <T>(filename: string): T => {
   const contentDir = path.resolve(process.cwd(), "content/generateContent")
-  const filePath = path.join(contentDir, "nav.json")
-  const navJson = fs.readFileSync(filePath, "utf-8")
-  const navData: NavData[] = JSON.parse(navJson)
+  const filePath = path.join(contentDir, filename)
+  const fileContent = fs.readFileSync(filePath, "utf-8")
+  return JSON.parse(fileContent) as T
+}
+
+const onBeforeRender = async (pageContext: PageContextServer) => {
+  const navData = readJsonFile<NavData[]>("nav.json")
+  const sidebarList = readJsonFile<ContentSidebarData[]>("sidebar.json")
+  const sidebarData = sidebarList.find((item) => item.content === pageContext.routeParams.content)
+  console.log("pageContext", pageContext.routeParams.content)
   return {
     pageContext: {
-      nav: navData
+      nav: navData,
+      sidebar: sidebarData
     }
   }
 }

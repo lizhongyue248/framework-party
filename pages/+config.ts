@@ -13,7 +13,7 @@ export default {
   // https://vike.dev/head-tags
   title: "My Vike App",
   description: "Demo showcasing Vike",
-  passToClient: ["nav"],
+  passToClient: ["nav", "sidebar"],
   // https://vike.dev/stream
   stream: true,
   // https://vike.dev/ssr - this line can be removed since `true` is the default

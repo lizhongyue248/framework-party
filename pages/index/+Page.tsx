@@ -6,7 +6,7 @@ import { Counter } from "./Counter.js"
 export default function Page() {
   const { setTheme, theme } = useTheme()
   return (
-    <>
+    <div>
       <h1 className={"font-bold text-3xl pb-4"}>My Vike app</h1>
       This page is: {theme}
       <ul>
@@ -17,6 +17,6 @@ export default function Page() {
       </ul>
       <Button onClick={() => setTheme("light")}>Light</Button>
       <Button onClick={() => setTheme("dark")}>dark</Button>
-    </>
+    </div>
   )
 }

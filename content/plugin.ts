@@ -5,7 +5,7 @@ import simpleGit from "simple-git"
 import type { EnvironmentOptions, Plugin } from "vite"
 import YAML from "yaml"
 import { getRepoName } from "../lib/utils"
-import type { Content, NavData } from "../types"
+import type { Content, ContentSidebarData, NavData, SidebarItemData, SidebarListData } from "../types"
 
 const readContentFile = () => {
   const contentDir = path.resolve("content/repository")
@@ -42,6 +42,7 @@ const contentPlugin = async (): Promise<Plugin> => {
       const contentList = readContentFile()
       const taskList = new Listr([])
       const navList: NavData[] = []
+      const sidebarContent: ContentSidebarData[] = []
       for (const content of contentList) {
         const repoName = getRepoName(content.repository)
         const targetDir = `tmp/${repoName}`
@@ -55,9 +56,9 @@ const contentPlugin = async (): Promise<Plugin> => {
             const git = simpleGit()
             try {
               if (fs.existsSync(targetDir)) {
-                task.output = `Repository ${repoName} already exists, updating...`
-                const repoGit = simpleGit(targetDir)
-                await repoGit.pull("origin")
+                // task.output = `Repository ${repoName} already exists, updating...`
+                // const repoGit = simpleGit(targetDir)
+                // await repoGit.pull("origin")
               } else {
                 task.output = `Cloning repository ${repoName}...`
                 await git.clone(content.repository, targetDir, {})
@@ -77,19 +78,32 @@ const contentPlugin = async (): Promise<Plugin> => {
                     }
                   }
                 }
-                fs.writeFileSync(`content/generateContent/${repoName}.json`, JSON.stringify(content, null, 2))
               }
+              const contentSidebarData: SidebarListData[] = []
+              for (const value of Object.values(content.definitions ?? {})) {
+                const detailList = value["detail-list"].map((item) => ({ detail: item }) as SidebarItemData)
+                const feature: SidebarListData = {
+                  feature: value.name,
+                  item: detailList
+                }
+                contentSidebarData.push(feature)
+              }
+              sidebarContent.push({
+                content: content.name,
+                data: contentSidebarData
+              })
             } catch (e) {
+              console.error(e)
               task.output = `Error: ${e}`
             }
           }
         })
       }
-      fs.writeFileSync("content/generateContent/nav.json", JSON.stringify(navList, null, 2))
       await taskList.run()
+      fs.writeFileSync("content/generateContent/nav.json", JSON.stringify(navList, null, 2))
+      fs.writeFileSync("content/generateContent/sidebar.json", JSON.stringify(sidebarContent, null, 2))
     }
   }
 }
 
 export default contentPlugin
-readContentFile()

@@ -17,6 +17,7 @@ export interface Feature {
   name: string
   type: "group"
   description: string
+  detailList: string[]
   detail: DetailItem[]
 }
 
@@ -41,6 +42,7 @@ export interface Content {
       type: string
       name: string
       description: string
+      "detail-list": string[]
     }
   >
 }
@@ -48,6 +50,18 @@ export interface Content {
 export type NavData = {
   name: string
   id: string
+}
+
+export type SidebarItemData = { detail: string }
+
+export type SidebarListData = {
+  feature: string
+  item: SidebarItemData[]
+}
+
+export type ContentSidebarData = {
+  content: string
+  data: SidebarListData[]
 }
 
 export type ThemeType = "light" | "dark" | "system"

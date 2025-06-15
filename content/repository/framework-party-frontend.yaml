@@ -6,6 +6,8 @@ definitions:
       Reactivity is the mechanism that allows the framework to detect when data used on the page is changed (mutated), 
       and to update the page optimally to reflect these changes. It is therefore a crucial mechanism for any web framework, 
       so we are going to analyze it to understand its strengths and limitations.
+    detail-list:
+      - "Declaring State"
 
 name: "Frontend"
 repository: "https://github.com/lizhongyue248/framework-party-frontend"
