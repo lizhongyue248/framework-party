@@ -30,11 +30,15 @@ export const Page = () => {
       <div>{currentContent.description}</div>
       {sidebar.data.map((feature) => (
         <div key={`page-${feature.feature}`} className={"flex flex-col gap-4"}>
-          <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">{feature.feature}</h3>
+          <h3 id={feature.feature} className="scroll-m-20 text-2xl font-semibold tracking-tight">
+            {feature.feature}
+          </h3>
           <p>{feature.description}</p>
           {feature.item.map((detail) => (
             <div key={`detail-${detail.detail}-content`} className={"flex flex-col gap-4"}>
-              <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">{detail.detail}</h4>
+              <h4 id={detail.detail} className="scroll-m-20 text-xl font-semibold tracking-tight">
+                {detail.detail}
+              </h4>
               <div className={"grid gap-4 grid-cols-2"}>
                 {filteredContent.map((framework) => {
                   const currentFeature = framework.feature.find((f) => f.name === feature.feature)
