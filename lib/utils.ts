@@ -1,3 +1,5 @@
+import fs from "node:fs"
+import path from "node:path"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -12,4 +14,11 @@ export const getRepoName = (repoUrl: string): string => {
     repoName = repoName.split(":").pop() || ""
   }
   return repoName.replace(/\.git$/, "")
+}
+
+export const readJsonFile = <T>(filename: string): T => {
+  const contentDir = path.resolve(process.cwd(), "content/generateContent")
+  const filePath = path.join(contentDir, filename)
+  const fileContent = fs.readFileSync(filePath, "utf-8")
+  return JSON.parse(fileContent) as T
 }

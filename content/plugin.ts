@@ -89,7 +89,7 @@ const contentPlugin = async (): Promise<Plugin> => {
                 contentSidebarData.push(feature)
               }
               sidebarContent.push({
-                content: content.name,
+                content: repoName,
                 data: contentSidebarData
               })
             } catch (e) {
