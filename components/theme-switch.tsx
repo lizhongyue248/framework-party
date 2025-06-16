@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { useStore } from "@/lib/store"
 import type { ThemeType } from "@/types"
 import { MoonIcon, SunIcon } from "lucide-react"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import { flushSync } from "react-dom"
 export const ThemeSwitch = () => {
   const { theme, setTheme } = useStore()

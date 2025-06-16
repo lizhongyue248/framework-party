@@ -1,4 +1,3 @@
-import { locales } from "@/lib/locale"
 import { Languages } from "lucide-react"
 import React from "react"
 import { usePageContext } from "vike-react/usePageContext"

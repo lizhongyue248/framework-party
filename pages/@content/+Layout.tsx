@@ -9,7 +9,6 @@ import type { ContentData } from "@/pages/@content/+data"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 import type React from "react"
 import { useEffect } from "react"
-import { flushSync } from "react-dom"
 import { useData } from "vike-react/useData"
 
 const FRAMEWORK_KEY = "frameworks"
