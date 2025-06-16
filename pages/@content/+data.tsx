@@ -1,5 +1,6 @@
 import fs from "node:fs"
 import path from "node:path"
+import { localeDefault } from "@/lib/locale"
 import { getRepoName, readJsonFile } from "@/lib/utils"
 import type { Content, ContentSidebarData, NavData } from "@/types"
 import type { PageContextClient, PageContextServer } from "vike/types"
@@ -11,11 +12,13 @@ export interface ContentData {
 }
 
 export const data = (pageContext: PageContextServer | PageContextClient) => {
-  const navData = readJsonFile<NavData[]>("nav.json")
-  const sidebarList = readJsonFile<ContentSidebarData[]>("sidebar.json")
+  const locale = pageContext.locale || localeDefault
+
+  const navData = readJsonFile<NavData[]>("nav.json", locale)
+  const sidebarList = readJsonFile<ContentSidebarData[]>("sidebar.json", locale)
   const sidebarData = sidebarList.find((item) => item.content === pageContext.routeParams.content)
 
-  const contentDir = path.resolve(process.cwd(), "content/generateContent")
+  const contentDir = path.resolve(process.cwd(), `content/generateContent/${locale}`)
   const files = fs.readdirSync(contentDir).filter((file) => file.endsWith(".json") && file.startsWith("framework-"))
   let currentContent: Content | undefined = undefined
   for (const file of files) {
@@ -27,7 +30,6 @@ export const data = (pageContext: PageContextServer | PageContextClient) => {
       currentContent = content
     }
   }
-
   return {
     nav: navData,
     sidebar: sidebarData,

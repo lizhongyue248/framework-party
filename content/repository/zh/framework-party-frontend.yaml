@@ -1,0 +1,105 @@
+definitions:
+  reactivity-group: &reactivity-group
+    type: "group"
+    name: "响应式"
+    description: >
+      响应式是一种机制，它允许框架检测页面上使用的数据何时发生变化（被修改），
+      并优化地更新页面以反映这些变化。因此，它是任何Web框架的关键机制，
+      所以我们将对其进行分析以了解其优势和局限性。
+    detail-list:
+      - "声明状态"
+
+name: "前端"
+repository: "https://github.com/lizhongyue248/framework-party-frontend"
+description: "这是前端框架。"
+framework:
+  - name: "React"
+    description: "一个用于构建具有组件化架构的用户界面的JavaScript库。"
+    version: "18.2.0"
+    repository: "https://github.com/facebook/react"
+    website: "https://reactjs.org"
+    license: "MIT"
+    logo: "https://reactjs.org/logo-og.png"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - name: "声明状态"
+            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            file:
+              - path: "apps/react-party/src/components/reactivity/DeclareState.tsx"
+                language: "typescript"
+  - name: "Vue"
+    description: "一个渐进式框架，用于构建具有易于接近的核心库的用户界面。"
+    version: "3.3.4"
+    repository: "https://github.com/vuejs/vue"
+    website: "https://vuejs.org"
+    license: "MIT"
+    logo: "https://vuejs.org/images/logo.png"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - name: "声明状态"
+            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            file:
+              - path: "apps/vue-party/src/components/reactivity/DeclareState.vue"
+                language: "vue"
+  - name: "Svelte"
+    description: "一种构建用户界面的全新方法，将您的代码编译为微小的、无框架的原生JS。"
+    version: "4.1.2"
+    repository: "https://github.com/sveltejs/svelte"
+    website: "https://svelte.dev"
+    license: "MIT"
+    logo: "https://svelte.dev/svelte-logo.svg"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - name: "声明状态"
+            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            file:
+              - path: "apps/svelte-party/src/components/reactivity/DeclareState.svelte"
+                language: "svelte"
+  - name: "Lit"
+    description: "一个用于构建快速、轻量级Web组件的简单库。"
+    version: "3.0.0"
+    repository: "https://github.com/lit/lit"
+    website: "https://lit.dev"
+    license: "BSD-3-Clause"
+    logo: "https://lit.dev/images/logo.svg"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - name: "声明状态"
+            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            file:
+              - path: "apps/lit-party/src/components/reactivity/declare-state.ts"
+                language: "typescript"
+  - name: "Solid"
+    description: "一个声明式、高效且灵活的JavaScript库，用于构建具有细粒度响应式的用户界面。"
+    version: "1.7.11"
+    repository: "https://github.com/solidjs/solid"
+    website: "https://www.solidjs.com"
+    license: "MIT"
+    logo: "https://www.solidjs.com/img/logo.svg"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - name: "声明状态"
+            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            file:
+              - path: "apps/solid-party/src/components/reactivity/DeclareState.tsx"
+                language: "typescript"
+  - name: "Qwik"
+    description: "一个可恢复的框架，用于构建专注于性能和可扩展性的即时Web应用程序。"
+    version: "1.2.12"
+    repository: "https://github.com/BuilderIO/qwik"
+    website: "https://qwik.builder.io"
+    license: "MIT"
+    logo: "https://qwik.builder.io/logos/qwik-logo.svg"
+    feature:
+      - <<: *reactivity-group
+        detail:
+          - name: "声明状态"
+            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            file:
+              - path: "apps/qwik-party/src/components/reactivity/DeclareState.tsx"
+                language: "typescript"

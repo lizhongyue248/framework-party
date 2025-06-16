@@ -18,7 +18,7 @@ interface FrameworkDetailProps {
 export const FrameworkDetail = ({ framework, feature, detail, selectedFileIndex, onFileSelect }: FrameworkDetailProps) => {
   const currentFeature = framework.feature.find((f) => f.name === feature.feature)
   const currentDetail = currentFeature?.detail?.find((d) => d.name === detail.detail)
-
+  console.log("detail", detail)
   return (
     <div className={"flex flex-col gap-4"}>
       <div className="text-lg font-semibold">{framework.name}</div>

@@ -16,8 +16,8 @@ export const getRepoName = (repoUrl: string): string => {
   return repoName.replace(/\.git$/, "")
 }
 
-export const readJsonFile = <T>(filename: string): T => {
-  const contentDir = path.resolve(process.cwd(), "content/generateContent")
+export const readJsonFile = <T>(filename: string, locale: "zh" | "en" = "en"): T => {
+  const contentDir = path.resolve(process.cwd(), `content/generateContent/${locale}`)
   const filePath = path.join(contentDir, filename)
   const fileContent = fs.readFileSync(filePath, "utf-8")
   return JSON.parse(fileContent) as T

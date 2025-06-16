@@ -1,7 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar"
 import { Button } from "@/components/ui/button"
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable"
-import { Separator } from "@/components/ui/separator"
 import { Toggle } from "@/components/ui/toggle"
 import { useStore } from "@/lib/store"
 import type { ContentData } from "@/pages/@content/+data"
