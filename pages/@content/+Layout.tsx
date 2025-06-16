@@ -74,6 +74,7 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
                 pressed={activeFrameworks.includes(framework.name)}
                 onPressedChange={() => handleFrameworkToggle(framework.name)}
               >
+                <img className={"w-4 h-4"} src={`/assets/${framework.logo}`} alt={framework.name} />
                 {framework.name}
               </Toggle>
             ))}

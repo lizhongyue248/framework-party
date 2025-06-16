@@ -16,7 +16,7 @@ export const DetailSection = ({ detail, feature, filteredContent }: DetailSectio
       <h4 id={detail.detail} className="scroll-m-20 text-xl font-semibold tracking-tight">
         {detail.detail}
       </h4>
-      <div className={"grid gap-4 grid-cols-2"}>
+      <div className={"grid gap-4 grid-cols-1 lg:grid-cols-2"}>
         {filteredContent.map((framework) => {
           const frameworkKey = `${framework.name}-${feature.feature}-${detail.detail}`
           const selectedFileIndex = selectedFileIndices[frameworkKey] || 0

@@ -4,6 +4,7 @@ import { getFileName } from "@/lib/utils"
 import type { File, Framework } from "@/types"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 import { Copy } from "lucide-react"
+import type React from "react"
 import { toast } from "sonner"
 
 interface FrameworkDetailProps {
@@ -20,12 +21,15 @@ export const FrameworkDetail = ({ framework, feature, detail, selectedFileIndex,
   const currentDetail = currentFeature?.detail?.find((d) => d.name === detail.detail)
   return (
     <div className={"flex flex-col gap-4"}>
-      <div className="text-lg font-semibold">{framework.name}</div>
+      <div className="text-lg flex flex-row gap-2 items-center font-semibold">
+        <img className={"w-6 h-6"} src={`/assets/${framework.logo}`} alt={framework.name} />
+        {framework.name}
+      </div>
       {!currentDetail ? (
         <div>No data available</div>
       ) : (
         <>
-          <small className="text-sm leading-none font-medium">{currentDetail.description}</small>
+          <small className="text-sm font-medium">{currentDetail.description}</small>
           {currentDetail.file.length > 0 && (
             <CodeBlock files={currentDetail.file} selectedFileIndex={selectedFileIndex} onFileSelect={onFileSelect} repository={framework.repository} />
           )}

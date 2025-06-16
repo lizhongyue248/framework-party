@@ -79,8 +79,12 @@ const processRepository = async (content: Content, repoName: string, sidebarCont
     if (!fs.existsSync(targetDir)) {
       await git.clone(content.repository, targetDir, {})
     } else {
-      // const repoGit = simpleGit(targetDir)
-      // await repoGit.pull("origin")
+      const repoGit = simpleGit(targetDir)
+      await repoGit.fetch("origin")
+      const status = await repoGit.status()
+      if (status.behind > 0) {
+        await repoGit.pull("origin")
+      }
     }
 
     for (const framework of content.framework) {
@@ -130,44 +134,45 @@ const contentPlugin = async (): Promise<Plugin> => {
   return {
     name: "content-plugin",
     version: "1.0.0",
-    buildStart: async () => {
-      const { contents, locales } = readContentFile()
+    buildStart: processContentFiles
+  }
+}
 
-      for (const locale of locales) {
-        const navList: NavData[] = []
-        const sidebarContent: ContentSidebarData[] = []
-        const taskList = new Listr([])
+// 提取处理内容文件的逻辑为单独的函数
+const processContentFiles = async () => {
+  const { contents, locales } = readContentFile()
 
-        // 确保输出目录存在
-        const outputDir = `content/generateContent/${locale}`
-        if (!fs.existsSync(outputDir)) {
-          fs.mkdirSync(outputDir, { recursive: true })
-        }
+  for (const locale of locales) {
+    const navList: NavData[] = []
+    const sidebarContent: ContentSidebarData[] = []
+    const taskList = new Listr([])
 
-        // 过滤当前语言的内容
-        const localeContents = contents.filter((item) => item.locale === locale).map((item) => item.content)
-
-        for (const content of localeContents) {
-          const repoName = getRepoName(content.repository)
-          navList.push({
-            name: content.name,
-            id: repoName
-          })
-          taskList.add({
-            title: `Processing ${content.name} (${locale})`,
-            task: async (_, task) => {
-              const result = await processRepository(content, repoName, sidebarContent, locale)
-              if (!result) {
-                task.output = `Failed to process ${content.name} (${locale})`
-              }
-            }
-          })
-        }
-        await taskList.run()
-        fs.writeFileSync(`${outputDir}/nav.json`, JSON.stringify(navList, null, 2))
-        fs.writeFileSync(`${outputDir}/sidebar.json`, JSON.stringify(sidebarContent, null, 2))
-      }
+    const outputDir = `content/generateContent/${locale}`
+    if (!fs.existsSync(outputDir)) {
+      fs.mkdirSync(outputDir, { recursive: true })
     }
+
+    const localeContents = contents.filter((item) => item.locale === locale).map((item) => item.content)
+
+    for (const content of localeContents) {
+      const repoName = getRepoName(content.repository)
+      navList.push({
+        name: content.name,
+        id: repoName
+      })
+      taskList.add({
+        title: `Processing ${content.name} (${locale})`,
+        task: async (_, task) => {
+          const result = await processRepository(content, repoName, sidebarContent, locale)
+          if (!result) {
+            task.output = `Failed to process ${content.name} (${locale})`
+          }
+        }
+      })
+    }
+    await taskList.run()
+    fs.writeFileSync(`${outputDir}/nav.json`, JSON.stringify(navList, null, 2))
+    fs.writeFileSync(`${outputDir}/sidebar.json`, JSON.stringify(sidebarContent, null, 2))
   }
 }
 
