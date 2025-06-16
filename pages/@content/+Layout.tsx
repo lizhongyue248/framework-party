@@ -1,18 +1,22 @@
 import { AppSidebar } from "@/components/app-sidebar"
+import LanguageSwitch from "@/components/language-switch"
+import { Link } from "@/components/link"
+import { ThemeSwitch } from "@/components/theme-switch"
 import { Button } from "@/components/ui/button"
 import { Toggle } from "@/components/ui/toggle"
 import { useStore } from "@/lib/store"
 import type { ContentData } from "@/pages/@content/+data"
-import { MoonIcon, SunIcon } from "lucide-react"
+import { SiGithub } from "@icons-pack/react-simple-icons"
 import type React from "react"
 import { useEffect } from "react"
+import { flushSync } from "react-dom"
 import { useData } from "vike-react/useData"
 
 const FRAMEWORK_KEY = "frameworks"
 
 const ContentLayout = ({ children }: { children: React.ReactNode }) => {
   const contentData = useData<ContentData>()
-  const { activeFrameworks, setActiveFrameworks, theme, setTheme } = useStore()
+  const { activeFrameworks, setActiveFrameworks } = useStore()
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const frameworks = urlParams.get("frameworks")
@@ -41,17 +45,21 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={"w-full min-h-screen flex flex-col"}>
       <header className={"flex justify-between p-4 items-center border-b-2"}>
-        <h1 className={"text-xl font-bold"}>Framework Party</h1>
+        <h1 className={"text-xl font-bold"}>
+          <Link href={"/"}>Framework Party</Link>
+        </h1>
         <nav className={"flex flex-row gap-2"}>
           {(contentData.nav ?? []).map((item) => (
-            <a key={item.id} href={`/${item.id}`} className={"text-sm text-gray-600 hover:text-gray-900"}>
+            <a key={item.id} href={`/${item.id}`} className={"text-sm text-primary"}>
               {item.name}
             </a>
           ))}
         </nav>
         <div className={"flex flex-row gap-2"}>
-          <Button variant="secondary" size="icon" className="size-8" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-            {theme === "dark" ? <SunIcon className="size-4" /> : <MoonIcon className="size-4" />}
+          <LanguageSwitch />
+          <ThemeSwitch />
+          <Button variant="secondary" size="icon" className="size-8" onClick={() => window.open("https://github.com/lizhongyue248/framework-party")}>
+            <SiGithub />
           </Button>
         </div>
       </header>

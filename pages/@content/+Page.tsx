@@ -19,7 +19,6 @@ export const Page = () => {
     return <div className={"py-4 h-full"}>No Data</div>
   }
 
-  console.log(currentContent)
   return (
     <div className={"py-4 h-full flex flex-col gap-2"}>
       <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">{currentContent.name}</h2>

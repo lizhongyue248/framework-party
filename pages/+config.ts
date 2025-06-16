@@ -13,7 +13,7 @@ export default {
   // https://vike.dev/head-tags
   title: "My Vike App",
   description: "Demo showcasing Vike",
-  passToClient: ["nav", "sidebar", "locale"],
+  passToClient: ["nav", "sidebar", "locale", "urlLogical"],
   prerender: true,
   // https://vike.dev/stream
   stream: true,

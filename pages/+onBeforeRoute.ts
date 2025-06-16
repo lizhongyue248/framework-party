@@ -6,7 +6,6 @@ const onBeforeRoute = async (pageContext: PageContextServer) => {
   const url = pageContext.urlParsed
   const { urlPathnameWithoutLocale, locale } = extractLocale(url.pathname)
   const urlLogical = modifyUrl(url.href, { pathname: urlPathnameWithoutLocale })
-  console.log({ urlPathnameWithoutLocale, locale, urlLogical })
   return {
     pageContext: {
       locale,

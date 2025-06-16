@@ -11,3 +11,9 @@ html.dark .shiki span {
   padding: 2rem 1rem;
   overflow: auto;
 }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
