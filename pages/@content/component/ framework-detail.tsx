@@ -22,7 +22,7 @@ export const FrameworkDetail = ({ framework, feature, detail, selectedFileIndex,
   return (
     <div className={"flex flex-col gap-4"}>
       <div className="text-lg flex flex-row gap-2 items-center font-semibold">
-        <img className={"w-6 h-6"} src={`/assets/${framework.logo}`} alt={framework.name} />
+        <img className={"w-6 h-6"} src={framework.logo} alt={framework.name} />
         {framework.name}
       </div>
       {!currentDetail ? (
