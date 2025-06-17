@@ -1,5 +1,7 @@
 import * as fs from "node:fs"
 import path from "node:path"
+import chokidar from "chokidar"
+import type { FSWatcher } from "chokidar"
 import { Listr } from "listr2"
 import { bundledLanguages, createHighlighter } from "shiki"
 import simpleGit from "simple-git"
@@ -116,7 +118,6 @@ const processRepository = async (content: Content, repoName: string, sidebarCont
       repository: content.repository
     })
 
-    // 确保目录存在
     const outputDir = `content/generateContent/${locale}`
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true })
@@ -129,17 +130,8 @@ const processRepository = async (content: Content, repoName: string, sidebarCont
     return false
   }
 }
-// 内容插件
-const contentPlugin = async (): Promise<Plugin> => {
-  return {
-    name: "content-plugin",
-    version: "1.0.0",
-    buildStart: processContentFiles
-  }
-}
 
-// 提取处理内容文件的逻辑为单独的函数
-const processContentFiles = async () => {
+const processContentFiles = async (changedFile?: string) => {
   const { contents, locales } = readContentFile()
 
   for (const locale of locales) {
@@ -156,6 +148,11 @@ const processContentFiles = async () => {
 
     for (const content of localeContents) {
       const repoName = getRepoName(content.repository)
+
+      if (changedFile && !changedFile.includes(repoName)) {
+        continue
+      }
+
       navList.push({
         name: content.name,
         id: repoName
@@ -171,9 +168,34 @@ const processContentFiles = async () => {
       })
     }
     await taskList.run()
-    fs.writeFileSync(`${outputDir}/nav.json`, JSON.stringify(navList, null, 2))
-    fs.writeFileSync(`${outputDir}/sidebar.json`, JSON.stringify(sidebarContent, null, 2))
+
+    // 如果没有指定changedFile，或者处理了文件，才更新nav.json和sidebar.json
+    if (!changedFile || taskList.tasks.length > 0) {
+      fs.writeFileSync(`${outputDir}/nav.json`, JSON.stringify(navList, null, 2))
+      fs.writeFileSync(`${outputDir}/sidebar.json`, JSON.stringify(sidebarContent, null, 2))
+    }
   }
 }
 
+const contentPlugin = async (): Promise<Plugin> => {
+  let fsContentWatcher: FSWatcher
+  return {
+    name: "content-plugin",
+    version: "1.0.0",
+    buildStart: async () => {
+      await processContentFiles()
+      if (process.env.NODE_ENV === "development") {
+        console.log("Watching content files for changes...")
+        fsContentWatcher = chokidar.watch(["content/repository"]).on("change", async (file) => {
+          console.log(`Content file ${file} changed, reprocessing...`)
+          await processContentFiles(file)
+        })
+      }
+    },
+    buildEnd: async () => {
+      console.log("Content files processed successfully.")
+      fsContentWatcher && (await fsContentWatcher.close())
+    }
+  }
+}
 export default contentPlugin
