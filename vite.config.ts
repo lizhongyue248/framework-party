@@ -6,8 +6,7 @@ import contentPlugin from "./content/plugin"
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), vike(), tailwindcss(), contentPlugin()],
-
+    plugins: [contentPlugin(), react(), vike(), tailwindcss()],
     build: {
       target: "es2022"
     },

@@ -5,7 +5,7 @@ import { bundledLanguages, createHighlighter } from "shiki"
 import simpleGit from "simple-git"
 import type { Plugin } from "vite"
 import YAML from "yaml"
-import { getRepoName } from "../lib/utils"
+import { getRepoName } from "../lib/file"
 import type { Content, ContentSidebarData, File, NavData, SidebarItemData, SidebarListData } from "../types"
 
 const readContentFile = () => {

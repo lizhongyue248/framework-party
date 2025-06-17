@@ -1,8 +1,8 @@
+import { getCurrentContent, getRepoName, readJsonFile } from "@/lib/file"
 import { localeDefault, locales } from "@/lib/locale"
-import { getCurrentContent, getRepoName, readJsonFile } from "@/lib/utils"
 import type { ContentData } from "@/pages/@content/+data"
 import type { ContentSidebarData, LanguageOption, NavData } from "@/types"
-import type { OnBeforePrerenderStartAsync, PageContext } from "vike/types"
+import type { OnBeforePrerenderStartAsync } from "vike/types"
 
 export { onBeforePrerenderStart }
 

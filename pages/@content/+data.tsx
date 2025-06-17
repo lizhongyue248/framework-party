@@ -1,7 +1,5 @@
-import fs from "node:fs"
-import path from "node:path"
+import { getCurrentContent, readJsonFile } from "@/lib/file"
 import { localeDefault } from "@/lib/locale"
-import { getCurrentContent, getRepoName, readJsonFile } from "@/lib/utils"
 import type { Content, ContentSidebarData, NavData } from "@/types"
 import type { PageContextClient, PageContextServer } from "vike/types"
 
