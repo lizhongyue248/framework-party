@@ -3,18 +3,78 @@ definitions:
     type: "group"
     name: "响应式"
     description: >
-      响应式是一种机制，它允许框架检测页面上使用的数据何时发生变化（被修改），
-      并优化地更新页面以反映这些变化。因此，它是任何Web框架的关键机制，
-      所以我们将对其进行分析以了解其优势和局限性。
+      响应式是框架检测页面上使用的数据何时发生变化(突变),并优化更新页面以反映这些变化的机制。
+      因此,它是任何 Web 框架的关键机制,所以我们将分析它以了解其优势和局限性。
     detail-list:
       - "声明状态"
+      - "更新状态"
+      - "计算状态"
+
+  templating: &templating
+    type: "group"
+    name: "模板"
+    description: >
+      模板指的是框架允许开发人员构建和渲染 UI 的方式。
+      它包括如何创建类似 HTML 的结构、如何插入动态内容以及 UI 如何对数据变化做出反应。
+    detail-list:
+      - "最小模板"
+      - "样式"
+      - "循环"
+      - "点击事件"
+      - "DOM 引用"
+      - "条件渲染"
+
+  lifecycle: &lifecycle
+    type: "group"
+    name: "生命周期"
+    description: >
+      生命周期钩子是允许开发人员在组件生命周期的特定点运行代码的方法,
+      例如在创建、更新或销毁组件时。理解这些钩子对于管理副作用和优化性能至关重要。
+    detail-list:
+      - "挂载时"
+      - "卸载时"
+
+  component-composition: &component-composition
+    type: "group"
+    name: "组件组合"
+    description: >
+      组件组合是现代前端框架中的一个基本概念。它涉及将 UI 分解为可重用的部分,
+      并理解这些部分如何相互通信和协同工作以构建复杂的应用程序。
+    detail-list:
+      - "属性"
+      - "向父组件发送事件"
+      - "插槽"
+      - "插槽后备内容"
+      - "上下文"
+
+  form-input: &form-input
+    type: "group"
+    name: "表单输入"
+    description: >
+      处理表单输入是 Web 应用程序中的常见任务。本节探讨不同框架如何
+      管理表单状态、验证输入以及处理各种类型表单控件的用户交互。
+    detail-list:
+      - "文本输入"
+      - "复选框"
+      - "单选按钮"
+      - "选择框"
+
+  webapp-features: &webapp-features
+    type: "group"
+    name: "Web 应用功能"
+    description: >
+      本节涵盖了构建完整 Web 应用程序的基本功能,包括如何引导应用程序
+      以及与外部数据源交互。
+    detail-list:
+      - "渲染应用"
+      - "获取数据"
 
 name: "前端"
 repository: "https://github.com/lizhongyue248/framework-party-frontend"
-description: "这是前端框架。"
+description: "这是一个前端框架。"
 framework:
   - name: "React"
-    description: "一个用于构建具有组件化架构的用户界面的JavaScript库。"
+    description: "一个使用基于组件架构构建用户界面的JavaScript库。"
     version: "18.2.0"
     repository: "https://github.com/facebook/react"
     website: "https://reactjs.org"
@@ -24,13 +84,169 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "声明状态"
-            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            description: "在React中，状态通常使用useState钩子声明。"
+            link: "https://react.dev/reference/react/useState"
             file:
-              - path: "apps/react-party/src/components/reactivity/DeclareState.tsx"
-                language: "typescript"
+              - path: "apps/react-party/src/components/0-reactivity/0-declare-state/name.tsx"
+                language: "tsx"
+          - name: "更新状态"
+            description: "在React中，可以通过useState返回的setter函数更新状态。"
+            link: "https://react.dev/reference/react/useState#updating-state"
+            file:
+              - path: "apps/react-party/src/components/0-reactivity/1-update-state/update-count.tsx"
+                language: "tsx"
+          - name: "计算状态"
+            description: "在React中，可以使用useMemo钩子创建计算值。"
+            link: "https://react.dev/reference/react/useMemo"
+            file:
+              - path: "apps/react-party/src/components/0-reactivity/2-computed-state/double-count.tsx"
+                language: "tsx"
+      - <<: *templating
+        detail:
+          - name: "简约模板"
+            description: "React使用JSX, 这是一种语法扩展，让你可以在JavaScript中编写类似HTML的代码。"
+            link: "https://react.dev/learn/writing-markup-with-jsx"
+            file:
+              - path: "apps/react-party/src/components/1-templating/0-minimal-template/hello-world.tsx"
+                language: "tsx"
+          - name: "样式"
+            description: "React组件可以使用CSS模块或内联样式。"
+            link: "https://react.dev/learn/adding-interactivity#responding-to-events"
+            file:
+              - path: "apps/react-party/src/components/1-templating/1-styling/styling.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/1-templating/1-styling/style.css"
+                language: "css"
+          - name: "循环"
+            description: "在React中，可以使用map函数渲染元素列表。"
+            link: "https://react.dev/learn#rendering-lists"
+            file:
+              - path: "apps/react-party/src/components/1-templating/2-loop/count-list.tsx"
+                language: "tsx"
+          - name: "事件点击"
+            description: "React通过类似onClick的属性处理事件。"
+            link: "https://react.dev/learn/adding-interactivity#responding-to-events"
+            file:
+              - path: "apps/react-party/src/components/1-templating/3-event-click/count-increment.tsx"
+                language: "tsx"
+          - name: "dom引用"
+            description: "React提供useRef钩子来创建对DOM元素的引用。"
+            link: "https://react.dev/learn/manipulating-the-dom-with-refs"
+            file:
+              - path: "apps/react-party/src/components/1-templating/4-dom-ref/focus-input.tsx"
+                language: "tsx"
+          - name: "条件渲染"
+            description: "在React中，可以使用三元运算符或&&运算符进行简单条件渲染。"
+            link: "https://react.dev/learn/conditional-rendering"
+            file:
+              - path: "apps/react-party/src/components/1-templating/5-conditional/level-display.tsx"
+                language: "tsx"
+      - <<: *lifecycle
+        detail:
+          - name: "挂载时"
+            description: "React使用useEffect钩子和空依赖数组在组件挂载时运行代码。"
+            link: "https://react.dev/reference/react/useEffect#running-an-effect-only-when-the-component-mounts"
+            file:
+              - path: "apps/react-party/src/components/2-lifecycle/0-on-mount/page-title.tsx"
+                language: "tsx"
+          - name: "卸载时"
+            description: "React使用useEffect返回的清理函数在组件卸载时运行代码。"
+            link: "https://react.dev/reference/react/useEffect#cleaning-up-an-effect"
+            file:
+              - path: "apps/react-party/src/components/2-lifecycle/1-on-unmount/time.tsx"
+                language: "tsx"
+      - <<: *component-composition
+        detail:
+          - name: "属性"
+            description: "React组件可以通过属性从父组件接收数据。"
+            link: "https://react.dev/learn/passing-props-to-a-component"
+            file:
+              - path: "apps/react-party/src/components/3-component-composition/0-props/count-content.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/0-props/count-display.tsx"
+                language: "tsx"
+          - name: "向父组件发射事件"
+            description: "React组件可以调用作为props传递的函数，与父组件进行通信。"
+            link: "https://react.dev/learn/responding-to-events#passing-event-handlers-as-props"
+            file:
+              - path: "apps/react-party/src/components/3-component-composition/1-emit-to-parent/count-action.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/1-emit-to-parent/count-content.tsx"
+                language: "tsx"
+          - name: "插槽"
+            description: "React使用children属性实现类似插槽的功能。"
+            link: "https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children"
+            file:
+              - path: "apps/react-party/src/components/3-component-composition/2-slot/button-content.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/2-slot/custom-button.tsx"
+                language: "tsx"
+          - name: "插槽回退"
+            description: "在React中，可以使用条件渲染为插槽提供默认内容。"
+            link: "https://react.dev/learn/conditional-rendering"
+            file:
+              - path: "apps/react-party/src/components/3-component-composition/3-slot-fallback/app.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/3-slot-fallback/card.tsx"
+                language: "tsx"
+          - name: "上下文"
+            description: "React提供Context API以便不通过props将数据传递给组件树。"
+            link: "https://react.dev/learn/passing-data-deeply-with-context"
+            file:
+              - path: "apps/react-party/src/components/3-component-composition/4-context/app-context.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/4-context/theme-context.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/4-context/theme-toggle.tsx"
+                language: "tsx"
+      - <<: *form-input
+        detail:
+          - name: "输入文本"
+            description: "React通过使用value和onChange属性的受控组件处理表单输入。"
+            link: "https://react.dev/reference/react-dom/components/input"
+            file:
+              - path: "apps/react-party/src/components/4-form-input/0-input-text/input-text.tsx"
+                language: "tsx"
+          - name: "复选框"
+            description: "在React中，复选框与其他表单输入项类似，使用checked属性。"
+            link: "https://react.dev/reference/react-dom/components/input#checkbox"
+            file:
+              - path: "apps/react-party/src/components/4-form-input/1-checkbox/checkbox.tsx"
+                language: "tsx"
+          - name: "单选按钮"
+            description: "在React中，单选按钮通过checked属性和onChange处理器进行管理。"
+            link: "https://react.dev/reference/react-dom/components/input#radio"
+            file:
+              - path: "apps/react-party/src/components/4-form-input/2-radio/radio.tsx"
+                language: "tsx"
+          - name: "选择元素"
+            description: "在React中，选择元素使用<select>和<option>标签，采用受控组件模式创建。"
+            link: "https://react.dev/reference/react-dom/components/select"
+            file:
+              - path: "apps/react-party/src/components/4-form-input/3-select/select.tsx"
+                language: "tsx"
+      - <<: *webapp-features
+        detail:
+          - name: "渲染应用"
+            description: "React应用通常使用ReactDOM.createRoot().render()进行渲染。"
+            link: "https://react.dev/reference/react-dom/client/createRoot"
+            file:
+              - path: "apps/react-party/index.html"
+                language: "html"
+              - path: "apps/react-party/src/main.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/5-webapp-features/0-render-app/app.tsx"
+                language: "tsx"
+          - name: "获取数据"
+            description: "在React中，可以使用useEffect钩子与Fetch API或像Axios这样的库获取数据。"
+            link: "https://react.dev/learn/synchronizing-with-effects#fetching-data"
+            file:
+              - path: "apps/react-party/src/components/5-webapp-features/1-fetch-data/app.tsx"
+                language: "tsx"
+
   - name: "Vue"
-    description: "一个渐进式框架，用于构建具有易于接近的核心库的用户界面。"
-    version: "3.3.4"
+    description: "一个为构建用户界面而生的渐进式框架，核心库以渐进增强的方式设计。"
+    version: "3.5.13"
     repository: "https://github.com/vuejs/vue"
     website: "https://vuejs.org"
     license: "MIT"
@@ -39,13 +255,170 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "声明状态"
-            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            description: "在Vue 3中，响应式状态通常使用ref或reactive函数在setup函数或script setup中声明。"
+            link: "https://vuejs.org/guide/essentials/reactivity-fundamentals.html"
             file:
-              - path: "apps/vue-party/src/components/reactivity/DeclareState.vue"
+              - path: "apps/vue-party/src/components/0-reactivity/0-declare-state/Name.vue"
                 language: "vue"
+          - name: "更新状态"
+            description: "在Vue中，可以通过直接为ref赋新值或修改响应式对象来更新状态。"
+            link: "https://vuejs.org/guide/essentials/reactivity-fundamentals.html#reactive-variables-with-ref"
+            file:
+              - path: "apps/vue-party/src/components/0-reactivity/1-update-state/UpdateCount.vue"
+                language: "vue"
+          - name: "计算状态"
+            description: "在Vue中，可以使用computed函数创建计算属性。"
+            link: "https://vuejs.org/guide/essentials/computed.html"
+            file:
+              - path: "apps/vue-party/src/components/0-reactivity/2-computed-state/DoubleCount.vue"
+                language: "vue"
+      - <<: *templating
+        detail:
+          - name: "简约模板"
+            description: "Vue使用一种扩展HTML的模板语法，让你可以声明式地将渲染的DOM绑定到组件的数据。"
+            link: "https://vuejs.org/guide/essentials/template-syntax.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/0-minimal-template/HelloWorld.vue"
+                language: "vue"
+          - name: "样式"
+            description: "Vue组件可以包含<style>部分，用于组件特定的CSS，并可选择性地对组件进行作用域限定。"
+            link: "https://vuejs.org/api/sfc-css-features.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/1-styling/Styling.vue"
+                language: "vue"
+          - name: "循环"
+            description: "Vue提供v-for指令以根据数组渲染项目列表。"
+            link: "https://vuejs.org/guide/essentials/list.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/2-loop/CountList.vue"
+                language: "vue"
+          - name: "事件点击"
+            description: "Vue使用v-on指令（或@简写）来监听DOM事件，并在事件触发时运行方法。"
+            link: "https://vuejs.org/guide/essentials/event-handling.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/3-event-click/CountIncrement.vue"
+                language: "vue"
+          - name: "dom引用"
+            description: "Vue允许你通过ref属性和ref函数直接访问DOM元素。"
+            link: "https://vuejs.org/guide/essentials/template-refs.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/4-dom-ref/FocusInput.vue"
+                language: "vue"
+          - name: "条件渲染"
+            description: "Vue提供v-if、v-else-if和v-else指令用于元素的条件渲染。"
+            link: "https://vuejs.org/guide/essentials/conditional.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/5-conditional/LevelDisplay.vue"
+                language: "vue"
+      - <<: *lifecycle
+        detail:
+          - name: "挂载时"
+            description: "Vue 3使用onMounted接口在组件挂载后运行代码。"
+            link: "https://vuejs.org/api/composition-api-lifecycle.html#onmounted"
+            file:
+              - path: "apps/vue-party/src/components/2-lifecycle/0-on-mount/PageTitle.vue"
+                language: "vue"
+          - name: "卸载时"
+            description: "Vue 3使用onUnmounted接口在组件卸载时进行清理。"
+            link: "https://vuejs.org/api/composition-api-lifecycle.html#onunmounted"
+            file:
+              - path: "apps/vue-party/src/components/2-lifecycle/1-on-unmount/Time.vue"
+                language: "vue"
+      - <<: *component-composition
+        detail:
+          - name: "属性"
+            description: "在Vue中，属性通过组件的<script setup>部分中的defineProps宏声明。"
+            link: "https://vuejs.org/guide/components/props.html"
+            file:
+              - path: "apps/vue-party/src/components/3-component-composition/0-props/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/0-props/CountContent.vue"
+                language: "vue"
+          - name: "向父组件发射事件"
+            description: "子组件可以使用defineEmits宏和发射事件与父组件进行通信。"
+            link: "https://vuejs.org/guide/components/events.html"
+            file:
+              - path: "apps/vue-party/src/components/3-component-composition/1-emit-to-parent/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/1-emit-to-parent/CountContent.vue"
+                language: "vue"
+          - name: "插槽"
+            description: "Vue的插槽允许你将内容从父组件传输到子组件。"
+            link: "https://vuejs.org/guide/components/slots.html"
+            file:
+              - path: "apps/vue-party/src/components/3-component-composition/2-slot/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/2-slot/ButtonContent.vue"
+                language: "vue"
+          - name: "插槽回退"
+            description: "Vue中的插槽可以具有后备内容，当父组件未提供内容时显示这些内容。"
+            link: "https://vuejs.org/guide/components/slots.html#fallback-content"
+            file:
+              - path: "apps/vue-party/src/components/3-component-composition/3-slot-fallback/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/3-slot-fallback/Card.vue"
+                language: "vue"
+          - name: "上下文"
+            description: "Vue提供provide和inject函数，用于在不传递属性的情况下在组件之间共享数据。"
+            link: "https://vuejs.org/guide/components/provide-inject.html"
+            file:
+              - path: "apps/vue-party/src/components/3-component-composition/4-context/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/4-context/ThemeContent.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/4-context/ThemedButton.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/4-context/ThemeProvider.ts"
+                language: "typescript"
+      - <<: *form-input
+        detail:
+          - name: "输入文本"
+            description: "Vue提供v-model指令用于表单输入的双向数据绑定。"
+            link: "https://vuejs.org/guide/components/v-model.html"
+            file:
+              - path: "apps/vue-party/src/components/4-form-input/0-input-text/InputText.vue"
+                language: "vue"
+          - name: "复选框"
+            description: "Vue中的复选框可以通过v-model绑定布尔值或数组。"
+            link: "https://vuejs.org/guide/form-input-bindings.html#checkbox"
+            file:
+              - path: "apps/vue-party/src/components/4-form-input/1-checkbox/Checkbox.vue"
+                language: "vue"
+          - name: "单选按钮"
+            description: "Vue中的单选按钮可以分组并绑定到使用v-model的单个值。"
+            link: "https://vuejs.org/guide/form-input-bindings.html#radio"
+            file:
+              - path: "apps/vue-party/src/components/4-form-input/2-radio/Radio.vue"
+                language: "vue"
+          - name: "选择元素"
+            description: "Vue中的选择元素可以通过v-model绑定到值。"
+            link: "https://vuejs.org/guide/form-input-bindings.html#select"
+            file:
+              - path: "apps/vue-party/src/components/4-form-input/3-select/Select.vue"
+                language: "vue"
+      - <<: *webapp-features
+        detail:
+          - name: "渲染应用"
+            description: "在Vue 3中，通常在main.ts文件中使用createApp创建和挂载应用。"
+            link: "https://vuejs.org/guide/essentials/application.html"
+            file:
+              - path: "apps/vue-party/index.html"
+                language: "html"
+              - path: "apps/vue-party/src/main.ts"
+                language: "typescript"
+              - path: "apps/vue-party/src/components/5-webapp-features/0-render-app/App.vue"
+                language: "vue"
+          - name: "获取数据"
+            description: "在Vue中，可以在setup函数中或使用composition API获取数据。"
+            link: "https://vuejs.org/guide/best-practices/production-deployment.html#fetching-data"
+            file:
+              - path: "apps/vue-party/src/components/5-webapp-features/1-fetch-data/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/5-webapp-features/1-fetch-data/useFetchUser.ts"
+                language: "typescript"
   - name: "Svelte"
-    description: "一种构建用户界面的全新方法，将您的代码编译为微小的、无框架的原生JS。"
-    version: "4.1.2"
+    description: "一种构建用户界面的崭新方法，它将你的代码编译为小型、无框架的原声JS, 现包含用于细粒度反应的符文。"
+    version: "5.28.1"
     repository: "https://github.com/sveltejs/svelte"
     website: "https://svelte.dev"
     license: "MIT"
@@ -54,13 +427,168 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "声明状态"
-            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            description: "在Svelte中，响应式状态在脚本部分通常使用let声明。"
+            link: "https://svelte.dev/docs/svelte-components#script"
             file:
-              - path: "apps/svelte-party/src/components/reactivity/DeclareState.svelte"
+              - path: "apps/svelte-party/src/components/0-reactivity/0-declare-state/Name.svelte"
                 language: "svelte"
+          - name: "更新状态"
+            description: "在Svelte中，可以通过直接为变量赋新值来更新状态。"
+            link: "https://svelte.dev/docs/svelte-components#script"
+            file:
+              - path: "apps/svelte-party/src/components/0-reactivity/1-update-state/UpdateCount.svelte"
+                language: "svelte"
+          - name: "计算状态"
+            description: "在Svelte中，计算值可以使用响应式声明($:)创建。"
+            link: "https://svelte.dev/docs/svelte-components#script-3-$-marks-a-statement-as-reactive"
+            file:
+              - path: "apps/svelte-party/src/components/0-reactivity/2-computed-state/DoubleCount.svelte"
+                language: "svelte"
+      - <<: *templating
+        detail:
+          - name: "简约模板"
+            description: "Svelte使用一种扩展HTML的模板语法，让你可以声明式地描述组件的标记。"
+            link: "https://svelte.dev/docs/introduction#components"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/0-minimal-template/HelloWorld.svelte"
+                language: "svelte"
+          - name: "样式"
+            description: "Svelte组件可以包含<style>部分，用于组件特定的CSS，并默认限定作用域。"
+            link: "https://svelte.dev/docs/svelte-components#style"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/1-styling/Styling.svelte"
+                language: "svelte"
+          - name: "循环"
+            description: "Svelte提供#each指令用于根据数组渲染元素列表。"
+            link: "https://svelte.dev/docs/logic-blocks#each"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/2-loop/CountList.svelte"
+                language: "svelte"
+          - name: "事件点击"
+            description: "Svelte使用on:click指令监听DOM事件，并在触发事件时运行JavaScript。"
+            link: "https://svelte.dev/docs/element-directives#on-eventname"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/3-event-click/CountIncrement.svelte"
+                language: "svelte"
+          - name: "dom引用"
+            description: "Svelte允许你通过bind:this指令直接访问DOM元素。"
+            link: "https://svelte.dev/docs/element-directives#bind-this"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/4-dom-ref/FocusInput.svelte"
+                language: "svelte"
+          - name: "条件渲染"
+            description: "Svelte提供#if、:else if和:else块用于条件渲染元素。"
+            link: "https://svelte.dev/docs/logic-blocks#if"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/5-conditional/LevelDisplay.svelte"
+                language: "svelte"
+      - <<: *lifecycle
+        detail:
+          - name: "挂载时"
+            description: "Svelte的onMount函数在组件渲染到DOM后调用。"
+            link: "https://svelte.dev/docs/svelte#onmount"
+            file:
+              - path: "apps/svelte-party/src/components/2-lifecycle/0-on-mount/PageTitle.svelte"
+                language: "svelte"
+          - name: "卸载时"
+            description: "在Svelte中，可以通过从onMount返回一个函数或使用onDestroy实现清理逻辑。"
+            link: "https://svelte.dev/docs/svelte#ondestroy"
+            file:
+              - path: "apps/svelte-party/src/components/2-lifecycle/1-on-unmount/Time.svelte"
+                language: "svelte"
+      - <<: *component-composition
+        detail:
+          - name: "属性"
+            description: "在Svelte中，属性通过在脚本部分声明export let来声明。"
+            link: "https://svelte.dev/docs/svelte-components#attributes-and-props"
+            file:
+              - path: "apps/svelte-party/src/components/3-component-composition/0-props/CountContent.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/0-props/CountDisplay.svelte"
+                language: "svelte"
+          - name: "向父组件发射事件"
+            description: "子组件可以使用createEventDispatcher函数向父组件发射事件。"
+            link: "https://svelte.dev/docs/component-directives#on-eventname"
+            file:
+              - path: "apps/svelte-party/src/components/3-component-composition/1-emit-to-parent/CountContent.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/1-emit-to-parent/CountDisplay.svelte"
+                language: "svelte"
+          - name: "插槽"
+            description: "Svelte的插槽允许你将内容从父组件传输到子组件。"
+            link: "https://svelte.dev/docs/special-elements#slot"
+            file:
+              - path: "apps/svelte-party/src/components/3-component-composition/2-slot/Button.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/2-slot/ButtonContent.svelte"
+                language: "svelte"
+          - name: "插槽回退"
+            description: "Svelte中的插槽可以具有后备内容，当父组件未提供内容时显示这些内容。"
+            link: "https://svelte.dev/docs/special-elements#slot"
+            file:
+              - path: "apps/svelte-party/src/components/3-component-composition/3-slot-fallback/Button.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/3-slot-fallback/ButtonContent.svelte"
+                language: "svelte"
+          - name: "上下文"
+            description: "Svelte提供setContext和getContext函数，用于在不传递属性的情况下在组件之间共享数据。"
+            link: "https://svelte.dev/docs/svelte#setcontext"
+            file:
+              - path: "apps/svelte-party/src/components/3-component-composition/4-context/AppContext.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/4-context/ThemeContent.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/4-context/ThemedButton.svelte"
+                language: "svelte"
+      - <<: *form-input
+        detail:
+          - name: "输入文本"
+            description: "Svelte通过使用bind:value指令提供表单输入的双向数据绑定。"
+            link: "https://svelte.dev/docs/element-directives#bind-property"
+            file:
+              - path: "apps/svelte-party/src/components/4-form-input/0-input-text/InputText.svelte"
+                language: "svelte"
+          - name: "复选框"
+            description: "Svelte中的复选框可以通过bind:checked绑定到布尔值或数组。"
+            link: "https://svelte.dev/docs/element-directives#bind-group"
+            file:
+              - path: "apps/svelte-party/src/components/4-form-input/1-checkbox/Checkbox.svelte"
+                language: "svelte"
+          - name: "单选按钮"
+            description: "Svelte中的单选按钮可以分组并绑定到使用bind:group的单个值。"
+            link: "https://svelte.dev/docs/element-directives#bind-group"
+            file:
+              - path: "apps/svelte-party/src/components/4-form-input/2-radio/Radio.svelte"
+                language: "svelte"
+          - name: "选择元素"
+            description: "Svelte中的选择元素可以通过bind:value绑定到值。"
+            link: "https://svelte.dev/docs/element-directives#bind-property"
+            file:
+              - path: "apps/svelte-party/src/components/4-form-input/3-select/Select.svelte"
+                language: "svelte"
+      - <<: *webapp-features
+        detail:
+          - name: "渲染应用"
+            description: "在Svelte中，通常在main.ts文件中使用new App()构造函数创建和挂载应用。"
+            link: "https://svelte.dev/docs/client-side-component-api#creating-a-component"
+            file:
+              - path: "apps/svelte-party/index.html"
+                language: "html"
+              - path: "apps/svelte-party/src/main.ts"
+                language: "typescript"
+              - path: "apps/svelte-party/src/components/5-webapp-features/0-render-app/App.svelte"
+                language: "svelte"
+          - name: "获取数据"
+            description: "在Svelte中，可以在onMount生命周期函数中或使用Svelte的内置存储库获取数据。"
+            link: "https://svelte.dev/docs/svelte#onmount"
+            file:
+              - path: "apps/svelte-party/src/components/5-webapp-features/1-fetch-data/App.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/5-webapp-features/1-fetch-data/useFetchsers.svelte.ts"
+                language: "typescript"
   - name: "Lit"
     description: "一个用于构建快速、轻量级Web组件的简单库。"
-    version: "3.0.1"
+    version: "3.3.0"
     repository: "https://github.com/lit/lit"
     website: "https://lit.dev"
     license: "BSD-3-Clause"
@@ -69,12 +597,165 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "声明状态"
-            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            description: "在Lit中，响应式属性通过@property装饰器声明。"
+            link: "https://lit.dev/docs/components/properties/"
             file:
-              - path: "apps/lit-party/src/components/reactivity/declare-state.ts"
+              - path: "apps/lit-party/src/components/0-reactivity/0-declare-state/name.ts"
+                language: "typescript"
+          - name: "更新状态"
+            description: "在Lit中，可以通过设置属性值并调用requestUpdate()来更新状态。"
+            link: "https://lit.dev/docs/components/lifecycle/#reactive-update-cycle"
+            file:
+              - path: "apps/lit-party/src/components/0-reactivity/1-update-state/update-count.ts"
+                language: "typescript"
+          - name: "计算状态"
+            description: "在Lit中，计算属性可以通过getter方法创建。"
+            link: "https://lit.dev/docs/components/properties/#computed-properties"
+            file:
+              - path: "apps/lit-party/src/components/0-reactivity/2-computed-state/double-count.ts"
+                language: "typescript"
+      - <<: *templating
+        detail:
+          - name: "简约模板"
+            description: "Lit使用标记模板文字定义模板。"
+            link: "https://lit.dev/docs/templates/overview/"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/0-minimal-template/hello-world.ts"
+                language: "typescript"
+          - name: "样式"
+            description: "Lit组件可以使用静态styles属性包含样式。"
+            link: "https://lit.dev/docs/components/styles/"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/1-styling/styling.ts"
+                language: "typescript"
+          - name: "循环"
+            description: "Lit使用map()函数和repeat指令渲染列表。"
+            link: "https://lit.dev/docs/templates/lists/"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/2-loop/count-list.ts"
+                language: "typescript"
+          - name: "事件点击"
+            description: "在Lit中，事件处理通过@click属性或类似的事件绑定完成。"
+            link: "https://lit.dev/docs/components/events/"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/3-event-click/count-increment.ts"
+                language: "typescript"
+          - name: "dom引用"
+            description: "Lit使用@query装饰器创建DOM元素的引用。"
+            link: "https://lit.dev/docs/components/shadow-dom/#querying"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/4-dom-ref/focus-input.ts"
+                language: "typescript"
+          - name: "条件渲染"
+            description: "在Lit中，条件渲染通过三元运算符或when指令完成。"
+            link: "https://lit.dev/docs/templates/conditionals/"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/5-conditional/level-display.ts"
+                language: "typescript"
+      - <<: *lifecycle
+        detail:
+          - name: "挂载时"
+            description: "Lit使用connectedCallback()运行在组件添加到DOM时的代码。"
+            link: "https://lit.dev/docs/components/lifecycle/#connectedcallback"
+            file:
+              - path: "apps/lit-party/src/components/2-lifecycle/0-on-mount/page-title.ts"
+                language: "typescript"
+          - name: "卸载时"
+            description: "Lit使用disconnectedCallback()在组件从DOM中移除时进行清理。"
+            link: "https://lit.dev/docs/components/lifecycle/#disconnectedcallback"
+            file:
+              - path: "apps/lit-party/src/components/2-lifecycle/1-on-unmount/time.ts"
+                language: "typescript"
+      - <<: *component-composition
+        detail:
+          - name: "属性"
+            description: "在Lit中，属性通过@property装饰器定义。"
+            link: "https://lit.dev/docs/components/properties/"
+            file:
+              - path: "apps/lit-party/src/components/3-component-composition/0-props/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/0-props/count-content.ts"
+                language: "typescript"
+          - name: "向父组件发射事件"
+            description: "Lit使用自定义事件进行子组件与父组件之间的通信。"
+            link: "https://lit.dev/docs/components/events/"
+            file:
+              - path: "apps/lit-party/src/components/3-component-composition/1-emit-to-parent/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/1-emit-to-parent/count-content.ts"
+                language: "typescript"
+          - name: "插槽"
+            description: "Lit使用<slot>元素进行内容投影。"
+            link: "https://lit.dev/docs/components/shadow-dom/#slots"
+            file:
+              - path: "apps/lit-party/src/components/3-component-composition/2-slot/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/2-slot/button-content.ts"
+                language: "typescript"
+          - name: "插槽回退"
+            description: "在<slot>元素中提供候补内容。"
+            link: "https://lit.dev/docs/components/shadow-dom/#fallback-content"
+            file:
+              - path: "apps/lit-party/src/components/3-component-composition/3-slot-fallback/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/3-slot-fallback/card.ts"
+                language: "typescript"
+          - name: "上下文"
+            description: "Lit提供了一个上下文API用于跨组件共享数据。"
+            link: "https://lit.dev/docs/data/context/"
+            file:
+              - path: "apps/lit-party/src/components/3-component-composition/4-context/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/4-context/theme-context.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/4-context/theme-toggle.ts"
+                language: "typescript"
+      - <<: *form-input
+        detail:
+          - name: "输入文本"
+            description: "Lit通过属性和事件监听器处理表单输入。"
+            link: "https://lit.dev/docs/components/events/#input-example"
+            file:
+              - path: "apps/lit-party/src/components/4-form-input/0-input-text/input-text.ts"
+                language: "typescript"
+          - name: "复选框"
+            description: "在Lit中，复选框与其他表单输入类似处理。"
+            link: "https://lit.dev/docs/components/events/#checkbox-example"
+            file:
+              - path: "apps/lit-party/src/components/4-form-input/1-checkbox/checkbox.ts"
+                language: "typescript"
+          - name: "单选按钮"
+            description: "在Lit中，单选按钮可以采用属性和事件监听器进行管理。"
+            link: "https://lit.dev/docs/components/events/#radio-buttons"
+            file:
+              - path: "apps/lit-party/src/components/4-form-input/2-radio/radio.ts"
+                language: "typescript"
+          - name: "选择元素"
+            description: "在Lit中，选择元素可以在组件内创建和管理。"
+            link: "https://lit.dev/docs/components/events/#select-example"
+            file:
+              - path: "apps/lit-party/src/components/4-form-input/3-select/select.ts"
+                language: "typescript"
+      - <<: *webapp-features
+        detail:
+          - name: "渲染应用"
+            description: "Lit组件通常通过创建实例并添加到DOM中渲染。"
+            link: "https://lit.dev/docs/getting-started/#render-the-component"
+            file:
+              - path: "apps/lit-party/src/components/5-webapp-features/0-render-app/index.html"
+                language: "html"
+              - path: "apps/lit-party/src/components/5-webapp-features/0-render-app/app.ts"
+                language: "typescript"
+          - name: "获取数据"
+            description: "在Lit中，可以在生命周期回调中使用标准JavaScript fetch API或库进行数据获取。"
+            link: "https://lit.dev/docs/components/lifecycle/#reactive-update-cycle"
+            file:
+              - path: "apps/lit-party/src/components/5-webapp-features/1-fetch-data/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/5-webapp-features/1-fetch-data/fetch-users-task.ts"
                 language: "typescript"
   - name: "Solid"
-    description: "一个声明式、高效且灵活的JavaScript库，用于构建具有细粒度响应式的用户界面。"
+    description: "一个声明式、高效且灵活的JavaScript库，用于构建具有细粒度反应性的用户界面。"
     version: "1.7.11"
     repository: "https://github.com/solidjs/solid"
     website: "https://www.solidjs.com"
@@ -84,12 +765,164 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "声明状态"
-            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            description: "在Solid中，响应式状态通常使用createSignal函数声明。"
+            link: "https://www.solidjs.com/docs/latest/api#createsignal"
             file:
-              - path: "apps/solid-party/src/components/reactivity/DeclareState.tsx"
-                language: "typescript"
+              - path: "apps/solid-party/src/components/0-reactivity/0-declare-state/name.tsx"
+                language: "tsx"
+          - name: "更新状态"
+            description: "在Solid中，可以使用createSignal返回的setter函数更新状态。"
+            link: "https://www.solidjs.com/docs/latest/api#updating-signals"
+            file:
+              - path: "apps/solid-party/src/components/0-reactivity/1-update-state/update-count.tsx"
+                language: "tsx"
+          - name: "计算状态"
+            description: "在Solid中，可以使用createMemo函数创建计算值。"
+            link: "https://www.solidjs.com/docs/latest/api#creatememo"
+            file:
+              - path: "apps/solid-party/src/components/0-reactivity/2-computed-state/double-count.tsx"
+                language: "tsx"
+      - <<: *templating
+        detail:
+          - name: "简约模板"
+            description: "Solid使用JSX进行模板设置，类似于React，但具备其独特的响应式系统。"
+            link: "https://www.solidjs.com/docs/latest/api#jsx"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/0-minimal-template/hello-world.tsx"
+                language: "tsx"
+          - name: "样式"
+            description: "Solid支持多种样式方法，包括CSS模块和内联样式。"
+            link: "https://www.solidjs.com/docs/latest/api#styling"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/1-styling/styling.tsx"
+                language: "tsx"
+          - name: "循环"
+            description: "Solid使用<For>组件或map函数渲染列表。"
+            link: "https://www.solidjs.com/docs/latest/api#for"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/2-loop/count-list.tsx"
+                language: "tsx"
+          - name: "事件点击"
+            description: "在Solid中，事件处理通过on:click或类似的事件绑定完成。"
+            link: "https://www.solidjs.com/docs/latest/api#on___"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/3-event-click/count-increment.tsx"
+                language: "tsx"
+          - name: "dom引用"
+            description: "Solid使用ref属性创建DOM元素的引用。"
+            link: "https://www.solidjs.com/docs/latest/api#ref"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/4-dom-ref/focus-input.tsx"
+                language: "tsx"
+          - name: "条件渲染"
+            description: "在Solid中，条件渲染通过<Show>组件或三元运算符完成。"
+            link: "https://www.solidjs.com/docs/latest/api#show"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/5-conditional/level-display.tsx"
+                language: "tsx"
+      - <<: *lifecycle
+        detail:
+          - name: "挂载时"
+            description: "Solid使用onMount函数在组件挂载时运行效果。"
+            link: "https://www.solidjs.com/docs/latest/api#onmount"
+            file:
+              - path: "apps/solid-party/src/components/2-lifecycle/0-on-mount/page-title.tsx"
+                language: "tsx"
+          - name: "卸载时"
+            description: "在Solid中，可以通过从createEffect返回一个清理函数或使用onCleanup进行清理。"
+            link: "https://www.solidjs.com/docs/latest/api#oncleanup"
+            file:
+              - path: "apps/solid-party/src/components/2-lifecycle/1-on-unmount/time.tsx"
+                language: "tsx"
+      - <<: *component-composition
+        detail:
+          - name: "属性"
+            description: "在Solid中，属性作为参数传递给组件函数。"
+            link: "https://www.solidjs.com/docs/latest/api#props"
+            file:
+              - path: "apps/solid-party/src/components/3-component-composition/0-props/count-content.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/3-component-composition/0-props/count-display.tsx"
+                language: "tsx"
+          - name: "向父组件发射事件"
+            description: "Solid使用属性将函数从父传递到子进行通信。"
+            link: "https://www.solidjs.com/docs/latest/api#passing-functions"
+            file:
+              - path: "apps/solid-party/src/components/3-component-composition/1-emit-to-parent/count-content.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/3-component-composition/1-emit-to-parent/count-display.tsx"
+                language: "tsx"
+          - name: "插槽"
+            description: "Solid使用children属性进行内容投影。"
+            link: "https://www.solidjs.com/docs/latest/api#children"
+            file:
+              - path: "apps/solid-party/src/components/3-component-composition/2-slot/button-content.tsx"
+                language: "tsx"
+          - name: "插槽回退"
+            description: "可以通过条件渲染为插槽提供后备内容。"
+            link: "https://www.solidjs.com/docs/latest/api#children"
+            file:
+              - path: "apps/solid-party/src/components/3-component-composition/3-slot-fallback/app.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/3-component-composition/3-slot-fallback/card.tsx"
+                language: "tsx"
+          - name: "上下文"
+            description: "Solid提供createContext和useContext，用于跨组件间共享数据。"
+            link: "https://www.solidjs.com/docs/latest/api#createcontext"
+            file:
+              - path: "apps/solid-party/src/components/3-component-composition/4-context/app-context.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/3-component-composition/4-context/theme-context.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/3-component-composition/4-context/themed-button.tsx"
+                language: "tsx"
+      - <<: *form-input
+        detail:
+          - name: "输入文本"
+            description: "Solid通过信号和事件绑定处理表单输入。"
+            link: "https://www.solidjs.com/docs/latest/api#createSignal"
+            file:
+              - path: "apps/solid-party/src/components/4-form-input/0-input-text/input-text.tsx"
+                language: "tsx"
+          - name: "复选框"
+            description: "在Solid中，复选框与其他表单输入项类似处理。"
+            link: "https://www.solidjs.com/docs/latest/api#createSignal"
+            file:
+              - path: "apps/solid-party/src/components/4-form-input/1-checkbox/checkbox.tsx"
+                language: "tsx"
+          - name: "单选按钮"
+            description: "在Solid中，单选按钮可通过信号和事件绑定进行管理。"
+            link: "https://www.solidjs.com/docs/latest/api#createSignal"
+            file:
+              - path: "apps/solid-party/src/components/4-form-input/2-radio/radio.tsx"
+                language: "tsx"
+          - name: "选择元素"
+            description: "在Solid中，选择元素可在组件内创建和管理。"
+            link: "https://www.solidjs.com/docs/latest/api#createSignal"
+            file:
+              - path: "apps/solid-party/src/components/4-form-input/3-select/select.tsx"
+                language: "tsx"
+      - <<: *webapp-features
+        detail:
+          - name: "渲染应用"
+            description: "Solid应用通常通过index.tsx文件中的render函数渲染。"
+            link: "https://www.solidjs.com/docs/latest/api#render"
+            file:
+              - path: "apps/solid-party/index.html"
+                language: "html"
+              - path: "apps/solid-party/src/index.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/5-webapp-features/0-render-app/app.tsx"
+                language: "tsx"
+          - name: "获取数据"
+            description: "在Solid中，可以使用createResource函数或在createEffect中获取数据。"
+            link: "https://www.solidjs.com/docs/latest/api#createresource"
+            file:
+              - path: "apps/solid-party/src/components/5-webapp-features/1-fetch-data/app.tsx"
+                language: "tsx"
+
   - name: "Qwik"
-    description: "一个可恢复的框架，用于构建专注于性能和可扩展性的即时Web应用程序。"
+    description: "一个可恢复框架，用于构建专注于性能和可伸缩性的瞬时Web应用。"
     version: "1.2.12"
     repository: "https://github.com/BuilderIO/qwik"
     website: "https://qwik.builder.io"
@@ -99,7 +932,160 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "声明状态"
-            description: "使用@RequestMapping将Web请求映射到特定的处理方法。"
+            description: "在Qwik中，响应式状态通常使用useSignal钩子声明。"
+            link: "https://qwik.builder.io/docs/components/state/"
             file:
-              - path: "apps/qwik-party/src/components/reactivity/DeclareState.tsx"
+              - path: "apps/qwik-party/src/components/0-reactivity/0-declare-state/name.tsx"
+                language: "tsx"
+          - name: "更新状态"
+            description: "在Qwik中，可以通过修改信号的value属性更新状态。"
+            link: "https://qwik.builder.io/docs/components/state/#updating-state"
+            file:
+              - path: "apps/qwik-party/src/components/0-reactivity/1-update-state/update-count.tsx"
+                language: "tsx"
+          - name: "计算状态"
+            description: "在Qwik中，计算值可以使用useComputed$函数创建。"
+            link: "https://qwik.builder.io/docs/components/state/#computed-state"
+            file:
+              - path: "apps/qwik-party/src/components/0-reactivity/2-computed-state/double-count.tsx"
+                language: "tsx"
+      - <<: *templating
+        detail:
+          - name: "简约模板"
+            description: "Qwik使用JSX进行模板设置，类似于React。"
+            link: "https://qwik.builder.io/docs/components/overview/"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/0-minimal-template/hello-world.tsx"
+                language: "tsx"
+          - name: "样式"
+            description: "Qwik支持多种样式方法，包括CSS模块和内联样式。"
+            link: "https://qwik.builder.io/docs/components/styles/"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/1-styling/styling.tsx"
+                language: "tsx"
+          - name: "循环"
+            description: "Qwik使用标准JavaScript map函数渲染列表。"
+            link: "https://qwik.builder.io/docs/components/rendering/#rendering-lists"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/2-loop/count-list.tsx"
+                language: "tsx"
+          - name: "事件点击"
+            description: "在Qwik中，事件处理通过on:click属性或类似的事件绑定完成。"
+            link: "https://qwik.builder.io/docs/components/events/"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/3-event-click/count-increment.tsx"
+                language: "tsx"
+          - name: "dom引用"
+            description: "Qwik使用useSignal钩子创建DOM元素的引用。"
+            link: "https://qwik.builder.io/docs/components/events/#element-events"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/4-dom-ref/focus-input.tsx"
+                language: "tsx"
+          - name: "条件渲染"
+            description: "在Qwik中，条件渲染通过标准JavaScript条件语句或三元运算符完成。"
+            link: "https://qwik.builder.io/docs/components/rendering/#conditional-rendering"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/5-conditional/level-display.tsx"
+                language: "tsx"
+      - <<: *lifecycle
+        detail:
+          - name: "挂载时"
+            description: "Qwik使用useVisibleTask$钩子在组件挂载后运行效果。"
+            link: "https://qwik.builder.io/docs/components/lifecycle/#usevisibletask"
+            file:
+              - path: "apps/qwik-party/src/components/2-lifecycle/0-on-mount/page-title.tsx"
+                language: "tsx"
+          - name: "卸载时"
+            description: "在Qwik中，可以通过从useVisibleTask$返回一个清理函数进行清理。"
+            link: "https://qwik.builder.io/docs/components/lifecycle/#cleanup"
+            file:
+              - path: "apps/qwik-party/src/components/2-lifecycle/1-on-unmount/time.tsx"
+                language: "tsx"
+      - <<: *component-composition
+        detail:
+          - name: "属性"
+            description: "在Qwik中，属性作为参数传递给组件函数。"
+            link: "https://qwik.builder.io/docs/components/props/"
+            file:
+              - path: "apps/qwik-party/src/components/3-component-composition/0-props/count-content.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/3-component-composition/0-props/count-display.tsx"
+                language: "tsx"
+          - name: "向父组件发射事件"
+            description: "Qwik使用属性将函数从父组件传递给子组件进行通信。"
+            link: "https://qwik.builder.io/docs/components/events/#component-events"
+            file:
+              - path: "apps/qwik-party/src/components/3-component-composition/1-emit-to-parent/count-action.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/3-component-composition/1-emit-to-parent/count-content.tsx"
+                language: "tsx"
+          - name: "插槽"
+            description: "Qwik使用Slot组件进行内容投影。"
+            link: "https://qwik.builder.io/docs/components/projection/"
+            file:
+              - path: "apps/qwik-party/src/components/3-component-composition/2-slot/button-content.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/3-component-composition/2-slot/custom-button.tsx"
+                language: "tsx"
+          - name: "插槽回退"
+            description: "可以通过条件渲染为插槽提供候补内容。"
+            link: "https://qwik.builder.io/docs/components/projection/#fallback-content"
+            file:
+              - path: "apps/qwik-party/src/components/3-component-composition/3-slot-fallback/app.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/3-component-composition/3-slot-fallback/card.tsx"
+                language: "tsx"
+          - name: "上下文"
+            description: "Qwik提供createContextId和useContext用于跨组件共享数据。"
+            link: "https://qwik.builder.io/docs/components/context/"
+            file:
+              - path: "apps/qwik-party/src/components/3-component-composition/4-context/app-context.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/3-component-composition/4-context/theme-context.ts"
                 language: "typescript"
+              - path: "apps/qwik-party/src/components/3-component-composition/4-context/theme-toggle.tsx"
+                language: "tsx"
+      - <<: *form-input
+        detail:
+          - name: "输入文本"
+            description: "Qwik通过useSignal钩子和事件绑定处理表单输入。"
+            link: "https://qwik.builder.io/docs/components/events/#input-binding"
+            file:
+              - path: "apps/qwik-party/src/components/4-form-input/0-input-text/input-text.tsx"
+                language: "tsx"
+          - name: "复选框"
+            description: "在Qwik中，复选框与其他表单输入类似处理。"
+            link: "https://qwik.builder.io/docs/components/events/#checkbox-binding"
+            file:
+              - path: "apps/qwik-party/src/components/4-form-input/1-checkbox/checkbox.tsx"
+                language: "tsx"
+          - name: "单选按钮"
+            description: "在Qwik中，单选按钮可通过信号和事件绑定进行处理。"
+            link: "https://qwik.builder.io/docs/components/events/#radio-binding"
+            file:
+              - path: "apps/qwik-party/src/components/4-form-input/2-radio/radio.tsx"
+                language: "tsx"
+          - name: "选择元素"
+            description: "在Qwik中，选择元素可在组件内创建和管理。"
+            link: "https://qwik.builder.io/docs/components/events/#select-binding"
+            file:
+              - path: "apps/qwik-party/src/components/4-form-input/3-select/select.tsx"
+                language: "tsx"
+      - <<: *webapp-features
+        detail:
+          - name: "渲染应用"
+            description: "Qwik应用通常通过main.tsx文件中的根组件渲染。"
+            link: "https://qwik.builder.io/docs/components/overview/#app-component"
+            file:
+              - path: "apps/qwik-party/index.html"
+                language: "html"
+              - path: "apps/qwik-party/src/main.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/5-webapp-features/0-render-app/app.tsx"
+                language: "tsx"
+          - name: "获取数据"
+            description: "在Qwik中，可以使用useResource$钩子或在useTask$中获取数据。"
+            link: "https://qwik.builder.io/docs/components/state/#useresource"
+            file:
+              - path: "apps/qwik-party/src/components/5-webapp-features/1-fetch-data/app.tsx"
+                language: "tsx"

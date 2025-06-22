@@ -8,6 +8,67 @@ definitions:
       so we are going to analyze it to understand its strengths and limitations.
     detail-list:
       - "Declaring State"
+      - "Updating State"
+      - "Computed State"
+
+  templating: &templating
+    type: "group"
+    name: "Templating"
+    description: >
+      Templating refers to the way a framework allows developers to structure and render the UI. 
+      It includes how HTML-like structures are created, how dynamic content is inserted, and how the UI reacts to data changes.
+    detail-list:
+      - "Minimal Template"
+      - "Styling"
+      - "Loop"
+      - "Event Click"
+      - "Dom Ref"
+      - "Conditional"
+
+  lifecycle: &lifecycle
+    type: "group"
+    name: "Lifecycle"
+    description: >
+      Lifecycle hooks are methods that allow developers to run code at specific points in a component's life, 
+      such as when it's created, updated, or destroyed. Understanding these hooks is crucial for managing side effects and optimizing performance.
+    detail-list:
+      - "On Mount"
+      - "On Unmount"
+
+  component-composition: &component-composition
+    type: "group"
+    name: "Component Composition"
+    description: >
+      Component composition is a fundamental concept in modern frontend frameworks. It involves breaking down the UI into reusable pieces, 
+      and understanding how these pieces can communicate and work together to build complex applications.
+    detail-list:
+      - "Props"
+      - "Emit to Parent"
+      - "Slot"
+      - "Slot Fallback"
+      - "Context"
+
+  form-input: &form-input
+    type: "group"
+    name: "Form Input"
+    description: >
+      Handling form inputs is a common task in web applications. This section explores how different frameworks 
+      manage form state, validate input, and handle user interactions with various types of form controls.
+    detail-list:
+      - "Input Text"
+      - "Checkbox"
+      - "Radio"
+      - "Select"
+
+  webapp-features: &webapp-features
+    type: "group"
+    name: "Web App Features"
+    description: >
+      This section covers essential features for building full-fledged web applications, including how to bootstrap the application 
+      and interact with external data sources.
+    detail-list:
+      - "Render App"
+      - "Fetch Data"
 
 name: "Frontend"
 repository: "https://github.com/lizhongyue248/framework-party-frontend"
@@ -24,13 +85,169 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "Declaring State"
-            description: "Use @RequestMapping to map web requests onto specific handler methods."
+            description: "In React, state is typically declared using the useState hook."
+            link: "https://react.dev/reference/react/useState"
             file:
-              - path: "apps/react-party/src/components/reactivity/DeclareState.tsx"
-                language: "typescript"
+              - path: "apps/react-party/src/components/0-reactivity/0-declare-state/name.tsx"
+                language: "tsx"
+          - name: "Updating State"
+            description: "State in React can be updated using the setter function returned by useState."
+            link: "https://react.dev/reference/react/useState#updating-state"
+            file:
+              - path: "apps/react-party/src/components/0-reactivity/1-update-state/update-count.tsx"
+                language: "tsx"
+          - name: "Computed State"
+            description: "Computed values in React can be created using the useMemo hook."
+            link: "https://react.dev/reference/react/useMemo"
+            file:
+              - path: "apps/react-party/src/components/0-reactivity/2-computed-state/double-count.tsx"
+                language: "tsx"
+      - <<: *templating
+        detail:
+          - name: "Minimal Template"
+            description: "React uses JSX, a syntax extension that allows you to write HTML-like code within JavaScript."
+            link: "https://react.dev/learn/writing-markup-with-jsx"
+            file:
+              - path: "apps/react-party/src/components/1-templating/0-minimal-template/hello-world.tsx"
+                language: "tsx"
+          - name: "Styling"
+            description: "React components can be styled using CSS modules or inline styles."
+            link: "https://react.dev/learn/adding-interactivity#responding-to-events"
+            file:
+              - path: "apps/react-party/src/components/1-templating/1-styling/styling.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/1-templating/1-styling/style.css"
+                language: "css"
+          - name: "Loop"
+            description: "In React, you can use the map function to render lists of elements."
+            link: "https://react.dev/learn#rendering-lists"
+            file:
+              - path: "apps/react-party/src/components/1-templating/2-loop/count-list.tsx"
+                language: "tsx"
+          - name: "Event Click"
+            description: "React handles events using props like onClick for click events."
+            link: "https://react.dev/learn/adding-interactivity#responding-to-events"
+            file:
+              - path: "apps/react-party/src/components/1-templating/3-event-click/count-increment.tsx"
+                language: "tsx"
+          - name: "Dom Ref"
+            description: "React provides the useRef hook to create references to DOM elements."
+            link: "https://react.dev/learn/manipulating-the-dom-with-refs"
+            file:
+              - path: "apps/react-party/src/components/1-templating/4-dom-ref/focus-input.tsx"
+                language: "tsx"
+          - name: "Conditional"
+            description: "In React, you can use conditional rendering with ternary operators or && for simple conditions."
+            link: "https://react.dev/learn/conditional-rendering"
+            file:
+              - path: "apps/react-party/src/components/1-templating/5-conditional/level-display.tsx"
+                language: "tsx"
+      - <<: *lifecycle
+        detail:
+          - name: "On Mount"
+            description: "React uses the useEffect hook with an empty dependency array for running code on component mount."
+            link: "https://react.dev/reference/react/useEffect#running-an-effect-only-when-the-component-mounts"
+            file:
+              - path: "apps/react-party/src/components/2-lifecycle/0-on-mount/page-title.tsx"
+                language: "tsx"
+          - name: "On Unmount"
+            description: "React uses the cleanup function returned by useEffect for running code on component unmount."
+            link: "https://react.dev/reference/react/useEffect#cleaning-up-an-effect"
+            file:
+              - path: "apps/react-party/src/components/2-lifecycle/1-on-unmount/time.tsx"
+                language: "tsx"
+      - <<: *component-composition
+        detail:
+          - name: "Props"
+            description: "React components can receive data from their parent component through props."
+            link: "https://react.dev/learn/passing-props-to-a-component"
+            file:
+              - path: "apps/react-party/src/components/3-component-composition/0-props/count-content.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/0-props/count-display.tsx"
+                language: "tsx"
+          - name: "Emit to Parent"
+            description: "React components can communicate with their parent by calling functions passed as props."
+            link: "https://react.dev/learn/responding-to-events#passing-event-handlers-as-props"
+            file:
+              - path: "apps/react-party/src/components/3-component-composition/1-emit-to-parent/count-action.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/1-emit-to-parent/count-content.tsx"
+                language: "tsx"
+          - name: "Slot"
+            description: "React uses the children prop to implement slot-like functionality."
+            link: "https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children"
+            file:
+              - path: "apps/react-party/src/components/3-component-composition/2-slot/button-content.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/2-slot/custom-button.tsx"
+                language: "tsx"
+          - name: "Slot Fallback"
+            description: "In React, you can provide default content for slots using conditional rendering."
+            link: "https://react.dev/learn/conditional-rendering"
+            file:
+              - path: "apps/react-party/src/components/3-component-composition/3-slot-fallback/app.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/3-slot-fallback/card.tsx"
+                language: "tsx"
+          - name: "Context"
+            description: "React provides the Context API for passing data through the component tree without props."
+            link: "https://react.dev/learn/passing-data-deeply-with-context"
+            file:
+              - path: "apps/react-party/src/components/3-component-composition/4-context/app-context.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/4-context/theme-context.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/3-component-composition/4-context/theme-toggle.tsx"
+                language: "tsx"
+      - <<: *form-input
+        detail:
+          - name: "Input Text"
+            description: "React handles form inputs using controlled components with the value and onChange props."
+            link: "https://react.dev/reference/react-dom/components/input"
+            file:
+              - path: "apps/react-party/src/components/4-form-input/0-input-text/input-text.tsx"
+                language: "tsx"
+          - name: "Checkbox"
+            description: "Checkboxes in React are handled similarly to other form inputs, using the checked prop."
+            link: "https://react.dev/reference/react-dom/components/input#checkbox"
+            file:
+              - path: "apps/react-party/src/components/4-form-input/1-checkbox/checkbox.tsx"
+                language: "tsx"
+          - name: "Radio"
+            description: "Radio buttons in React are managed using the checked prop and onChange handler."
+            link: "https://react.dev/reference/react-dom/components/input#radio"
+            file:
+              - path: "apps/react-party/src/components/4-form-input/2-radio/radio.tsx"
+                language: "tsx"
+          - name: "Select"
+            description: "Select elements in React are created using the <select> and <option> tags with controlled component pattern."
+            link: "https://react.dev/reference/react-dom/components/select"
+            file:
+              - path: "apps/react-party/src/components/4-form-input/3-select/select.tsx"
+                language: "tsx"
+      - <<: *webapp-features
+        detail:
+          - name: "Render App"
+            description: "React applications are typically rendered using ReactDOM.createRoot().render()."
+            link: "https://react.dev/reference/react-dom/client/createRoot"
+            file:
+              - path: "apps/react-party/index.html"
+                language: "html"
+              - path: "apps/react-party/src/main.tsx"
+                language: "tsx"
+              - path: "apps/react-party/src/components/5-webapp-features/0-render-app/app.tsx"
+                language: "tsx"
+          - name: "Fetch Data"
+            description: "Data fetching in React can be done using the useEffect hook along with the Fetch API or libraries like Axios."
+            link: "https://react.dev/learn/synchronizing-with-effects#fetching-data"
+            file:
+              - path: "apps/react-party/src/components/5-webapp-features/1-fetch-data/app.tsx"
+                language: "tsx"
+
   - name: "Vue"
     description: "A progressive framework for building user interfaces with an approachable core library."
-    version: "3.3.4"
+    version: "3.5.13"
     repository: "https://github.com/vuejs/vue"
     website: "https://vuejs.org"
     license: "MIT"
@@ -39,13 +256,170 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "Declaring State"
-            description: "Use @RequestMapping to map web requests onto specific handler methods."
+            description: "In Vue 3, reactive state is typically declared using the ref or reactive functions in the setup function or script setup."
+            link: "https://vuejs.org/guide/essentials/reactivity-fundamentals.html"
             file:
-              - path: "apps/vue-party/src/components/reactivity/DeclareState.vue"
+              - path: "apps/vue-party/src/components/0-reactivity/0-declare-state/Name.vue"
                 language: "vue"
+          - name: "Updating State"
+            description: "State in Vue can be updated by directly assigning new values to refs or modifying reactive objects."
+            link: "https://vuejs.org/guide/essentials/reactivity-fundamentals.html#reactive-variables-with-ref"
+            file:
+              - path: "apps/vue-party/src/components/0-reactivity/1-update-state/UpdateCount.vue"
+                language: "vue"
+          - name: "Computed State"
+            description: "Computed properties in Vue can be created using the computed function."
+            link: "https://vuejs.org/guide/essentials/computed.html"
+            file:
+              - path: "apps/vue-party/src/components/0-reactivity/2-computed-state/DoubleCount.vue"
+                language: "vue"
+      - <<: *templating
+        detail:
+          - name: "Minimal Template"
+            description: "Vue uses a template syntax that extends HTML, allowing you to declaratively bind the rendered DOM to the component's data."
+            link: "https://vuejs.org/guide/essentials/template-syntax.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/0-minimal-template/HelloWorld.vue"
+                language: "vue"
+          - name: "Styling"
+            description: "Vue components can include a <style> section for component-specific CSS, which can be scoped to the component."
+            link: "https://vuejs.org/api/sfc-css-features.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/1-styling/Styling.vue"
+                language: "vue"
+          - name: "Loop"
+            description: "Vue provides the v-for directive for rendering lists of items based on an array."
+            link: "https://vuejs.org/guide/essentials/list.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/2-loop/CountList.vue"
+                language: "vue"
+          - name: "Event Click"
+            description: "Vue uses the v-on directive (or @ shorthand) to listen to DOM events and run methods when they're triggered."
+            link: "https://vuejs.org/guide/essentials/event-handling.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/3-event-click/CountIncrement.vue"
+                language: "vue"
+          - name: "Dom Ref"
+            description: "Vue allows you to get direct access to DOM elements using the ref attribute and the ref function."
+            link: "https://vuejs.org/guide/essentials/template-refs.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/4-dom-ref/FocusInput.vue"
+                language: "vue"
+          - name: "Conditional"
+            description: "Vue provides v-if, v-else-if, and v-else directives for conditional rendering of elements."
+            link: "https://vuejs.org/guide/essentials/conditional.html"
+            file:
+              - path: "apps/vue-party/src/components/1-templating/5-conditional/LevelDisplay.vue"
+                language: "vue"
+      - <<: *lifecycle
+        detail:
+          - name: "On Mount"
+            description: "Vue 3 uses the onMounted composable for running code after the component has been mounted."
+            link: "https://vuejs.org/api/composition-api-lifecycle.html#onmounted"
+            file:
+              - path: "apps/vue-party/src/components/2-lifecycle/0-on-mount/PageTitle.vue"
+                language: "vue"
+          - name: "On Unmount"
+            description: "Vue 3 uses the onUnmounted composable for cleanup logic when a component is unmounted."
+            link: "https://vuejs.org/api/composition-api-lifecycle.html#onunmounted"
+            file:
+              - path: "apps/vue-party/src/components/2-lifecycle/1-on-unmount/Time.vue"
+                language: "vue"
+      - <<: *component-composition
+        detail:
+          - name: "Props"
+            description: "Props in Vue are declared using the defineProps macro in the <script setup> section of a component."
+            link: "https://vuejs.org/guide/components/props.html"
+            file:
+              - path: "apps/vue-party/src/components/3-component-composition/0-props/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/0-props/CountContent.vue"
+                language: "vue"
+          - name: "Emit to Parent"
+            description: "Child components can emit events to their parents using the defineEmits macro and emitting the event."
+            link: "https://vuejs.org/guide/components/events.html"
+            file:
+              - path: "apps/vue-party/src/components/3-component-composition/1-emit-to-parent/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/1-emit-to-parent/CountContent.vue"
+                language: "vue"
+          - name: "Slot"
+            description: "Slots in Vue allow you to pass content from a parent component to a child component."
+            link: "https://vuejs.org/guide/components/slots.html"
+            file:
+              - path: "apps/vue-party/src/components/3-component-composition/2-slot/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/2-slot/ButtonContent.vue"
+                language: "vue"
+          - name: "Slot Fallback"
+            description: "Slots in Vue can have fallback content that is rendered when no content is provided by the parent component."
+            link: "https://vuejs.org/guide/components/slots.html#fallback-content"
+            file:
+              - path: "apps/vue-party/src/components/3-component-composition/3-slot-fallback/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/3-slot-fallback/Card.vue"
+                language: "vue"
+          - name: "Context"
+            description: "Vue provides the provide and inject functions for sharing data between components without passing props."
+            link: "https://vuejs.org/guide/components/provide-inject.html"
+            file:
+              - path: "apps/vue-party/src/components/3-component-composition/4-context/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/4-context/ThemeContent.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/4-context/ThemedButton.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/3-component-composition/4-context/ThemeProvider.ts"
+                language: "typescript"
+      - <<: *form-input
+        detail:
+          - name: "Input Text"
+            description: "Vue provides v-model directive for two-way data binding on form inputs."
+            link: "https://vuejs.org/guide/components/v-model.html"
+            file:
+              - path: "apps/vue-party/src/components/4-form-input/0-input-text/InputText.vue"
+                language: "vue"
+          - name: "Checkbox"
+            description: "Checkboxes in Vue can be bound to boolean values or arrays using v-model."
+            link: "https://vuejs.org/guide/form-input-bindings.html#checkbox"
+            file:
+              - path: "apps/vue-party/src/components/4-form-input/1-checkbox/Checkbox.vue"
+                language: "vue"
+          - name: "Radio"
+            description: "Radio buttons in Vue can be grouped and bound to a single value using v-model."
+            link: "https://vuejs.org/guide/form-input-bindings.html#radio"
+            file:
+              - path: "apps/vue-party/src/components/4-form-input/2-radio/Radio.vue"
+                language: "vue"
+          - name: "Select"
+            description: "Select elements in Vue can be bound to a value using v-model."
+            link: "https://vuejs.org/guide/form-input-bindings.html#select"
+            file:
+              - path: "apps/vue-party/src/components/4-form-input/3-select/Select.vue"
+                language: "vue"
+      - <<: *webapp-features
+        detail:
+          - name: "Render App"
+            description: "In Vue 3, you typically create and mount your app using createApp from the main.ts file."
+            link: "https://vuejs.org/guide/essentials/application.html"
+            file:
+              - path: "apps/vue-party/index.html"
+                language: "html"
+              - path: "apps/vue-party/src/main.ts"
+                language: "typescript"
+              - path: "apps/vue-party/src/components/5-webapp-features/0-render-app/App.vue"
+                language: "vue"
+          - name: "Fetch Data"
+            description: "In Vue, you can fetch data in the setup function or using composables."
+            link: "https://vuejs.org/guide/best-practices/production-deployment.html#fetching-data"
+            file:
+              - path: "apps/vue-party/src/components/5-webapp-features/1-fetch-data/App.vue"
+                language: "vue"
+              - path: "apps/vue-party/src/components/5-webapp-features/1-fetch-data/useFetchUser.ts"
+                language: "typescript"
   - name: "Svelte"
-    description: "A radical new approach to building user interfaces that compiles your code to tiny, framework-less vanilla JS."
-    version: "4.1.2"
+    description: "A radical new approach to building user interfaces that compiles your code to tiny, framework-less vanilla JS, now with runes for fine-grained reactivity."
+    version: "5.28.1"
     repository: "https://github.com/sveltejs/svelte"
     website: "https://svelte.dev"
     license: "MIT"
@@ -54,13 +428,168 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "Declaring State"
-            description: "Use @RequestMapping to map web requests onto specific handler methods."
+            description: "In Svelte, reactive state is typically declared using let statements in the script section."
+            link: "https://svelte.dev/docs/svelte-components#script"
             file:
-              - path: "apps/svelte-party/src/components/reactivity/DeclareState.svelte"
+              - path: "apps/svelte-party/src/components/0-reactivity/0-declare-state/Name.svelte"
                 language: "svelte"
+          - name: "Updating State"
+            description: "State in Svelte can be updated by directly assigning new values to variables."
+            link: "https://svelte.dev/docs/svelte-components#script"
+            file:
+              - path: "apps/svelte-party/src/components/0-reactivity/1-update-state/UpdateCount.svelte"
+                language: "svelte"
+          - name: "Computed State"
+            description: "Computed values in Svelte can be created using reactive declarations ($:)."
+            link: "https://svelte.dev/docs/svelte-components#script-3-$-marks-a-statement-as-reactive"
+            file:
+              - path: "apps/svelte-party/src/components/0-reactivity/2-computed-state/DoubleCount.svelte"
+                language: "svelte"
+      - <<: *templating
+        detail:
+          - name: "Minimal Template"
+            description: "Svelte uses a template syntax that extends HTML, allowing you to declaratively describe your component's markup."
+            link: "https://svelte.dev/docs/introduction#components"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/0-minimal-template/HelloWorld.svelte"
+                language: "svelte"
+          - name: "Styling"
+            description: "Svelte components can include a <style> section for component-specific CSS, which is scoped by default."
+            link: "https://svelte.dev/docs/svelte-components#style"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/1-styling/Styling.svelte"
+                language: "svelte"
+          - name: "Loop"
+            description: "Svelte provides the #each directive for rendering lists of items based on an array."
+            link: "https://svelte.dev/docs/logic-blocks#each"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/2-loop/CountList.svelte"
+                language: "svelte"
+          - name: "Event Click"
+            description: "Svelte uses the on:click directive to listen to DOM events and run JavaScript when they're triggered."
+            link: "https://svelte.dev/docs/element-directives#on-eventname"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/3-event-click/CountIncrement.svelte"
+                language: "svelte"
+          - name: "Dom Ref"
+            description: "Svelte allows you to get direct access to DOM elements using the bind:this directive."
+            link: "https://svelte.dev/docs/element-directives#bind-this"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/4-dom-ref/FocusInput.svelte"
+                language: "svelte"
+          - name: "Conditional"
+            description: "Svelte provides #if, :else if, and :else blocks for conditional rendering of elements."
+            link: "https://svelte.dev/docs/logic-blocks#if"
+            file:
+              - path: "apps/svelte-party/src/components/1-templating/5-conditional/LevelDisplay.svelte"
+                language: "svelte"
+      - <<: *lifecycle
+        detail:
+          - name: "On Mount"
+            description: "The onMount function in Svelte is called after the component has been rendered to the DOM."
+            link: "https://svelte.dev/docs/svelte#onmount"
+            file:
+              - path: "apps/svelte-party/src/components/2-lifecycle/0-on-mount/PageTitle.svelte"
+                language: "svelte"
+          - name: "On Unmount"
+            description: "Cleanup logic in Svelte can be implemented by returning a function from onMount or using onDestroy."
+            link: "https://svelte.dev/docs/svelte#ondestroy"
+            file:
+              - path: "apps/svelte-party/src/components/2-lifecycle/1-on-unmount/Time.svelte"
+                language: "svelte"
+      - <<: *component-composition
+        detail:
+          - name: "Props"
+            description: "Props in Svelte are declared using export let statements in the script section of a component."
+            link: "https://svelte.dev/docs/svelte-components#attributes-and-props"
+            file:
+              - path: "apps/svelte-party/src/components/3-component-composition/0-props/CountContent.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/0-props/CountDisplay.svelte"
+                language: "svelte"
+          - name: "Emit to Parent"
+            description: "Child components can emit events to their parents using the createEventDispatcher function."
+            link: "https://svelte.dev/docs/component-directives#on-eventname"
+            file:
+              - path: "apps/svelte-party/src/components/3-component-composition/1-emit-to-parent/CountContent.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/1-emit-to-parent/CountDisplay.svelte"
+                language: "svelte"
+          - name: "Slot"
+            description: "Slots in Svelte allow you to pass content from a parent component to a child component."
+            link: "https://svelte.dev/docs/special-elements#slot"
+            file:
+              - path: "apps/svelte-party/src/components/3-component-composition/2-slot/Button.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/2-slot/ButtonContent.svelte"
+                language: "svelte"
+          - name: "Slot Fallback"
+            description: "Slots in Svelte can have fallback content that is rendered when no content is provided by the parent component."
+            link: "https://svelte.dev/docs/special-elements#slot"
+            file:
+              - path: "apps/svelte-party/src/components/3-component-composition/3-slot-fallback/Button.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/3-slot-fallback/ButtonContent.svelte"
+                language: "svelte"
+          - name: "Context"
+            description: "Svelte provides setContext and getContext functions for sharing data between components without passing props."
+            link: "https://svelte.dev/docs/svelte#setcontext"
+            file:
+              - path: "apps/svelte-party/src/components/3-component-composition/4-context/AppContext.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/4-context/ThemeContent.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/3-component-composition/4-context/ThemedButton.svelte"
+                language: "svelte"
+      - <<: *form-input
+        detail:
+          - name: "Input Text"
+            description: "Svelte provides two-way data binding for form inputs using the bind:value directive."
+            link: "https://svelte.dev/docs/element-directives#bind-property"
+            file:
+              - path: "apps/svelte-party/src/components/4-form-input/0-input-text/InputText.svelte"
+                language: "svelte"
+          - name: "Checkbox"
+            description: "Checkboxes in Svelte can be bound to boolean values or arrays using bind:checked."
+            link: "https://svelte.dev/docs/element-directives#bind-group"
+            file:
+              - path: "apps/svelte-party/src/components/4-form-input/1-checkbox/Checkbox.svelte"
+                language: "svelte"
+          - name: "Radio"
+            description: "Radio buttons in Svelte can be grouped and bound to a single value using bind:group."
+            link: "https://svelte.dev/docs/element-directives#bind-group"
+            file:
+              - path: "apps/svelte-party/src/components/4-form-input/2-radio/Radio.svelte"
+                language: "svelte"
+          - name: "Select"
+            description: "Select elements in Svelte can be bound to a value using bind:value."
+            link: "https://svelte.dev/docs/element-directives#bind-property"
+            file:
+              - path: "apps/svelte-party/src/components/4-form-input/3-select/Select.svelte"
+                language: "svelte"
+      - <<: *webapp-features
+        detail:
+          - name: "Render App"
+            description: "In Svelte, you typically create and mount your app using the new App() constructor in the main.ts file."
+            link: "https://svelte.dev/docs/client-side-component-api#creating-a-component"
+            file:
+              - path: "apps/svelte-party/index.html"
+                language: "html"
+              - path: "apps/svelte-party/src/main.ts"
+                language: "typescript"
+              - path: "apps/svelte-party/src/components/5-webapp-features/0-render-app/App.svelte"
+                language: "svelte"
+          - name: "Fetch Data"
+            description: "In Svelte, you can fetch data in the onMount lifecycle function or using Svelte's built-in stores."
+            link: "https://svelte.dev/docs/svelte#onmount"
+            file:
+              - path: "apps/svelte-party/src/components/5-webapp-features/1-fetch-data/App.svelte"
+                language: "svelte"
+              - path: "apps/svelte-party/src/components/5-webapp-features/1-fetch-data/useFetchsers.svelte.ts"
+                language: "typescript"
   - name: "Lit"
     description: "A simple library for building fast, lightweight web components."
-    version: "3.0.0"
+    version: "3.3.0"
     repository: "https://github.com/lit/lit"
     website: "https://lit.dev"
     license: "BSD-3-Clause"
@@ -69,9 +598,162 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "Declaring State"
-            description: "Use @RequestMapping to map web requests onto specific handler methods."
+            description: "In Lit, reactive properties are declared using the @property decorator."
+            link: "https://lit.dev/docs/components/properties/"
             file:
-              - path: "apps/lit-party/src/components/reactivity/declare-state.ts"
+              - path: "apps/lit-party/src/components/0-reactivity/0-declare-state/name.ts"
+                language: "typescript"
+          - name: "Updating State"
+            description: "State in Lit can be updated by setting the property value and calling requestUpdate()."
+            link: "https://lit.dev/docs/components/lifecycle/#reactive-update-cycle"
+            file:
+              - path: "apps/lit-party/src/components/0-reactivity/1-update-state/update-count.ts"
+                language: "typescript"
+          - name: "Computed State"
+            description: "Computed properties in Lit can be created using getter methods."
+            link: "https://lit.dev/docs/components/properties/#computed-properties"
+            file:
+              - path: "apps/lit-party/src/components/0-reactivity/2-computed-state/double-count.ts"
+                language: "typescript"
+      - <<: *templating
+        detail:
+          - name: "Minimal Template"
+            description: "Lit uses tagged template literals for defining templates."
+            link: "https://lit.dev/docs/templates/overview/"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/0-minimal-template/hello-world.ts"
+                language: "typescript"
+          - name: "Styling"
+            description: "Lit components can include styles using the static styles property."
+            link: "https://lit.dev/docs/components/styles/"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/1-styling/styling.ts"
+                language: "typescript"
+          - name: "Loop"
+            description: "Lit uses the map() function and the repeat directive for rendering lists."
+            link: "https://lit.dev/docs/templates/lists/"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/2-loop/count-list.ts"
+                language: "typescript"
+          - name: "Event Click"
+            description: "Event handling in Lit is done using the @click attribute or similar event bindings."
+            link: "https://lit.dev/docs/components/events/"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/3-event-click/count-increment.ts"
+                language: "typescript"
+          - name: "Dom Ref"
+            description: "Lit uses the @query decorator to create references to DOM elements."
+            link: "https://lit.dev/docs/components/shadow-dom/#querying"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/4-dom-ref/focus-input.ts"
+                language: "typescript"
+          - name: "Conditional"
+            description: "Conditional rendering in Lit is done using ternary operators or the when directive."
+            link: "https://lit.dev/docs/templates/conditionals/"
+            file:
+              - path: "apps/lit-party/src/components/1-templating/5-conditional/level-display.ts"
+                language: "typescript"
+      - <<: *lifecycle
+        detail:
+          - name: "On Mount"
+            description: "Lit uses the connectedCallback() for running code when the component is added to the DOM."
+            link: "https://lit.dev/docs/components/lifecycle/#connectedcallback"
+            file:
+              - path: "apps/lit-party/src/components/2-lifecycle/0-on-mount/page-title.ts"
+                language: "typescript"
+          - name: "On Unmount"
+            description: "Lit uses the disconnectedCallback() for cleanup when the component is removed from the DOM."
+            link: "https://lit.dev/docs/components/lifecycle/#disconnectedcallback"
+            file:
+              - path: "apps/lit-party/src/components/2-lifecycle/1-on-unmount/time.ts"
+                language: "typescript"
+      - <<: *component-composition
+        detail:
+          - name: "Props"
+            description: "Props in Lit are defined using the @property decorator."
+            link: "https://lit.dev/docs/components/properties/"
+            file:
+              - path: "apps/lit-party/src/components/3-component-composition/0-props/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/0-props/count-content.ts"
+                language: "typescript"
+          - name: "Emit to Parent"
+            description: "Lit uses custom events for child-to-parent communication."
+            link: "https://lit.dev/docs/components/events/"
+            file:
+              - path: "apps/lit-party/src/components/3-component-composition/1-emit-to-parent/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/1-emit-to-parent/count-content.ts"
+                language: "typescript"
+          - name: "Slot"
+            description: "Lit uses the <slot> element for content projection."
+            link: "https://lit.dev/docs/components/shadow-dom/#slots"
+            file:
+              - path: "apps/lit-party/src/components/3-component-composition/2-slot/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/2-slot/button-content.ts"
+                language: "typescript"
+          - name: "Slot Fallback"
+            description: "Fallback content for slots can be provided within the <slot> element."
+            link: "https://lit.dev/docs/components/shadow-dom/#fallback-content"
+            file:
+              - path: "apps/lit-party/src/components/3-component-composition/3-slot-fallback/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/3-slot-fallback/card.ts"
+                language: "typescript"
+          - name: "Context"
+            description: "Lit provides a context API for sharing data across components."
+            link: "https://lit.dev/docs/data/context/"
+            file:
+              - path: "apps/lit-party/src/components/3-component-composition/4-context/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/4-context/theme-context.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/3-component-composition/4-context/theme-toggle.ts"
+                language: "typescript"
+      - <<: *form-input
+        detail:
+          - name: "Input Text"
+            description: "Lit handles form inputs using properties and event listeners."
+            link: "https://lit.dev/docs/components/events/#input-example"
+            file:
+              - path: "apps/lit-party/src/components/4-form-input/0-input-text/input-text.ts"
+                language: "typescript"
+          - name: "Checkbox"
+            description: "Checkboxes in Lit are handled similarly to other form inputs."
+            link: "https://lit.dev/docs/components/events/#checkbox-example"
+            file:
+              - path: "apps/lit-party/src/components/4-form-input/1-checkbox/checkbox.ts"
+                language: "typescript"
+          - name: "Radio"
+            description: "Radio buttons in Lit can be managed using properties and event listeners."
+            link: "https://lit.dev/docs/components/events/#radio-buttons"
+            file:
+              - path: "apps/lit-party/src/components/4-form-input/2-radio/radio.ts"
+                language: "typescript"
+          - name: "Select"
+            description: "Select elements in Lit can be created and managed within the component."
+            link: "https://lit.dev/docs/components/events/#select-example"
+            file:
+              - path: "apps/lit-party/src/components/4-form-input/3-select/select.ts"
+                language: "typescript"
+      - <<: *webapp-features
+        detail:
+          - name: "Render App"
+            description: "Lit components are typically rendered by creating an instance and adding it to the DOM."
+            link: "https://lit.dev/docs/getting-started/#render-the-component"
+            file:
+              - path: "apps/lit-party/src/components/5-webapp-features/0-render-app/index.html"
+                language: "html"
+              - path: "apps/lit-party/src/components/5-webapp-features/0-render-app/app.ts"
+                language: "typescript"
+          - name: "Fetch Data"
+            description: "Data fetching in Lit can be done using standard JavaScript fetch API or libraries within lifecycle callbacks."
+            link: "https://lit.dev/docs/components/lifecycle/#reactive-update-cycle"
+            file:
+              - path: "apps/lit-party/src/components/5-webapp-features/1-fetch-data/app.ts"
+                language: "typescript"
+              - path: "apps/lit-party/src/components/5-webapp-features/1-fetch-data/fetch-users-task.ts"
                 language: "typescript"
   - name: "Solid"
     description: "A declarative, efficient, and flexible JavaScript library for building user interfaces with fine-grained reactivity."
@@ -84,10 +766,162 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "Declaring State"
-            description: "Use @RequestMapping to map web requests onto specific handler methods."
+            description: "In Solid, reactive state is typically declared using the createSignal function."
+            link: "https://www.solidjs.com/docs/latest/api#createsignal"
             file:
-              - path: "apps/solid-party/src/components/reactivity/DeclareState.tsx"
-                language: "typescript"
+              - path: "apps/solid-party/src/components/0-reactivity/0-declare-state/name.tsx"
+                language: "tsx"
+          - name: "Updating State"
+            description: "State in Solid can be updated using the setter function returned by createSignal."
+            link: "https://www.solidjs.com/docs/latest/api#updating-signals"
+            file:
+              - path: "apps/solid-party/src/components/0-reactivity/1-update-state/update-count.tsx"
+                language: "tsx"
+          - name: "Computed State"
+            description: "Computed values in Solid can be created using the createMemo function."
+            link: "https://www.solidjs.com/docs/latest/api#creatememo"
+            file:
+              - path: "apps/solid-party/src/components/0-reactivity/2-computed-state/double-count.tsx"
+                language: "tsx"
+      - <<: *templating
+        detail:
+          - name: "Minimal Template"
+            description: "Solid uses JSX for templating, similar to React but with its own unique reactive system."
+            link: "https://www.solidjs.com/docs/latest/api#jsx"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/0-minimal-template/hello-world.tsx"
+                language: "tsx"
+          - name: "Styling"
+            description: "Solid supports various styling methods, including CSS modules and inline styles."
+            link: "https://www.solidjs.com/docs/latest/api#styling"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/1-styling/styling.tsx"
+                language: "tsx"
+          - name: "Loop"
+            description: "Solid uses the <For> component or map function for rendering lists."
+            link: "https://www.solidjs.com/docs/latest/api#for"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/2-loop/count-list.tsx"
+                language: "tsx"
+          - name: "Event Click"
+            description: "Event handling in Solid is done using on:click or similar event bindings."
+            link: "https://www.solidjs.com/docs/latest/api#on___"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/3-event-click/count-increment.tsx"
+                language: "tsx"
+          - name: "Dom Ref"
+            description: "Solid uses the ref attribute to create references to DOM elements."
+            link: "https://www.solidjs.com/docs/latest/api#ref"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/4-dom-ref/focus-input.tsx"
+                language: "tsx"
+          - name: "Conditional"
+            description: "Conditional rendering in Solid is done using the <Show> component or ternary operators."
+            link: "https://www.solidjs.com/docs/latest/api#show"
+            file:
+              - path: "apps/solid-party/src/components/1-templating/5-conditional/level-display.tsx"
+                language: "tsx"
+      - <<: *lifecycle
+        detail:
+          - name: "On Mount"
+            description: "Solid uses the onMount function for running effects after the component is mounted."
+            link: "https://www.solidjs.com/docs/latest/api#onmount"
+            file:
+              - path: "apps/solid-party/src/components/2-lifecycle/0-on-mount/page-title.tsx"
+                language: "tsx"
+          - name: "On Unmount"
+            description: "Cleanup in Solid can be handled by returning a cleanup function from createEffect or onCleanup."
+            link: "https://www.solidjs.com/docs/latest/api#oncleanup"
+            file:
+              - path: "apps/solid-party/src/components/2-lifecycle/1-on-unmount/time.tsx"
+                language: "tsx"
+      - <<: *component-composition
+        detail:
+          - name: "Props"
+            description: "Props in Solid are passed as arguments to the component function."
+            link: "https://www.solidjs.com/docs/latest/api#props"
+            file:
+              - path: "apps/solid-party/src/components/3-component-composition/0-props/count-content.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/3-component-composition/0-props/count-display.tsx"
+                language: "tsx"
+          - name: "Emit to Parent"
+            description: "Solid uses props to pass functions from parent to child for communication."
+            link: "https://www.solidjs.com/docs/latest/api#passing-functions"
+            file:
+              - path: "apps/solid-party/src/components/3-component-composition/1-emit-to-parent/count-content.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/3-component-composition/1-emit-to-parent/count-display.tsx"
+                language: "tsx"
+          - name: "Slot"
+            description: "Solid uses the children prop for content projection."
+            link: "https://www.solidjs.com/docs/latest/api#children"
+            file:
+              - path: "apps/solid-party/src/components/3-component-composition/2-slot/button-content.tsx"
+                language: "tsx"
+          - name: "Slot Fallback"
+            description: "Fallback content for slots can be provided using conditional rendering."
+            link: "https://www.solidjs.com/docs/latest/api#children"
+            file:
+              - path: "apps/solid-party/src/components/3-component-composition/3-slot-fallback/app.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/3-component-composition/3-slot-fallback/card.tsx"
+                language: "tsx"
+          - name: "Context"
+            description: "Solid provides createContext and useContext for sharing data across components."
+            link: "https://www.solidjs.com/docs/latest/api#createcontext"
+            file:
+              - path: "apps/solid-party/src/components/3-component-composition/4-context/app-context.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/3-component-composition/4-context/theme-context.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/3-component-composition/4-context/themed-button.tsx"
+                language: "tsx"
+      - <<: *form-input
+        detail:
+          - name: "Input Text"
+            description: "Solid handles form inputs using signals and event bindings."
+            link: "https://www.solidjs.com/docs/latest/api#createSignal"
+            file:
+              - path: "apps/solid-party/src/components/4-form-input/0-input-text/input-text.tsx"
+                language: "tsx"
+          - name: "Checkbox"
+            description: "Checkboxes in Solid are handled similarly to other form inputs."
+            link: "https://www.solidjs.com/docs/latest/api#createSignal"
+            file:
+              - path: "apps/solid-party/src/components/4-form-input/1-checkbox/checkbox.tsx"
+                language: "tsx"
+          - name: "Radio"
+            description: "Radio buttons in Solid can be managed using signals and event bindings."
+            link: "https://www.solidjs.com/docs/latest/api#createSignal"
+            file:
+              - path: "apps/solid-party/src/components/4-form-input/2-radio/radio.tsx"
+                language: "tsx"
+          - name: "Select"
+            description: "Select elements in Solid can be created and managed within the component."
+            link: "https://www.solidjs.com/docs/latest/api#createSignal"
+            file:
+              - path: "apps/solid-party/src/components/4-form-input/3-select/select.tsx"
+                language: "tsx"
+      - <<: *webapp-features
+        detail:
+          - name: "Render App"
+            description: "Solid apps are typically rendered using the render function in the index.tsx file."
+            link: "https://www.solidjs.com/docs/latest/api#render"
+            file:
+              - path: "apps/solid-party/index.html"
+                language: "html"
+              - path: "apps/solid-party/src/index.tsx"
+                language: "tsx"
+              - path: "apps/solid-party/src/components/5-webapp-features/0-render-app/app.tsx"
+                language: "tsx"
+          - name: "Fetch Data"
+            description: "Data fetching in Solid can be done using the createResource function or within createEffect."
+            link: "https://www.solidjs.com/docs/latest/api#createresource"
+            file:
+              - path: "apps/solid-party/src/components/5-webapp-features/1-fetch-data/app.tsx"
+                language: "tsx"
+
   - name: "Qwik"
     description: "A resumable framework for building instant web applications that focus on performance and scalability."
     version: "1.2.12"
@@ -99,7 +933,160 @@ framework:
       - <<: *reactivity-group
         detail:
           - name: "Declaring State"
-            description: "Use @RequestMapping to map web requests onto specific handler methods."
+            description: "In Qwik, reactive state is typically declared using the useSignal hook."
+            link: "https://qwik.builder.io/docs/components/state/"
             file:
-              - path: "apps/qwik-party/src/components/reactivity/DeclareState.tsx"
+              - path: "apps/qwik-party/src/components/0-reactivity/0-declare-state/name.tsx"
+                language: "tsx"
+          - name: "Updating State"
+            description: "State in Qwik can be updated by modifying the value property of the signal."
+            link: "https://qwik.builder.io/docs/components/state/#updating-state"
+            file:
+              - path: "apps/qwik-party/src/components/0-reactivity/1-update-state/update-count.tsx"
+                language: "tsx"
+          - name: "Computed State"
+            description: "Computed values in Qwik can be created using the useComputed$ function."
+            link: "https://qwik.builder.io/docs/components/state/#computed-state"
+            file:
+              - path: "apps/qwik-party/src/components/0-reactivity/2-computed-state/double-count.tsx"
+                language: "tsx"
+      - <<: *templating
+        detail:
+          - name: "Minimal Template"
+            description: "Qwik uses JSX for templating, similar to React."
+            link: "https://qwik.builder.io/docs/components/overview/"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/0-minimal-template/hello-world.tsx"
+                language: "tsx"
+          - name: "Styling"
+            description: "Qwik supports various styling methods, including CSS modules and inline styles."
+            link: "https://qwik.builder.io/docs/components/styles/"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/1-styling/styling.tsx"
+                language: "tsx"
+          - name: "Loop"
+            description: "Qwik uses standard JavaScript map function for rendering lists."
+            link: "https://qwik.builder.io/docs/components/rendering/#rendering-lists"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/2-loop/count-list.tsx"
+                language: "tsx"
+          - name: "Event Click"
+            description: "Event handling in Qwik is done using the on:click attribute or similar event bindings."
+            link: "https://qwik.builder.io/docs/components/events/"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/3-event-click/count-increment.tsx"
+                language: "tsx"
+          - name: "Dom Ref"
+            description: "Qwik uses the useSignal hook to create references to DOM elements."
+            link: "https://qwik.builder.io/docs/components/events/#element-events"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/4-dom-ref/focus-input.tsx"
+                language: "tsx"
+          - name: "Conditional"
+            description: "Conditional rendering in Qwik is done using standard JavaScript conditionals or ternary operators."
+            link: "https://qwik.builder.io/docs/components/rendering/#conditional-rendering"
+            file:
+              - path: "apps/qwik-party/src/components/1-templating/5-conditional/level-display.tsx"
+                language: "tsx"
+      - <<: *lifecycle
+        detail:
+          - name: "On Mount"
+            description: "Qwik uses the useVisibleTask$ hook for running effects after the component is mounted."
+            link: "https://qwik.builder.io/docs/components/lifecycle/#usevisibletask"
+            file:
+              - path: "apps/qwik-party/src/components/2-lifecycle/0-on-mount/page-title.tsx"
+                language: "tsx"
+          - name: "On Unmount"
+            description: "Cleanup in Qwik can be handled by returning a cleanup function from useVisibleTask$."
+            link: "https://qwik.builder.io/docs/components/lifecycle/#cleanup"
+            file:
+              - path: "apps/qwik-party/src/components/2-lifecycle/1-on-unmount/time.tsx"
+                language: "tsx"
+      - <<: *component-composition
+        detail:
+          - name: "Props"
+            description: "Props in Qwik are passed as arguments to the component function."
+            link: "https://qwik.builder.io/docs/components/props/"
+            file:
+              - path: "apps/qwik-party/src/components/3-component-composition/0-props/count-content.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/3-component-composition/0-props/count-display.tsx"
+                language: "tsx"
+          - name: "Emit to Parent"
+            description: "Qwik uses props to pass functions from parent to child for communication."
+            link: "https://qwik.builder.io/docs/components/events/#component-events"
+            file:
+              - path: "apps/qwik-party/src/components/3-component-composition/1-emit-to-parent/count-action.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/3-component-composition/1-emit-to-parent/count-content.tsx"
+                language: "tsx"
+          - name: "Slot"
+            description: "Qwik uses the Slot component for content projection."
+            link: "https://qwik.builder.io/docs/components/projection/"
+            file:
+              - path: "apps/qwik-party/src/components/3-component-composition/2-slot/button-content.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/3-component-composition/2-slot/custom-button.tsx"
+                language: "tsx"
+          - name: "Slot Fallback"
+            description: "Fallback content for slots can be provided using conditional rendering."
+            link: "https://qwik.builder.io/docs/components/projection/#fallback-content"
+            file:
+              - path: "apps/qwik-party/src/components/3-component-composition/3-slot-fallback/app.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/3-component-composition/3-slot-fallback/card.tsx"
+                language: "tsx"
+          - name: "Context"
+            description: "Qwik provides createContextId and useContext for sharing data across components."
+            link: "https://qwik.builder.io/docs/components/context/"
+            file:
+              - path: "apps/qwik-party/src/components/3-component-composition/4-context/app-context.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/3-component-composition/4-context/theme-context.ts"
                 language: "typescript"
+              - path: "apps/qwik-party/src/components/3-component-composition/4-context/theme-toggle.tsx"
+                language: "tsx"
+      - <<: *form-input
+        detail:
+          - name: "Input Text"
+            description: "Qwik handles form inputs using the useSignal hook and event bindings."
+            link: "https://qwik.builder.io/docs/components/events/#input-binding"
+            file:
+              - path: "apps/qwik-party/src/components/4-form-input/0-input-text/input-text.tsx"
+                language: "tsx"
+          - name: "Checkbox"
+            description: "Checkboxes in Qwik are handled similarly to other form inputs."
+            link: "https://qwik.builder.io/docs/components/events/#checkbox-binding"
+            file:
+              - path: "apps/qwik-party/src/components/4-form-input/1-checkbox/checkbox.tsx"
+                language: "tsx"
+          - name: "Radio"
+            description: "Radio buttons in Qwik can be managed using signals and event bindings."
+            link: "https://qwik.builder.io/docs/components/events/#radio-binding"
+            file:
+              - path: "apps/qwik-party/src/components/4-form-input/2-radio/radio.tsx"
+                language: "tsx"
+          - name: "Select"
+            description: "Select elements in Qwik can be created and managed within the component."
+            link: "https://qwik.builder.io/docs/components/events/#select-binding"
+            file:
+              - path: "apps/qwik-party/src/components/4-form-input/3-select/select.tsx"
+                language: "tsx"
+      - <<: *webapp-features
+        detail:
+          - name: "Render App"
+            description: "Qwik apps are typically rendered using the root component in the main.tsx file."
+            link: "https://qwik.builder.io/docs/components/overview/#app-component"
+            file:
+              - path: "apps/qwik-party/index.html"
+                language: "html"
+              - path: "apps/qwik-party/src/main.tsx"
+                language: "tsx"
+              - path: "apps/qwik-party/src/components/5-webapp-features/0-render-app/app.tsx"
+                language: "tsx"
+          - name: "Fetch Data"
+            description: "Data fetching in Qwik can be done using the useResource$ hook or within useTask$."
+            link: "https://qwik.builder.io/docs/components/state/#useresource"
+            file:
+              - path: "apps/qwik-party/src/components/5-webapp-features/1-fetch-data/app.tsx"
+                language: "tsx"
