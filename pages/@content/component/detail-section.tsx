@@ -12,9 +12,17 @@ export const DetailSection = ({ detail, feature, filteredContent }: DetailSectio
   const [selectedFileIndices, setSelectedFileIndices] = useState<Record<string, number>>({})
 
   return (
-    <div className={"flex flex-col gap-4"}>
-      <h4 id={detail.detail} className="scroll-m-20 text-xl font-semibold tracking-tight">
+    <div className={"flex flex-col gap-4 relative"}>
+      <h4 id={detail.detail} className="group top-0 z-10 bg-[var(--background)] py-2 scroll-m-20 text-xl font-semibold tracking-tight sticky">
         {detail.detail}
+        <a
+          tabIndex={-1}
+          href={`#${detail.detail}`}
+          className={"float-left -ml-6 transition-all duration-200 opacity-0 group-hover:opacity-100 w-4 pr-6"}
+          aria-label={`Link to ${detail.detail}`}
+        >
+          #
+        </a>
       </h4>
       <div className={"grid gap-4 grid-cols-1 lg:grid-cols-2"}>
         {filteredContent.map((framework) => {

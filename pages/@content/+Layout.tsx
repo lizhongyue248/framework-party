@@ -42,8 +42,8 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <div className={"w-full min-h-screen flex flex-col"}>
-      <header className={"flex justify-between p-4 items-center border-b-2"}>
+    <div className={"w-full min-h-screen flex flex-col [--header-height:calc(--spacing(14))]"}>
+      <header className={"flex justify-between p-4 items-center border-b-2 h-(--header-height)"}>
         <h1 className={"text-xl font-bold"}>
           <Link href={"/"}>Framework Party</Link>
         </h1>
@@ -66,7 +66,7 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
       <div className={"flex-1 flex flex-row"}>
         <AppSidebar sidebarData={contentData.sidebar} />
         <div className={"h-full w-full"}>
-          <div className={"flex flex-row gap-4 py-2 overflow-x-auto px-8 border-b-2 backdrop-blur-lg bg-background/30 scrollbar-thin"}>
+          <div className={"flex flex-row gap-4 py-2 overflow-x-auto px-8 border-b-2 scrollbar-thin scrollbar-track-transparent"}>
             {contentData.currentContent?.framework.map((framework) => (
               <Toggle
                 variant={"outline"}
@@ -79,7 +79,7 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
               </Toggle>
             ))}
           </div>
-          <div className={"flex-1 w-full overflow-auto px-8 scrollbar-thin"} style={{ height: "calc(100vh - 130px)" }}>
+          <div id={"container"} className={"flex-1 w-full overflow-auto px-8 scrollbar-thin scrollbar-track-transparent h-[calc(100svh-var(--header-height)-4rem)]!"}>
             {children}
           </div>
         </div>
