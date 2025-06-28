@@ -20,5 +20,5 @@ export default {
   // https://vike.dev/ssr - this line can be removed since `true` is the default
   ssr: true,
   extends: [vikeReact, vikeReactZustand],
-  htmlAttributes: { class: "scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-500 scrollbar-track-transparent" }
+  htmlAttributes: { class: "scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-500 scrollbar-track-transparent scrollbar-thin" }
 } satisfies Config

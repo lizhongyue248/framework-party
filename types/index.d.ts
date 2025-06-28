@@ -74,5 +74,5 @@ export type ContentSidebarData = {
   data: SidebarListData[]
 }
 
-export type ThemeType = "light" | "dark" | "system"
+export type ThemeType = "light" | "dark"
 export type LanguageOption = "zh" | "en"

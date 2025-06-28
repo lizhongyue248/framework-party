@@ -1,0 +1,97 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "error": "发生错误",
+    "notFound": "页面未找到",
+    "backToHome": "返回首页"
+  },
+  "home": {
+    "title": "来参加派对吧",
+    "description": "选择加入不同的派对，体验不同的乐趣！",
+    "action": "加入派对",
+    "summary": [
+      {
+        "icon": "🎉",
+        "title": "框架"
+      },
+      {
+        "icon": "🛠️",
+        "title": "特性"
+      },
+      {
+        "icon": "🌐",
+        "title": "可能性"
+      },
+      {
+        "icon": "🚀",
+        "title": "开源"
+      }
+    ],
+    "guest": {
+      "title": "派对嘉宾",
+      "subTitle": "认识派对成员"
+    },
+    "main": {
+      "title": "主活动",
+      "subTitle": "巅峰对决",
+      "description": "见证终极框架对决！在一张精彩的表格中比较所有主流框架的特性、能力和实现。"
+    },
+    "table": {
+      "title": "特性支持锦标赛",
+      "features": "特性",
+      "showAll": "显示全部特性",
+      "showLess": "显示较少特性"
+    },
+    "why": {
+      "title": "为什么加入派对？",
+      "description": "让框架对比变得有趣、互动且富有洞察力，面向全球开发者。",
+      "question": [
+        {
+          "title": "并排代码",
+          "description": "通过真实、可执行的代码示例，比较不同框架实现同一特性的方式。",
+          "color": "from-purple-500 to-blue-500",
+          "emoji": "💻"
+        },
+        {
+          "title": "交互式示例",
+          "description": "可在浏览器中直接运行和修改代码示例，实时查看效果。",
+          "color": "from-pink-500 to-red-500",
+          "emoji": "⚡"
+        },
+        {
+          "title": "社区驱动",
+          "description": "开源且由全球热情开发者共同驱动。",
+          "color": "from-green-500 to-blue-500",
+          "emoji": "🌍"
+        },
+        {
+          "title": "持续更新",
+          "description": "紧跟最新框架特性和最佳实践的演进。",
+          "color": "from-yellow-500 to-orange-500",
+          "emoji": "🔄"
+        },
+        {
+          "title": "性能为先",
+          "description": "不仅比较语法，还对比各框架的性能指标和包体积。",
+          "color": "from-indigo-500 to-purple-500",
+          "emoji": "🚀"
+        },
+        {
+          "title": "趣味学习",
+          "description": "在充满派对氛围的环境中，轻松有趣地学习框架差异！",
+          "color": "from-pink-500 to-purple-500",
+          "emoji": "🎉"
+        }
+      ]
+    },
+    "party": {
+      "title": "准备好参加派对了吗？\uD83C\uDF8A",
+      "description": "加入已经在用有趣方式对比框架的开发者行列。今天就开始你的编程庆典吧！\n\n立即开始对比！\n",
+      "action": "立即开始对比！",
+      "github": "在 GitHub 贡献"
+    },
+    "footer": {
+      "description": "让框架对比变得有趣且人人可参与。加入代码的庆典吧！"
+    }
+  }
+}
