@@ -1,4 +1,4 @@
-import { getCurrentContent, getRepoName, readJsonFile } from "@/lib/file"
+import { REPO_PREFIX, getCurrentContent, getRepoName, readJsonFile } from "@/lib/file"
 import { localeDefault, locales } from "@/lib/locale"
 import type { ContentData } from "@/pages/@content/+data"
 import type { ContentSidebarData, LanguageOption, NavData } from "@/types"
@@ -14,28 +14,31 @@ const onBeforePrerenderStart: OnBeforePrerenderStartAsync<ContentData> = async (
   for (const locale of locales) {
     const navData = readJsonFile<NavData[]>("nav.json", locale as LanguageOption)
     const sidebarList = readJsonFile<ContentSidebarData[]>("sidebar.json", locale as LanguageOption)
-    const currentLocalePage = sidebarList.map((content) => ({
-      url: `/${locale}/${content.content}`,
-      pageContext: {
-        data: {
-          nav: navData,
-          sidebar: content,
-          locale,
-          urlLogical: `/${content.content}`,
-          currentContent: getCurrentContent(getRepoName(content.repository), locale as LanguageOption)
-        }
-      }
-    }))
-    urlsWithPageContext.push(...currentLocalePage)
-    if (locale === localeDefault) {
-      const defaultLocalePage = sidebarList.map((content) => ({
-        url: `/${content.content}`,
+    const currentLocalePage = sidebarList.map((content) => {
+      const targetPath = content.content.replaceAll(REPO_PREFIX)
+      return {
+        url: `/${locale}/${targetPath}`,
         pageContext: {
           data: {
             nav: navData,
             sidebar: content,
             locale,
-            urlLogical: `/${content.content}`,
+            urlLogical: `/${targetPath}`,
+            currentContent: getCurrentContent(getRepoName(content.repository), locale as LanguageOption)
+          }
+        }
+      }
+    })
+    urlsWithPageContext.push(...currentLocalePage)
+    if (locale === localeDefault) {
+      const defaultLocalePage = sidebarList.map((content) => ({
+        url: `/${targetPath}`,
+        pageContext: {
+          data: {
+            nav: navData,
+            sidebar: content,
+            locale,
+            urlLogical: `/${targetPath}`,
             currentContent: getCurrentContent(getRepoName(content.repository), locale as LanguageOption)
           }
         }
