@@ -9,10 +9,13 @@ export interface I18nData {
     title: string
     description: string
     action: string
-    summary: Array<{
-      icon: string
-      title: string
-    }>
+    welcome: string
+    summary: {
+      frameworks: string
+      features: string
+      possibilities: string
+      openSource: string
+    }
     guest: {
       title: string
       subTitle: string
@@ -34,7 +37,6 @@ export interface I18nData {
       question: Array<{
         title: string
         description: string
-        color: string
         emoji: string
       }>
     }

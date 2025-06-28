@@ -2,14 +2,16 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import type { PartyInfo } from "@/pages/index/+data"
+import type { I18nData } from "@/types/i18n"
 import { Check, ChevronDown, ChevronUp, Star, Trophy, X, Zap } from "lucide-react"
-import { useState } from "react"
+import React, { useState } from "react"
 
 interface FrameworkComparisonProps {
   data: PartyInfo
+  i18n: I18nData
 }
 
-export function FrameworkComparison({ data }: FrameworkComparisonProps) {
+export function FrameworkComparison({ data, i18n }: FrameworkComparisonProps) {
   const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>(data.frameworkSupport.map((f) => f.name))
   const [showAllFeatures, setShowAllFeatures] = useState(false)
 
@@ -17,35 +19,22 @@ export function FrameworkComparison({ data }: FrameworkComparisonProps) {
     setSelectedFrameworks((prev) => (prev.includes(frameworkName) ? prev.filter((name) => name !== frameworkName) : [...prev, frameworkName]))
   }
 
-  const getFrameworkColor = (name: string) => {
-    const colors: Record<string, string> = {
-      React: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 border-blue-300 dark:border-blue-700",
-      Vue: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 border-green-300 dark:border-green-700",
-      Svelte: "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 border-orange-300 dark:border-orange-700",
-      Lit: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 border-yellow-300 dark:border-yellow-700",
-      Solid: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 border-purple-300 dark:border-purple-700",
-      Qwik: "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200 border-pink-300 dark:border-pink-700",
-      "Spring Boot": "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 border-green-300 dark:border-green-700",
-      Quarkus: "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 border-red-300 dark:border-red-700",
-      Micronaut: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 border-blue-300 dark:border-blue-700"
-    }
-    return colors[name] || "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 border-gray-300 dark:border-gray-700"
-  }
+  // 颜色和 emoji 数组，顺序循环使用
+  const frameworkColors = [
+    "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 border-blue-300 dark:border-blue-700",
+    "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 border-green-300 dark:border-green-700",
+    "bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200 border-orange-300 dark:border-orange-700",
+    "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 border-yellow-300 dark:border-yellow-700",
+    "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 border-purple-300 dark:border-purple-700",
+    "bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200 border-pink-300 dark:border-pink-700",
+    "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 border-red-300 dark:border-red-700",
+    "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 border-gray-300 dark:border-gray-700"
+  ]
+  const frameworkEmojis = ["⚛️", "💚", "🔥", "💡", "🗿", "⚡", "🍃", "🚀", "🔬"]
 
-  const getFrameworkEmoji = (name: string) => {
-    const emojis: Record<string, string> = {
-      React: "⚛️",
-      Vue: "💚",
-      Svelte: "🔥",
-      Lit: "💡",
-      Solid: "🗿",
-      Qwik: "⚡",
-      "Spring Boot": "🍃",
-      Quarkus: "🚀",
-      Micronaut: "🔬"
-    }
-    return emojis[name] || "🚀"
-  }
+  // 按索引循环取色和 emoji
+  const getFrameworkColor = (index: number) => frameworkColors[index % frameworkColors.length]
+  const getFrameworkEmoji = (index: number) => frameworkEmojis[index % frameworkEmojis.length]
 
   // Show first 10 features or all based on state
   const displayedFeatures = showAllFeatures ? data.detailList : data.detailList.slice(0, 10)
@@ -55,36 +44,36 @@ export function FrameworkComparison({ data }: FrameworkComparisonProps) {
       <div className="text-center mb-20">
         <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full px-8 py-3 mb-8 shadow-xl">
           <Star className="h-5 w-5 animate-spin" />
-          <span className="font-bold text-lg">MAIN EVENT</span>
+          <span className="font-bold text-lg">{i18n.home.main.title}</span>
           <Star className="h-5 w-5 animate-spin" />
         </div>
-        <h2 className="text-6xl md:text-7xl font-black mb-8 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent">The Grand Comparison</h2>
-        <p className="text-2xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto font-medium">
-          Witness the ultimate framework face-off! Compare features, capabilities, and implementations across all major frameworks in one spectacular table.
-        </p>
+        <h2 className="text-6xl md:text-7xl font-black mb-8 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent">
+          {i18n.home.main.subTitle}
+        </h2>
+        <p className="text-2xl text-gray-700 dark:text-gray-300 max-w-4xl mx-auto font-medium">{i18n.home.main.description}</p>
       </div>
       <div className="space-y-16">
         <div className="flex flex-wrap justify-center gap-3">
-          {data.frameworkSupport.map((framework) => (
+          {data.frameworkSupport.map((framework, idx) => (
             <Badge
               key={framework.name}
               variant={selectedFrameworks.includes(framework.name) ? "default" : "outline"}
               className={`cursor-pointer transition-all duration-300 hover:scale-110 text-lg px-4 py-2 border-2 ${
-                selectedFrameworks.includes(framework.name) ? getFrameworkColor(framework.name) : "hover:bg-gray-100 dark:hover:bg-gray-700 border-gray-300 dark:border-gray-600"
+                selectedFrameworks.includes(framework.name) ? getFrameworkColor(idx) : "hover:bg-gray-100 dark:hover:bg-gray-700 border-gray-300 dark:border-gray-600"
               }`}
               onClick={() => toggleFramework(framework.name)}
             >
-              <span className="mr-2">{getFrameworkEmoji(framework.name)}</span>
+              <img className={"w-4 h-4"} src={framework.logo} alt={framework.name} />
               {framework.name}
             </Badge>
           ))}
         </div>
         {/* Comparison Table */}
-        <Card className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm border-3 border-purple-200 dark:border-purple-700 overflow-hidden shadow-2xl pt-0">
+        <Card className="bg-white/95 dark:bg-black/45 backdrop-blur-sm border-3 border-purple-200 dark:border-purple-700 overflow-hidden shadow-2xl pt-0">
           <CardHeader className="bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 text-white p-8">
             <CardTitle className="text-3xl font-black text-center flex items-center justify-center space-x-3">
               <Trophy className="h-8 w-8 animate-bounce" />
-              <span>Feature Support Championship</span>
+              <span>{i18n.home.table.title}</span>
               <Trophy className="h-8 w-8 animate-bounce" />
             </CardTitle>
           </CardHeader>
@@ -101,10 +90,10 @@ export function FrameworkComparison({ data }: FrameworkComparisonProps) {
                     </th>
                     {data.frameworkSupport
                       .filter((framework) => selectedFrameworks.includes(framework.name))
-                      .map((framework) => (
+                      .map((framework, index) => (
                         <th key={framework.name} className="text-center p-4 font-black min-w-[150px]">
-                          <Badge className={`${getFrameworkColor(framework.name)} text-lg px-4 py-2 border-2`}>
-                            <span className="mr-2">{getFrameworkEmoji(framework.name)}</span>
+                          <Badge className={`${getFrameworkColor(index)} text-lg px-4 py-2 border-2`}>
+                            <img className={"w-4 h-4"} src={framework.logo} alt={framework.name} />
                             {framework.name}
                           </Badge>
                         </th>
@@ -156,12 +145,12 @@ export function FrameworkComparison({ data }: FrameworkComparisonProps) {
                   {showAllFeatures ? (
                     <>
                       <ChevronUp className="h-5 w-5 mr-2" />
-                      Show Less Features
+                      {i18n.home.table.showLess}
                     </>
                   ) : (
                     <>
                       <ChevronDown className="h-5 w-5 mr-2" />
-                      Show All {data.detailList.length} Features
+                      {i18n.home.table.showAll} {data.detailList.length}
                     </>
                   )}
                 </Button>

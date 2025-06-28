@@ -9,24 +9,13 @@
     "title": "Let's Party",
     "description": "Choose to join different parties and experience different experiences!",
     "action": "Join Party",
-    "summary": [
-      {
-        "icon": "🎉",
-        "title": "Frameworks"
-      },
-      {
-        "icon": "🛠️",
-        "title": "Features"
-      },
-      {
-        "icon": "🌐",
-        "title": "Possibilities"
-      },
-      {
-        "icon": "🚀",
-        "title": "Open Source"
-      }
-    ],
+    "welcome": "Welcome to the Ultimate Framework Showdown!",
+    "summary": {
+      "frameworks": "Frameworks",
+      "features": "Features",
+      "possibilities": "Possibilities",
+      "openSource": "Open Source"
+    },
     "guest": {
       "title": "PARTY GUESTS",
       "subTitle": "Meet the party"
@@ -49,43 +38,37 @@
         {
           "title": "Side-by-Side Code",
           "description": "Compare how different frameworks implement the same features with real, executable code examples.",
-          "color": "from-purple-500 to-blue-500",
           "emoji": "💻"
         },
         {
           "title": "Interactive Examples",
           "description": "Run and modify code examples directly in your browser to see how they work in real-time.",
-          "color": "from-pink-500 to-red-500",
           "emoji": "⚡"
         },
         {
           "title": "Community Driven",
           "description": "Open source and community-driven with contributions from passionate developers worldwide.",
-          "color": "from-green-500 to-blue-500",
           "emoji": "🌍"
         },
         {
           "title": "Always Updated",
           "description": "Stay current with the latest framework features and best practices as they evolve.",
-          "color": "from-yellow-500 to-orange-500",
           "emoji": "🔄"
         },
         {
           "title": "Performance Focused",
           "description": "Compare not just syntax but also performance metrics and bundle sizes across frameworks.",
-          "color": "from-indigo-500 to-purple-500",
           "emoji": "🚀"
         },
         {
           "title": "Fun Learning",
           "description": "Learn framework differences in an engaging, party-themed environment that makes coding fun!",
-          "color": "from-pink-500 to-purple-500",
           "emoji": "🎉"
         }
       ]
     },
     "party": {
-      "title": "Ready to Party? \uD83C\uDF8A",
+      "title": "Ready to Party?",
       "description": "Join developers who are already comparing frameworks the fun way. Start your coding celebration today!\n\nStart Comparing Now!\n",
       "action": "Start Comparing Now!",
       "github": "Contribute on GitHub"

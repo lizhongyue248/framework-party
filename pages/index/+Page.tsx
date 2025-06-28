@@ -2,6 +2,7 @@ import { ConfettiEffect } from "@/components/effect/confetti-effect"
 import { FireworksEffect } from "@/components/effect/fireworks-effect"
 import { FrameworkComparison } from "@/components/effect/framework-comparison"
 import { PartyEffects } from "@/components/effect/party-effects"
+import LanguageSwitch from "@/components/language-switch"
 import { Link } from "@/components/link"
 import { ThemeSwitch } from "@/components/theme-switch"
 import { Button } from "@/components/ui/button"
@@ -10,9 +11,27 @@ import { useStore } from "@/lib/store"
 import type { HomePageData } from "@/pages/index/+data"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 import { Code, ExternalLink, Moon, Rocket, Sparkles, Star, Sun, Users, Zap } from "lucide-react"
-import { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import { useData } from "vike-react/useData"
 import { PartyCategories } from "./component/party-categories"
+
+const icons = [
+  <Code className="h-8 w-8" key={"code"} />,
+  <Zap className="h-8 w-8" key={"zap"} />,
+  <Users className="h-8 w-8" key={"users"} />,
+  <Star className="h-8 w-8" key={"star"} />,
+  <Rocket className="h-8 w-8" key={"rocket"} />,
+  <Sparkles className="h-8 w-8" key={"sparkles"} />
+]
+const colors = [
+  "from-purple-500 to-blue-500",
+  "from-pink-500 to-red-500",
+  "from-green-500 to-blue-500",
+  "from-yellow-500 to-orange-500",
+  "from-indigo-500 to-purple-500",
+  "from-pink-500 to-purple-500"
+]
+const emojis = ["💻", "⚡", "🌍", "🔄", "🚀", "🎉"]
 
 const Page = () => {
   const { partyList, i18n }: HomePageData = useData()
@@ -34,12 +53,14 @@ const Page = () => {
       clearTimeout(timer4)
     }
   }, [])
+  const framersCount = partyList.reduce((count, party) => count + party.frameworkSupport.length, 0)
+  const featureDetailCount = partyList.reduce((count, party) => count + (party.detailList?.length || 0), 0)
   return (
     <div className={`min-h-screen transition-all duration-700 ${isDark ? "dark bg-black" : "bg-gradient-to-br from-pink-100 via-purple-50 to-cyan-100"}`}>
       <PartyEffects />
       {showConfetti && <ConfettiEffect />}
       {showFireworks && <FireworksEffect />}
-      <header className="relative z-20 p-6">
+      <header className="sticky top-0 z-50 bg-white/20 dark:bg-black/20 backdrop-blur-lg border-b-2 border-purple-200/50 dark:border-purple-700/50 p-6 transition-all duration-300">
         <nav className="flex justify-between items-center max-w-7xl mx-auto">
           <div className="flex items-center space-x-3">
             <div className="relative">
@@ -52,7 +73,8 @@ const Page = () => {
           </div>
           <div className="flex items-center space-x-4">
             <ThemeSwitch />
-            <Button variant="outline" className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-2 hover:scale-105 transition-all duration-300">
+            <LanguageSwitch />
+            <Button variant="outline" className="rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-sm border-2 hover:scale-105 transition-all duration-300">
               <SiGithub className="h-4 w-4 mr-2" />
               Open Source
             </Button>
@@ -62,13 +84,13 @@ const Page = () => {
 
       <section className="relative z-10 text-center py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="inline-flex items-center space-x-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-full px-8 py-3 mb-12 border-2 border-purple-200 dark:border-purple-700 shadow-xl">
+          <div className="inline-flex items-center space-x-3 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full px-8 py-3 mb-12 border-2 border-purple-200 dark:border-purple-700 shadow-xl">
             <div className="flex space-x-1">
               <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce" />
               <div className="w-2 h-2 bg-yellow-500 rounded-full animate-bounce" style={{ animationDelay: "0.1s" }} />
               <div className="w-2 h-2 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
             </div>
-            <span className="text-lg font-bold text-gray-800 dark:text-gray-200">🎊 Welcome to the Ultimate Framework Showdown! 🎊</span>
+            <span className="text-lg font-bold text-gray-800 dark:text-gray-200">🎊 {i18n.home.welcome} 🎊</span>
           </div>
 
           <div className="relative">
@@ -81,6 +103,9 @@ const Page = () => {
               <Button
                 size="lg"
                 className="w-full max-w-sm bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 hover:from-purple-700 hover:via-pink-700 hover:to-red-600 text-white rounded-full px-12 py-4 text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse"
+                onClick={() => {
+                  document.getElementById("main")?.scrollIntoView({ behavior: "smooth" })
+                }}
               >
                 <Code className="h-6 w-6 mr-3" />
                 {i18n.home.action}
@@ -95,14 +120,14 @@ const Page = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
-              { number: "6+", label: "Frameworks", icon: "⚛️", color: "from-blue-500 to-purple-600" },
-              { number: "22+", label: "Features", icon: "🔧", color: "from-purple-500 to-pink-600" },
-              { number: "∞", label: "Possibilities", icon: "🚀", color: "from-pink-500 to-red-500" },
-              { number: "100%", label: "Open Source", icon: "💝", color: "from-green-500 to-blue-500" }
+              { number: framersCount, label: i18n.home.summary.frameworks, icon: "⚛️", color: "from-blue-500 to-purple-600" },
+              { number: featureDetailCount, label: i18n.home.summary.features, icon: "🔧", color: "from-purple-500 to-pink-600" },
+              { number: "∞", label: i18n.home.summary.possibilities, icon: "🚀", color: "from-pink-500 to-red-500" },
+              { number: "100%", label: i18n.home.summary.openSource, icon: "💝", color: "from-green-500 to-blue-500" }
             ].map((stat, index) => (
               <Card
                 key={stat.label}
-                className="text-center bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-purple-200 dark:border-purple-700 hover:shadow-2xl transition-all duration-500 hover:scale-110 group cursor-pointer"
+                className="text-center bg-white/90 dark:bg-black/40 backdrop-blur-sm border-2 border-purple-200 dark:border-purple-700 hover:shadow-2xl transition-all duration-500 hover:scale-110 group cursor-pointer"
                 style={{ animationDelay: `${index * 200}ms` }}
               >
                 <CardContent className="pt-8 pb-6">
@@ -116,16 +141,18 @@ const Page = () => {
         </div>
       </section>
 
-      <section className="relative z-10 py-24 px-6">
+      <section id={"main"} className="relative z-10 py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full px-8 py-3 mb-8 shadow-xl">
               <span className="text-2xl animate-spin">🎪</span>
-              <span className="font-bold text-lg">PARTY GUESTS</span>
+              <span className="font-bold text-lg">{i18n.home.main.title}</span>
               <span className="text-2xl animate-spin">🎪</span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-black mb-8 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent">Meet the Party</h2>
-            <p className="text-2xl text-gray-700 dark:text-gray-300 font-medium">Choose your party and start comparing! 🎉</p>
+            <h2 className="text-5xl md:text-6xl font-black mb-8 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent">
+              {i18n.home.main.subTitle}
+            </h2>
+            <p className="text-2xl text-gray-700 dark:text-gray-300 font-medium">{i18n.home.main.description} 🎉</p>
           </div>
 
           {/* Two Column Layout */}
@@ -137,16 +164,16 @@ const Page = () => {
 
             {/* Right Column - Framework Logos for Selected Category */}
             <div className="space-y-6">
-              <Card className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-3 border-purple-200 dark:border-purple-700 shadow-2xl">
+              <Card className="bg-white/90 dark:bg-black/40 backdrop-blur-sm border-3 border-purple-200 dark:border-purple-700 shadow-2xl">
                 <CardHeader className="text-center">
                   <CardTitle className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                     <span className="mr-3">🎨</span>
-                    {currentParty?.name} Frameworks
+                    {currentParty?.name} Party
                   </CardTitle>
                   <p className="text-gray-600 dark:text-gray-400">{currentParty?.description}</p>
                 </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <CardContent className={"flex flex-col items-center gap-6"}>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-6 w-full">
                     {currentParty?.frameworkSupport.map((framework, index) => {
                       const getFrameworkConfig = (name: string) => {
                         const configs: Record<string, { emoji: string; color: string; bgColor: string }> = {
@@ -246,6 +273,13 @@ const Page = () => {
                       )
                     })}
                   </div>
+
+                  <Button
+                    size="lg"
+                    className="w-full max-w-sm bg-gradient-to-r  from-purple-600 via-pink-600 to-red-500 hover:from-purple-700 hover:via-pink-700 hover:to-red-600 text-white rounded-full px-12 py-4 text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse"
+                  >
+                    {i18n.home.action}
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -255,7 +289,7 @@ const Page = () => {
 
       {/* Framework Comparison - More Prominent */}
       <section className="relative z-10 py-24 px-6">
-        <div className="max-w-7xl mx-auto">{currentParty && <FrameworkComparison data={currentParty} />}</div>
+        <div className="max-w-7xl mx-auto">{currentParty && <FrameworkComparison i18n={i18n} data={currentParty} />}</div>
       </section>
 
       {/* Features Section */}
@@ -269,87 +303,45 @@ const Page = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {[
-              {
-                icon: <Code className="h-8 w-8" />,
-                title: "Side-by-Side Code",
-                description: "Compare how different frameworks implement the same features with real, executable code examples.",
-                color: "from-purple-500 to-blue-500",
-                emoji: "💻"
-              },
-              {
-                icon: <Zap className="h-8 w-8" />,
-                title: "Interactive Examples",
-                description: "Run and modify code examples directly in your browser to see how they work in real-time.",
-                color: "from-pink-500 to-red-500",
-                emoji: "⚡"
-              },
-              {
-                icon: <Users className="h-8 w-8" />,
-                title: "Community Driven",
-                description: "Open source and community-driven with contributions from passionate developers worldwide.",
-                color: "from-green-500 to-blue-500",
-                emoji: "🌍"
-              },
-              {
-                icon: <Star className="h-8 w-8" />,
-                title: "Always Updated",
-                description: "Stay current with the latest framework features and best practices as they evolve.",
-                color: "from-yellow-500 to-orange-500",
-                emoji: "🔄"
-              },
-              {
-                icon: <Rocket className="h-8 w-8" />,
-                title: "Performance Focused",
-                description: "Compare not just syntax but also performance metrics and bundle sizes across frameworks.",
-                color: "from-indigo-500 to-purple-500",
-                emoji: "🚀"
-              },
-              {
-                icon: <Sparkles className="h-8 w-8" />,
-                title: "Fun Learning",
-                description: "Learn framework differences in an engaging, party-themed environment that makes coding fun!",
-                color: "from-pink-500 to-purple-500",
-                emoji: "🎉"
-              }
-            ].map((feature, index) => (
-              <Card
-                key={feature.title}
-                className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-2 border-purple-200 dark:border-purple-700 hover:shadow-2xl transition-all duration-500 hover:scale-105 group cursor-pointer overflow-hidden"
-                style={{ animationDelay: `${index * 150}ms`, paddingTop: "0px" }}
-              >
-                <div className={`h-2 bg-gradient-to-r ${feature.color}`} />
-                <CardHeader className="pb-4">
-                  <CardTitle className="flex items-center space-x-3 text-xl">
-                    <div className={`p-3 rounded-full bg-gradient-to-r ${feature.color} text-white group-hover:animate-pulse`}>{feature.icon}</div>
-                    <span className="font-bold text-gray-900 dark:text-gray-100">{feature.title}</span>
-                    <span className="text-2xl group-hover:animate-bounce">{feature.emoji}</span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+            {i18n.home.why.question.map((question, index: number) => {
+              const color = colors[index % colors.length]
+              return (
+                <Card
+                  key={question.title}
+                  className="bg-white/90 dark:bg-black/40 backdrop-blur-sm border-2 border-purple-200 dark:border-purple-700 hover:shadow-2xl transition-all duration-500 hover:scale-105 group cursor-pointer overflow-hidden"
+                  style={{ animationDelay: `${index * 150}ms`, paddingTop: "0px" }}
+                >
+                  <div className={`h-2 bg-gradient-to-r ${color}`} />
+                  <CardHeader className="pb-4">
+                    <CardTitle className="flex items-center space-x-3 text-xl">
+                      <div className={`p-3 rounded-full bg-gradient-to-r ${color} text-white group-hover:animate-pulse`}>{icons[index % colors.length]}</div>
+                      <span className="font-bold text-gray-900 dark:text-gray-100">{question.title}</span>
+                      <span className="text-2xl group-hover:animate-bounce">{emojis[index % colors.length]}</span>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium">{question.description}</p>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       </section>
 
       <section className="relative z-10 py-24 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <Card className="bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 border-0 shadow-2xl overflow-hidden">
+          <Card className="bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 dark:from-purple-900 dark:via-pink-900 dark:to-red-900 border-0 shadow-2xl overflow-hidden">
             <CardContent className="p-16">
-              <h2 className="text-5xl md:text-6xl font-black text-white mb-8">Ready to Party? 🎊</h2>
-              <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto font-medium">
-                Join thousands of developers who are already comparing frameworks the fun way. Start your coding celebration today!
-              </p>
+              <h2 className="text-5xl md:text-6xl font-black text-white  mb-8">{i18n.home.party.title} 🎊</h2>
+              <p className="text-xl text-white/90 mb-12 max-w-2xl mx-auto font-medium">{i18n.home.party.description}</p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Button
                   size="lg"
                   className="bg-white text-purple-600 hover:bg-gray-100 rounded-full px-12 py-4 text-xl font-bold shadow-xl hover:shadow-2xl transform hover:scale-110 transition-all duration-300"
                 >
                   <Rocket className="h-6 w-6 mr-3" />
-                  Start Comparing Now!
+                  {i18n.home.party.action}
                 </Button>
                 <Button
                   variant="outline"
@@ -357,7 +349,7 @@ const Page = () => {
                   className="border-2 border-white text-white hover:bg-white hover:text-purple-600 rounded-full px-12 py-4 text-xl font-bold hover:scale-105 transition-all duration-300 bg-transparent"
                 >
                   <SiGithub className="h-6 w-6 mr-3" />
-                  Contribute on GitHub
+                  {i18n.home.party.github}
                 </Button>
               </div>
             </CardContent>
@@ -373,7 +365,7 @@ const Page = () => {
               <span className="text-3xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Framework Party</span>
               <Sparkles className="h-8 w-8 text-pink-400 animate-pulse" />
             </div>
-            <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">Making framework comparison fun and accessible for everyone. Join the celebration of code!</p>
+            <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">{i18n.home.footer.description}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
