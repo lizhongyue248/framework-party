@@ -25,7 +25,7 @@ const onBeforePrerenderStart: OnBeforePrerenderStartAsync<ContentData> = async (
             sidebar: content,
             locale,
             urlLogical: `/${targetPath}`,
-            currentContent: getCurrentContent(getRepoName(content.repository), locale as LanguageOption)
+            currentContent: getCurrentContent(getRepoName(content.repository).replaceAll(REPO_PREFIX, ""), locale as LanguageOption)
           }
         }
       }
