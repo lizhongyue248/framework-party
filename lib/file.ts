@@ -81,7 +81,7 @@ export const getContentSummary = (frameworkContents: Content[]) => {
     }
     partyList.push({
       name: content.name,
-      link: getRepoName(content.repository).replaceAll(REPO_PREFIX, ""),
+      link: getRepoName(content.repository).replaceAll(REPO_PREFIX, "").toLowerCase(),
       repo: content.repository,
       description: content.description,
       detailList: allDetail,

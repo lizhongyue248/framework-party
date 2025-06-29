@@ -33,7 +33,7 @@ const onBeforePrerenderStart: OnBeforePrerenderStartAsync<ContentData> = async (
     urlsWithPageContext.push(...currentLocalePage)
     if (locale === localeDefault) {
       const defaultLocalePage = sidebarList.map((content) => {
-        const targetPath = content.content.replaceAll(REPO_PREFIX, "")
+        const targetPath = content.content.replaceAll(REPO_PREFIX, "").toLowerCase()
         return {
           url: `/${targetPath}`,
           pageContext: {
@@ -42,7 +42,7 @@ const onBeforePrerenderStart: OnBeforePrerenderStartAsync<ContentData> = async (
               sidebar: content,
               locale,
               urlLogical: `/${targetPath}`,
-              currentContent: getCurrentContent(getRepoName(content.repository), locale as LanguageOption)
+              currentContent: getCurrentContent(getRepoName(content.repository).replaceAll(REPO_PREFIX, "").toLowerCase(), locale as LanguageOption)
             }
           }
         }
