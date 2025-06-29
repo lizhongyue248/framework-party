@@ -6,7 +6,7 @@ import type { PartyInfo } from "@/pages/index/+data"
 
 interface PartyCategoriesProps {
   categories: PartyInfo[]
-  selectedCategory: string
+  selectedCategory?: string
   onCategorySelect: (category: string) => void
 }
 

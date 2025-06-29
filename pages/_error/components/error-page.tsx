@@ -1,3 +1,4 @@
+import { AppHeader } from "@/components/app-nav"
 import { ConfettiEffect } from "@/components/effect/confetti-effect"
 import { PartyEffects } from "@/components/effect/party-effects"
 import LanguageSwitch from "@/components/language-switch"
@@ -9,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import type { ErrorData } from "@/pages/_error/+data"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 import { AlertTriangle, ArrowLeft, Code, ExternalLink, Github, Globe, Home, Moon, PartyPopper, RefreshCw, Sparkles, Sun, Zap } from "lucide-react"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useData } from "vike-react/useData"
 
 interface ErrorPageProps {
@@ -69,37 +70,7 @@ export default function ErrorPage({ errorCode = "404", title, description }: Err
       {showConfetti && <ConfettiEffect />}
 
       {/* Header */}
-      <header className="relative z-20 p-6">
-        <nav className="flex justify-between items-center max-w-7xl mx-auto">
-          <div className="flex items-center space-x-3">
-            <div className="relative">
-              <Sparkles className="h-10 w-10 text-purple-600 dark:text-purple-400 animate-spin" />
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-ping" />
-            </div>
-            <div>
-              <Link href={"/"} className="text-3xl font-black bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent animate-pulse">
-                Framework Party
-              </Link>
-            </div>
-          </div>
-
-          {/* Navigation Controls */}
-          <div className="flex items-center space-x-4">
-            <LanguageSwitch />
-            <ThemeSwitch />
-
-            <Button
-              variant="outline"
-              onClick={() => window.open("https://github.com/framework-party", "_blank")}
-              className="rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-2 hover:scale-105 transition-all duration-300"
-            >
-              <SiGithub className="h-4 w-4 mr-2" />
-              <span className="hidden sm:inline">{errorData.navigation.github}</span>
-            </Button>
-          </div>
-        </nav>
-      </header>
-
+      <AppHeader />
       {/* Main Error Content */}
       <main className="relative z-10 flex-1 px-6 py-12">
         <div className="max-w-6xl mx-auto">

@@ -1,3 +1,4 @@
+import { AppHeader } from "@/components/app-nav"
 import { ConfettiEffect } from "@/components/effect/confetti-effect"
 import { FireworksEffect } from "@/components/effect/fireworks-effect"
 import { FrameworkComparison } from "@/components/effect/framework-comparison"
@@ -8,10 +9,11 @@ import { ThemeSwitch } from "@/components/theme-switch"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useStore } from "@/lib/store"
+import { getFrameworkConfig } from "@/lib/utils"
 import type { HomePageData } from "@/pages/index/+data"
 import { PartyCategories } from "@/pages/index/components/party-categories"
 import { SiGithub } from "@icons-pack/react-simple-icons"
-import { Code, ExternalLink, Moon, Rocket, Sparkles, Star, Sun, Users, Zap } from "lucide-react"
+import { Code, Rocket, Sparkles, Star, Users, Zap } from "lucide-react"
 import React, { useEffect, useMemo, useState } from "react"
 import { useData } from "vike-react/useData"
 
@@ -37,10 +39,15 @@ const Page = () => {
   const { partyList, i18n }: HomePageData = useData()
   const [showFireworks, setShowFireworks] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
-  const [selectedCategory, setSelectedCategory] = useState("Frontend")
+  const [selectedCategory, setSelectedCategory] = useState<string | undefined>()
   const currentParty = useMemo(() => partyList.find((party) => party.name === selectedCategory), [selectedCategory])
   const { theme } = useStore()
   const isDark = useMemo(() => theme === "dark", [theme])
+  useEffect(() => {
+    if (partyList.length > 0 && !selectedCategory) {
+      setSelectedCategory(partyList[0].name)
+    }
+  }, [partyList])
   useEffect(() => {
     const timer1 = setTimeout(() => setShowConfetti(true), 1000)
     const timer2 = setTimeout(() => setShowFireworks(true), 2000)
@@ -55,32 +62,13 @@ const Page = () => {
   }, [])
   const framersCount = partyList.reduce((count, party) => count + party.frameworkSupport.length, 0)
   const featureDetailCount = partyList.reduce((count, party) => count + (party.detailList?.length || 0), 0)
+
   return (
     <div className={`min-h-screen transition-all duration-700 ${isDark ? "dark bg-black" : "bg-gradient-to-br from-pink-100 via-purple-50 to-cyan-100"}`}>
       <PartyEffects />
       {showConfetti && <ConfettiEffect />}
       {showFireworks && <FireworksEffect />}
-      <header className="sticky top-0 z-50 bg-white/20 dark:bg-black/20 backdrop-blur-lg border-b-2 border-purple-200/50 dark:border-purple-700/50 p-6 transition-all duration-300">
-        <nav className="flex justify-between items-center max-w-7xl mx-auto">
-          <div className="flex items-center space-x-3">
-            <div className="relative">
-              <Sparkles className="h-10 w-10 text-purple-600 dark:text-purple-400 animate-spin" />
-              <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full animate-ping" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-black bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent animate-pulse">Framework Party</h1>
-            </div>
-          </div>
-          <div className="flex items-center space-x-4">
-            <ThemeSwitch />
-            <LanguageSwitch />
-            <Button variant="outline" className="rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-sm border-2 hover:scale-105 transition-all duration-300">
-              <SiGithub className="h-4 w-4 mr-2" />
-              Open Source
-            </Button>
-          </div>
-        </nav>
-      </header>
+      <AppHeader />
 
       <section className="relative z-10 text-center py-24 px-6">
         <div className="max-w-7xl mx-auto">
@@ -175,91 +163,22 @@ const Page = () => {
                 <CardContent className={"flex flex-col items-center gap-6"}>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-6 w-full">
                     {currentParty?.frameworkSupport.map((framework, index) => {
-                      const getFrameworkConfig = (name: string) => {
-                        const configs: Record<string, { emoji: string; color: string; bgColor: string }> = {
-                          React: {
-                            emoji: "⚛️",
-                            color: "from-blue-400 to-blue-600",
-                            bgColor: "bg-blue-50 dark:bg-blue-900/20"
-                          },
-                          Vue: {
-                            emoji: "💚",
-                            color: "from-green-400 to-green-600",
-                            bgColor: "bg-green-50 dark:bg-green-900/20"
-                          },
-                          Svelte: {
-                            emoji: "🔥",
-                            color: "from-orange-400 to-red-500",
-                            bgColor: "bg-orange-50 dark:bg-orange-900/20"
-                          },
-                          Lit: {
-                            emoji: "💡",
-                            color: "from-yellow-400 to-orange-500",
-                            bgColor: "bg-yellow-50 dark:bg-yellow-900/20"
-                          },
-                          Solid: {
-                            emoji: "🗿",
-                            color: "from-blue-500 to-purple-600",
-                            bgColor: "bg-purple-50 dark:bg-purple-900/20"
-                          },
-                          Qwik: {
-                            emoji: "⚡",
-                            color: "from-purple-400 to-pink-500",
-                            bgColor: "bg-pink-50 dark:bg-pink-900/20"
-                          },
-                          "Spring Boot": {
-                            emoji: "🍃",
-                            color: "from-green-400 to-green-600",
-                            bgColor: "bg-green-50 dark:bg-green-900/20"
-                          },
-                          Quarkus: {
-                            emoji: "🚀",
-                            color: "from-red-400 to-red-600",
-                            bgColor: "bg-red-50 dark:bg-red-900/20"
-                          },
-                          Micronaut: {
-                            emoji: "🔬",
-                            color: "from-blue-400 to-blue-600",
-                            bgColor: "bg-blue-50 dark:bg-blue-900/20"
-                          },
-                          "React Native": {
-                            emoji: "📱",
-                            color: "from-blue-400 to-purple-600",
-                            bgColor: "bg-blue-50 dark:bg-blue-900/20"
-                          },
-                          Flutter: {
-                            emoji: "🦋",
-                            color: "from-blue-400 to-cyan-500",
-                            bgColor: "bg-cyan-50 dark:bg-cyan-900/20"
-                          },
-                          Ionic: {
-                            emoji: "⚡",
-                            color: "from-blue-500 to-indigo-600",
-                            bgColor: "bg-indigo-50 dark:bg-indigo-900/20"
-                          }
-                        }
-                        return (
-                          configs[name] || {
-                            emoji: "🚀",
-                            color: "from-gray-400 to-gray-600",
-                            bgColor: "bg-gray-50 dark:bg-gray-900/20"
-                          }
-                        )
-                      }
-
                       const config = getFrameworkConfig(framework.name)
-
                       return (
                         <Card
                           key={framework.name}
-                          className={`group ${config.bgColor} backdrop-blur-sm border-3 border-transparent hover:border-purple-400 dark:hover:border-purple-500 transition-all duration-500 hover:scale-110 hover:shadow-2xl cursor-pointer transform hover:-translate-y-2`}
+                          className={`group p-0 ${config.bgColor} backdrop-blur-sm border-3 border-transparent hover:border-purple-400 dark:hover:border-purple-500 transition-all duration-500 hover:scale-110 hover:shadow-2xl cursor-pointer transform hover:-translate-y-2`}
                           style={{
                             animationDelay: `${index * 200}ms`,
                             animation: "fadeInUp 0.8s ease-out forwards"
                           }}
                         >
                           <CardContent className="p-6 text-center">
-                            <div className="text-4xl mb-4 group-hover:animate-bounce group-hover:scale-125 transition-all duration-300">{config.emoji}</div>
+                            <img
+                              className={"w-8 h-8 mx-auto text-4xl mb-4 group-hover:animate-bounce group-hover:scale-125 transition-all duration-300"}
+                              src={framework.logo}
+                              alt={framework.name}
+                            />
                             <div
                               className={`text-lg font-black bg-gradient-to-r ${config.color} bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300`}
                             >
