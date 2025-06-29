@@ -16,7 +16,7 @@ interface Store {
 export const useStore = create<Store>()(
   persist(
     (set) => ({
-      theme: "party",
+      theme: "dark",
       language: "zh",
       activeFrameworks: [],
       setTheme: (theme: ThemeType) => set((state) => ({ ...state, theme })),

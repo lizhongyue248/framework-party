@@ -1,9 +1,9 @@
 // Only server
 import fs from "node:fs"
 import path from "node:path"
-import type { Content } from "@/types"
+import type { Content, FrameworkSupport, PartyInfo } from "@/types"
 import type { I18nData } from "@/types/i18n"
-export const REPO_PREFIX = "framework-party-"
+const REPO_PREFIX = "framework-party-"
 
 export const getRepoName = (repoUrl: string): string => {
   const cleanUrl = repoUrl.endsWith("/") ? repoUrl.slice(0, -1) : repoUrl
@@ -53,4 +53,38 @@ export const getLocaleData = (locale: "zh" | "en" = "en"): I18nData => {
   const filePath = path.resolve(process.cwd(), `content/i18n/data.${locale}.json`)
   const fileContent = fs.readFileSync(filePath, "utf-8")
   return JSON.parse(fileContent) as I18nData
+}
+
+export const getContentSummary = (frameworkContents: Content[]) => {
+  const partyList: PartyInfo[] = []
+  for (const content of frameworkContents) {
+    const definitions = content.definitions
+    const allDetail: string[] = []
+    for (const definitionsKey in definitions) {
+      const definition = definitions[definitionsKey]
+      const detailList = definition["detail-list"]
+      allDetail.push(...detailList)
+    }
+    const frameworkSupport: FrameworkSupport[] = []
+    for (const framework of content.framework) {
+      const featureSupport: Record<string, boolean> = {}
+      for (const feature of framework.feature) {
+        for (const detail of feature.detail) {
+          featureSupport[detail.name] = allDetail.includes(detail.name)
+        }
+      }
+      frameworkSupport.push({
+        name: framework.name,
+        logo: framework.logo,
+        detail: featureSupport
+      })
+    }
+    partyList.push({
+      name: content.name,
+      description: content.description,
+      detailList: allDetail,
+      frameworkSupport
+    })
+  }
+  return partyList
 }

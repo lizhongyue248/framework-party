@@ -76,3 +76,12 @@ export type ContentSidebarData = {
 
 export type ThemeType = "light" | "dark"
 export type LanguageOption = "zh" | "en"
+
+export type FrameworkSupport = { name: string; logo: string; detail: Record<string, boolean> }
+
+export interface PartyInfo {
+  name: string
+  description: string
+  detailList: string[]
+  frameworkSupport: FrameworkSupport[]
+}

@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import type { PartyInfo } from "@/pages/index/+data"
+import type { PartyInfo } from "@/types"
 import type { I18nData } from "@/types/i18n"
 import { Check, ChevronDown, ChevronUp, Star, Trophy, X, Zap } from "lucide-react"
 import React, { useState } from "react"

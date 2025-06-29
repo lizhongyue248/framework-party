@@ -56,14 +56,6 @@ export default function ErrorPage({ errorCode = "404", title, description }: Err
     { icon: <PartyPopper className={"size-8"} />, color: "from-pink-500 to-red-500" },
     { icon: <Zap className={"size-8"} />, color: "from-orange-500 to-red-600" }
   ]
-
-  const partyPages = [
-    { name: "Homepage", path: "/", icon: Home, color: "from-blue-500 to-purple-600" },
-    { name: "Documentation", path: "/docs", icon: Code, color: "from-purple-500 to-pink-600" },
-    { name: "Frontend Party", path: "/#frontend", icon: PartyPopper, color: "from-pink-500 to-red-500" },
-    { name: "Java Web Party", path: "/#java", icon: Zap, color: "from-orange-500 to-red-600" }
-  ]
-
   return (
     <div className={"min-h-screen transition-all duration-700"}>
       <PartyEffects />

@@ -15,7 +15,6 @@ export const data = (pageContext: PageContextServer | PageContextClient): ErrorD
   const frameworkContents = getAllFrameworkContents(locale)
   const links: QuickLink[] = []
   for (const content of frameworkContents) {
-    console.log(getRepoName(content.repository))
     links.push({
       name: content.name,
       description: content.description,

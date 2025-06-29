@@ -1,8 +1,6 @@
-"use client"
-
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import type { PartyInfo } from "@/pages/index/+data"
+import type { PartyInfo } from "@/types"
 
 interface PartyCategoriesProps {
   categories: PartyInfo[]

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getFrameworkConfig } from "@/lib/utils"
-import type { PartyInfo } from "@/pages/index/+data"
+import type { PartyInfo } from "@/types"
 import type { I18nData } from "@/types/i18n"
 import type React from "react"
 
