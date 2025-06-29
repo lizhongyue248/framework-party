@@ -1,4 +1,4 @@
-import { FrameworkDetail } from "@/pages/@content/component/ framework-detail"
+import { FrameworkDetail } from "@/pages/@content/components/ framework-detail"
 import type { Framework } from "@/types"
 import { useState } from "react"
 

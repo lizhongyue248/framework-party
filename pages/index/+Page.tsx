@@ -9,11 +9,11 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useStore } from "@/lib/store"
 import type { HomePageData } from "@/pages/index/+data"
+import { PartyCategories } from "@/pages/index/components/party-categories"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 import { Code, ExternalLink, Moon, Rocket, Sparkles, Star, Sun, Users, Zap } from "lucide-react"
 import React, { useEffect, useMemo, useState } from "react"
 import { useData } from "vike-react/useData"
-import { PartyCategories } from "./component/party-categories"
 
 const icons = [
   <Code className="h-8 w-8" key={"code"} />,

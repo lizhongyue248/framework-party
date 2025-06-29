@@ -1,9 +1,29 @@
 {
   "common": {
-    "loading": "加载中...",
-    "error": "发生错误",
-    "notFound": "页面未找到",
-    "backToHome": "返回首页"
+    "error": {
+      "notFound": "页面未找到",
+      "serverError": "服务器错误",
+      "404": {
+        "title": "糟糕！这个派对嘉宾失踪了！🎭",
+        "description": "你要找的页面提前离开了派对。别担心，还有许多精彩的框架对比等你探索！",
+        "suggestion": "也许他们藏在其他派对房间？"
+      },
+      "500": {
+        "title": "派对崩溃！服务器出问题了！🎪",
+        "description": "我们的派对服务器遇到了一些问题。框架巫师们正在努力让一切恢复庆典！",
+        "suggestion": "请尝试刷新页面或稍后再来。"
+      },
+      "navigation": {
+        "backHome": "返回派对首页",
+        "goBack": "返回上一页",
+        "refreshPage": "刷新派对",
+        "searchSite": "搜索站点",
+        "viewDocs": "查看文档",
+        "github": "GitHub"
+      },
+      "quickLinks": "快捷派对链接",
+      "errorCode": "错误码"
+    }
   },
   "home": {
     "title": "让我们开派对",

@@ -3,7 +3,7 @@ import type { ContentData } from "@/pages/@content/+data"
 import React, { useMemo } from "react"
 import { useData } from "vike-react/useData"
 import "./page.css"
-import { FeatureSection } from "@/pages/@content/component/feature-section"
+import { FeatureSection } from "@/pages/@content/components/feature-section"
 
 export const Page = () => {
   const { currentContent, sidebar } = useData<ContentData>()

@@ -1,9 +1,29 @@
 export interface I18nData {
   common: {
-    loading: string
-    error: string
-    notFound: string
-    backToHome: string
+    error: {
+      notFound: string
+      serverError: string
+      404: {
+        title: string
+        description: string
+        suggestion: string
+      }
+      500: {
+        title: string
+        description: string
+        suggestion: string
+      }
+      navigation: {
+        backHome: string
+        goBack: string
+        refreshPage: string
+        searchSite: string
+        viewDocs: string
+        github: string
+      }
+      quickLinks: string
+      errorCode: string
+    }
   }
   home: {
     title: string

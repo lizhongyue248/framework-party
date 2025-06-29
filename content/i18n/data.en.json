@@ -1,9 +1,29 @@
 {
   "common": {
-    "loading": "Loading...",
-    "error": "An error occurred",
-    "notFound": "Page not found",
-    "backToHome": "Back to Home"
+    "error": {
+      "notFound": "Page Not Found",
+      "serverError": "Server Error",
+      "404": {
+        "title": "Oops! This Party Guest Went Missing! 🎭",
+        "description": "The page you're looking for decided to leave the party early. Don't worry, there are plenty of other exciting framework comparisons to explore!",
+        "suggestion": "Maybe they're hiding in one of our other party rooms?"
+      },
+      "500": {
+        "title": "Party Crashed! Server Having Issues! 🎪",
+        "description": "Our party servers are having a moment. Our team of framework wizards is working to get everything back to the celebration!",
+        "suggestion": "Try refreshing the page or come back in a few minutes."
+      },
+      "navigation": {
+        "backHome": "Back to Party",
+        "goBack": "Go Back",
+        "refreshPage": "Refresh Party",
+        "searchSite": "Search Site",
+        "viewDocs": "View Docs",
+        "github": "GitHub"
+      },
+      "quickLinks": "Quick Party Links",
+      "errorCode": "Error Code"
+    }
   },
   "home": {
     "title": "Let's Party",
