@@ -1,12 +1,13 @@
-import { AppSidebar } from "@/components/app-sidebar"
 import { PartyEffects } from "@/components/effect/party-effects"
 import LanguageSwitch from "@/components/language-switch"
 import { Link } from "@/components/link"
 import { ThemeSwitch } from "@/components/theme-switch"
 import { Button } from "@/components/ui/button"
 import { Toggle } from "@/components/ui/toggle"
+import { REPO_PREFIX } from "@/lib/file"
 import { useStore } from "@/lib/store"
 import type { ContentData } from "@/pages/@content/+data"
+import { AppSidebar } from "@/pages/@content/component/app-sidebar"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 import { Sparkles } from "lucide-react"
 import type React from "react"
@@ -58,7 +59,7 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
         <nav className={"flex flex-row gap-2"}>
           {(contentData.nav ?? []).map((item) => (
-            <a key={item.id} href={`/${item.id}`} className={"text-sm text-primary"}>
+            <a key={item.id} href={`/${item.id.replaceAll(REPO_PREFIX, "")}`} className={"text-sm text-primary"}>
               {item.name}
             </a>
           ))}
@@ -75,7 +76,7 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
       <div className={"flex-1 flex flex-row"}>
         <AppSidebar sidebarData={contentData.sidebar} />
         <div className={"h-full w-full"}>
-          <div className={"flex flex-row gap-4 py-2 overflow-x-auto px-8 border-b-2 scrollbar-thin scrollbar-track-transparent"}>
+          <div className={"flex flex-row gap-4 py-2 overflow-x-auto px-8 border-b-2"}>
             {contentData.currentContent?.framework.map((framework) => (
               <Toggle
                 variant={"outline"}
@@ -88,7 +89,7 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
               </Toggle>
             ))}
           </div>
-          <div id={"container"} className={"flex-1 w-full overflow-auto px-8 scrollbar-thin scrollbar-track-transparent h-[calc(100svh-var(--header-height)-4rem)]!"}>
+          <div id={"container"} className={"flex-1 w-full overflow-auto px-8 h-[calc(100svh-var(--header-height)-4rem)]!"}>
             {children}
           </div>
         </div>

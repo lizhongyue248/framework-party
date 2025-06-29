@@ -65,7 +65,7 @@ const processCodeFile = (targetDir: string, file: File) => {
     transformers: [
       {
         pre(node) {
-          node.properties.class = `${node.properties.class || ""} scrollbar-thin scrollbar-track-transparent`
+          node.properties.class = `${node.properties.class || ""}`
           return node
         }
       }

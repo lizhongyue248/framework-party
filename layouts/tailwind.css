@@ -1,8 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@plugin 'tailwind-scrollbar' {
-  nocompatible: true;
-}
 
 @custom-variant dark (&:is(.dark *));
 
@@ -165,23 +162,6 @@
   animation: glow 2s ease-in-out infinite;
 }
 
-/* Enhanced scrollbar */
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-900 rounded-full;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-gradient-to-b from-purple-400 to-pink-500 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply from-purple-500 to-pink-600;
-}
-
 /* Custom border utilities */
 .border-3 {
   border-width: 3px;
@@ -230,4 +210,46 @@
 .hover-lift:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced scrollbar */
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  @apply rounded-full;
+}
+
+/* 纵向滚动条 thumb（默认） */
+*::-webkit-scrollbar-thumb {
+  @apply bg-gradient-to-b from-purple-400 to-pink-500 rounded-full;
+}
+.dark *::-webkit-scrollbar-thumb {
+  @apply from-purple-700 to-pink-700 bg-gradient-to-b;
+}
+*::-webkit-scrollbar-thumb:hover {
+  @apply from-purple-500 to-pink-600 bg-gradient-to-b;
+}
+.dark *::-webkit-scrollbar-thumb:hover {
+  @apply from-purple-800 to-pink-800 bg-gradient-to-b;
+}
+
+/* 横向滚动条 thumb */
+*::-webkit-scrollbar:horizontal {
+  height: 5px;
+}
+*::-webkit-scrollbar-thumb:horizontal {
+  @apply bg-gradient-to-r from-purple-400 to-pink-500 rounded-full;
+}
+.dark *::-webkit-scrollbar-thumb:horizontal {
+  @apply from-purple-700 to-pink-700 bg-gradient-to-r;
+}
+*::-webkit-scrollbar-thumb:horizontal:hover {
+  @apply from-purple-500 to-pink-600 bg-gradient-to-r;
+}
+.dark *::-webkit-scrollbar-thumb:horizontal:hover {
+  @apply from-purple-800 to-pink-800 bg-gradient-to-r;
 }
