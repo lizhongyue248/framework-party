@@ -1,3 +1,4 @@
+import { Link } from "@/components/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getFrameworkConfig } from "@/lib/utils"
@@ -53,12 +54,12 @@ export const FrameworkDisplay: React.FC<FrameworkDisplayProps> = ({ i18n, curren
           })}
         </div>
 
-        <Button
-          size="lg"
-          className="w-full max-w-sm bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 hover:from-purple-700 hover:via-pink-700 hover:to-red-600 text-white rounded-full px-12 py-4 text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse"
+        <Link
+          href={currentParty.link}
+          className="w-full text-center max-w-sm bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 hover:from-purple-700 hover:via-pink-700 hover:to-red-600 text-white rounded-full px-12 py-4 text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse"
         >
           {i18n.home.action}
-        </Button>
+        </Link>
       </CardContent>
     </Card>
   )

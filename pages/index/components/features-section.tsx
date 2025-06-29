@@ -32,10 +32,8 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ i18n }) => {
     <section className="relative z-10 py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-20">
-          <h2 className="text-5xl md:text-6xl font-black mb-8 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Why Join the Party?</h2>
-          <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto font-medium">
-            Making framework comparison fun, interactive, and insightful for developers worldwide.
-          </p>
+          <h2 className="text-5xl md:text-6xl font-black mb-8 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{i18n.home.why.title}</h2>
+          <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto font-medium">{i18n.home.why.description}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">

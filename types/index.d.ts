@@ -81,6 +81,8 @@ export type FrameworkSupport = { name: string; logo: string; detail: Record<stri
 
 export interface PartyInfo {
   name: string
+  link: string
+  repo: string
   description: string
   detailList: string[]
   frameworkSupport: FrameworkSupport[]
