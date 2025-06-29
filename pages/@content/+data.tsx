@@ -11,10 +11,9 @@ export interface ContentData {
 
 export const data = (pageContext: PageContextServer | PageContextClient) => {
   const locale = pageContext.locale || localeDefault
-
   const navData = readJsonFile<NavData[]>("nav.json", locale)
   const sidebarList = readJsonFile<ContentSidebarData[]>("sidebar.json", locale)
-  const current = pageContext.routeParams.content.replaceAll(REPO_PREFIX, "")
+  const current = pageContext.routeParams.content.replaceAll(REPO_PREFIX, "").toLowerCase()
   const sidebarData = sidebarList.find((item) => item.content.replaceAll(REPO_PREFIX, "") === current)
   const currentContent = getCurrentContent(current, locale)
   return {

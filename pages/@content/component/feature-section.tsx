@@ -13,7 +13,7 @@ interface FeatureSectionProps {
 export const FeatureSection = ({ feature, filteredContent }: FeatureSectionProps) => {
   return (
     <div key={`page-${feature.feature}`} className={"flex flex-col gap-4 relative"}>
-      <h3 id={feature.feature} className="group top-0 z-10 bg-[var(--background)] py-2 scroll-m-20 text-2xl font-semibold tracking-tight sticky">
+      <h3 id={feature.feature} className="group top-0 z-10 bg-transparent py-2 scroll-m-20 text-2xl font-semibold tracking-tight">
         {feature.feature}
         <a
           tabIndex={-1}

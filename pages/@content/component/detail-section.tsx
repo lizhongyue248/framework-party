@@ -13,7 +13,7 @@ export const DetailSection = ({ detail, feature, filteredContent }: DetailSectio
 
   return (
     <div className={"flex flex-col gap-4 relative"}>
-      <h4 id={detail.detail} className="group top-0 z-10 bg-[var(--background)] py-2 scroll-m-20 text-xl font-semibold tracking-tight sticky">
+      <h4 id={detail.detail} className="bg-transparent group top-0 z-10 py-2 scroll-m-20 text-xl font-semibold tracking-tight">
         {detail.detail}
         <a
           tabIndex={-1}

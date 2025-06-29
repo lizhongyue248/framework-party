@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-export function PartyEffects() {
+export function PartyEffects({ line = true }) {
   const [particles, setParticles] = useState<
     Array<{
       id: number
@@ -60,11 +60,13 @@ export function PartyEffects() {
       />
 
       {/* Animated light rays */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-1 h-full bg-gradient-to-b from-purple-400/20 to-transparent animate-pulse" />
-        <div className="absolute top-0 right-1/4 w-1 h-full bg-gradient-to-b from-pink-400/20 to-transparent animate-pulse" style={{ animationDelay: "1s" }} />
-        <div className="absolute top-0 left-1/2 w-1 h-full bg-gradient-to-b from-blue-400/20 to-transparent animate-pulse" style={{ animationDelay: "2s" }} />
-      </div>
+      {line && (
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-1 h-full bg-gradient-to-b from-purple-400/20 to-transparent animate-pulse" />
+          <div className="absolute top-0 right-1/4 w-1 h-full bg-gradient-to-b from-pink-400/20 to-transparent animate-pulse" style={{ animationDelay: "1s" }} />
+          <div className="absolute top-0 left-1/2 w-1 h-full bg-gradient-to-b from-blue-400/20 to-transparent animate-pulse" style={{ animationDelay: "2s" }} />
+        </div>
+      )}
     </div>
   )
 }

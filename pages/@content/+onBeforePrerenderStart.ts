@@ -15,7 +15,7 @@ const onBeforePrerenderStart: OnBeforePrerenderStartAsync<ContentData> = async (
     const navData = readJsonFile<NavData[]>("nav.json", locale as LanguageOption)
     const sidebarList = readJsonFile<ContentSidebarData[]>("sidebar.json", locale as LanguageOption)
     const currentLocalePage = sidebarList.map((content) => {
-      const targetPath = content.content.replaceAll(REPO_PREFIX)
+      const targetPath = content.content.replaceAll(REPO_PREFIX, "")
       return {
         url: `/${locale}/${targetPath}`,
         pageContext: {
@@ -31,18 +31,21 @@ const onBeforePrerenderStart: OnBeforePrerenderStartAsync<ContentData> = async (
     })
     urlsWithPageContext.push(...currentLocalePage)
     if (locale === localeDefault) {
-      const defaultLocalePage = sidebarList.map((content) => ({
-        url: `/${targetPath}`,
-        pageContext: {
-          data: {
-            nav: navData,
-            sidebar: content,
-            locale,
-            urlLogical: `/${targetPath}`,
-            currentContent: getCurrentContent(getRepoName(content.repository), locale as LanguageOption)
+      const defaultLocalePage = sidebarList.map((content) => {
+        const targetPath = content.content.replaceAll(REPO_PREFIX, "")
+        return {
+          url: `/${targetPath}`,
+          pageContext: {
+            data: {
+              nav: navData,
+              sidebar: content,
+              locale,
+              urlLogical: `/${targetPath}`,
+              currentContent: getCurrentContent(getRepoName(content.repository), locale as LanguageOption)
+            }
           }
         }
-      }))
+      })
       urlsWithPageContext.push(...defaultLocalePage)
     }
   }
