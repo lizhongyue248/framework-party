@@ -24,13 +24,18 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
     const frameworks = urlParams.get("frameworks")
     if (frameworks) {
       setActiveFrameworks(frameworks.split(","))
+    } else if (activeFrameworks.length === 0 && contentData.currentContent?.framework && contentData.currentContent.framework.length > 0) {
+      setActiveFrameworks([contentData.currentContent.framework[0].name])
     }
-  }, [])
+  }, [contentData.currentContent])
 
   const handleFrameworkToggle = async (framework: string) => {
     let newFrameworks: string[]
     if (activeFrameworks.includes(framework)) {
       newFrameworks = activeFrameworks.filter((f) => f !== framework)
+      if (newFrameworks.length === 0 && contentData.currentContent?.framework && contentData.currentContent.framework.length > 0) {
+        newFrameworks = [contentData.currentContent.framework[0].name]
+      }
     } else {
       newFrameworks = [...activeFrameworks, framework]
     }

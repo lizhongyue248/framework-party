@@ -77,16 +77,19 @@ const CodeBlock = ({ files, selectedFileIndex, onFileSelect, repository }: CodeB
       </div>
 
       <div className={"absolute top-2 right-4 flex flex-row items-center gap-3"}>
-        <Button
-          variant={"ghost"}
-          size={"icon"}
-          className="h-2 w-2 opacity-30 hover:opacity-80 transition-all"
-          onClick={async () => {
-            window.open(`${currentContent?.code}?file=${encodeURIComponent(currentFile.path)}`, "_blank")
-          }}
-        >
-          <Play className="size-3" />
-        </Button>
+        {currentContent?.code && (
+          <Button
+            variant={"ghost"}
+            size={"icon"}
+            className="h-2 w-2 opacity-30 hover:opacity-80 transition-all"
+            onClick={async () => {
+              window.open(`${currentContent?.code}?file=${encodeURIComponent(currentFile.path)}`, "_blank")
+            }}
+          >
+            <Play className="size-3" />
+          </Button>
+        )}
+
         <Button
           variant={"ghost"}
           size={"icon"}
