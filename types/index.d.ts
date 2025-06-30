@@ -40,6 +40,7 @@ export interface ContentInformation {
 }
 
 export interface Content extends ContentInformation {
+  code: string
   framework: Framework[]
   definitions?: Record<
     string,

@@ -71,6 +71,7 @@ definitions:
 
 name: "前端"
 repository: "https://github.com/lizhongyue248/framework-party-frontend"
+code: "https://codesandbox.io/p/github/lizhongyue248/framework-party-frontend/main"
 description: "这是一个前端框架。"
 framework:
   - name: "React"

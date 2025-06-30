@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { getFileName } from "@/lib/utils"
+import type { ContentData } from "@/pages/@content/+data"
 import type { File, Framework } from "@/types"
 import { SiGithub } from "@icons-pack/react-simple-icons"
-import { Copy } from "lucide-react"
+import { Copy, Play } from "lucide-react"
 import type React from "react"
 import { toast } from "sonner"
+import { useData } from "vike-react/useData"
 
 interface FrameworkDetailProps {
   framework: Framework
@@ -48,6 +50,7 @@ interface CodeBlockProps {
 
 const CodeBlock = ({ files, selectedFileIndex, onFileSelect, repository }: CodeBlockProps) => {
   const currentFile = files[selectedFileIndex]
+  const { currentContent }: ContentData = useData()
 
   return (
     <div className="code-block overflow-auto rounded-md my-2 relative group">
@@ -77,7 +80,17 @@ const CodeBlock = ({ files, selectedFileIndex, onFileSelect, repository }: CodeB
         <Button
           variant={"ghost"}
           size={"icon"}
-          className="h-2 w-2 opacity-30"
+          className="h-2 w-2 opacity-30 hover:opacity-80 transition-all"
+          onClick={async () => {
+            window.open(`${currentContent?.code}?file=${encodeURIComponent(currentFile.path)}`, "_blank")
+          }}
+        >
+          <Play className="size-3" />
+        </Button>
+        <Button
+          variant={"ghost"}
+          size={"icon"}
+          className="h-2 w-2 opacity-30 hover:opacity-80 transition-all"
           onClick={async () => {
             try {
               await navigator.clipboard.writeText(currentFile.code ?? "")
@@ -92,7 +105,7 @@ const CodeBlock = ({ files, selectedFileIndex, onFileSelect, repository }: CodeB
         <Button
           variant={"ghost"}
           size={"icon"}
-          className="h-2 w-2 opacity-30"
+          className="h-2 w-2 opacity-30 hover:opacity-80 transition-all"
           onClick={() => {
             const fileUrl = currentFile.path
             const repoUrl = repository.replace(/\.git$/, "")

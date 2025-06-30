@@ -72,6 +72,7 @@ definitions:
 
 name: "Frontend"
 repository: "https://github.com/lizhongyue248/framework-party-frontend"
+code: "https://codesandbox.io/p/github/lizhongyue248/framework-party-frontend/main"
 description: "This is frontend framework."
 framework:
   - name: "React"
