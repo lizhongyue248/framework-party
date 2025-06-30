@@ -1,7 +1,6 @@
 import { Languages } from "lucide-react"
 import React from "react"
 import { usePageContext } from "vike-react/usePageContext"
-import { navigate } from "vike/client/router"
 import { Button } from "./ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from "./ui/dropdown-menu"
 
@@ -18,7 +17,7 @@ const LanguageSwitch = () => {
         <DropdownMenuRadioGroup
           value={locale}
           onValueChange={(to) => {
-            void navigate(`/${to}${urlLogical}`)
+            window.location.href = `/${to}${urlLogical}`
           }}
         >
           <DropdownMenuRadioItem value="zh">中文</DropdownMenuRadioItem>
