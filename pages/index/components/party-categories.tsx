@@ -10,8 +10,8 @@ interface PartyCategoriesProps {
 
 export function PartyCategories({ categories, selectedCategory, onCategorySelect }: PartyCategoriesProps) {
   return (
-    <div className="space-y-6">
-      <div className="space-y-4">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="space-y-3 sm:space-y-4">
         {Object.entries(categories).map(([key, category]) => (
           <Card
             key={key}
@@ -22,17 +22,21 @@ export function PartyCategories({ categories, selectedCategory, onCategorySelect
             }`}
             onClick={() => onCategorySelect(category.name)}
           >
-            <CardContent className="p-6">
-              <div className="flex items-center space-x-4">
-                <div className={`text-4xl ${selectedCategory === category.name ? "animate-bounce" : "group-hover:animate-bounce"}`}>🎨</div>
-                <div className="flex-1">
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-start sm:items-center space-x-3 sm:space-x-4">
+                <div className={`text-2xl sm:text-3xl md:text-4xl flex-shrink-0 ${selectedCategory === category.name ? "animate-bounce" : "group-hover:animate-bounce"}`}>🎨</div>
+                <div className="flex-1 min-w-0">
                   <h3
-                    className={`text-xl font-black mb-2 ${selectedCategory === category.name ? "text-white" : "bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"}`}
+                    className={`text-lg sm:text-xl font-black mb-1 sm:mb-2 ${selectedCategory === category.name ? "text-white" : "bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"}`}
                   >
                     {category.name}
                   </h3>
-                  <p className={`text-sm font-medium ${selectedCategory === category.name ? "text-white/90" : "text-gray-600 dark:text-gray-400"}`}>{category.description}</p>
-                  <div className="mt-3 flex items-center space-x-2">
+                  <p
+                    className={`text-xs sm:text-sm font-medium mb-2 sm:mb-3 line-clamp-2 ${selectedCategory === category.name ? "text-white/90" : "text-gray-600 dark:text-gray-400"}`}
+                  >
+                    {category.description}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-2">
                     <Badge
                       variant="outline"
                       className={`text-xs ${
@@ -49,11 +53,12 @@ export function PartyCategories({ categories, selectedCategory, onCategorySelect
                     >
                       {category.detailList.length} features
                     </Badge>
+                    {selectedCategory === category.name && <Badge className="bg-white/20 text-white border-white/30 animate-pulse hidden sm:inline-flex">Active! 🎉</Badge>}
                   </div>
                 </div>
                 {selectedCategory === category.name && (
-                  <div className="flex items-center">
-                    <Badge className="bg-white/20 text-white border-white/30 animate-pulse">Active! 🎉</Badge>
+                  <div className="flex items-center sm:hidden">
+                    <div className="w-3 h-3 bg-white rounded-full animate-pulse" />
                   </div>
                 )}
               </div>

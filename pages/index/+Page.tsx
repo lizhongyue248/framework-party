@@ -55,33 +55,33 @@ const Page = () => {
       <WelcomeBanner i18n={i18n} />
       <StatsSection i18n={i18n} framersCount={framersCount} featureDetailCount={featureDetailCount} />
 
-      <section id="main" className="relative z-10 py-24 px-6">
+      <section id="main" className="relative z-10 py-12 sm:py-16 md:py-24 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full px-8 py-3 mb-8 shadow-xl">
-              <span className="text-2xl animate-spin">🎪</span>
-              <span className="font-bold text-lg">{i18n.home.main.title}</span>
-              <span className="text-2xl animate-spin">🎪</span>
+          <div className="text-center mb-12 sm:mb-16 md:mb-20">
+            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full px-4 sm:px-6 md:px-8 py-2 sm:py-3 mb-6 sm:mb-8 shadow-xl">
+              <span className="text-xl sm:text-2xl animate-spin">🎪</span>
+              <span className="font-bold text-sm sm:text-base md:text-lg">{i18n.home.main.title}</span>
+              <span className="text-xl sm:text-2xl animate-spin">🎪</span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-black mb-8 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent leading-tight">
               {i18n.home.main.subTitle}
             </h2>
-            <p className="text-2xl text-gray-700 dark:text-gray-300 font-medium">{i18n.home.main.description} 🎉</p>
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium px-4 sm:px-0">{i18n.home.main.description} 🎉</p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+            <div className="space-y-6 order-2 lg:order-1">
               <PartyCategories categories={partyList} selectedCategory={selectedCategory} onCategorySelect={(key) => setSelectedCategory(key)} />
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 order-1 lg:order-2">
               <FrameworkDisplay i18n={i18n} currentParty={currentParty} />
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative z-10 py-24 px-6">
+      <section className="relative z-10 py-12 sm:py-16 md:py-24 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">{currentParty && <FrameworkComparison i18n={i18n} data={currentParty} />}</div>
       </section>
 

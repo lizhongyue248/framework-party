@@ -24,19 +24,23 @@ export const StatsSection: React.FC<StatsSectionProps> = ({ i18n, framersCount, 
   ]
 
   return (
-    <section className="relative z-10 py-20 px-6">
+    <section className="relative z-10 py-12 sm:py-16 md:py-20 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
           {stats.map((stat, index) => (
             <Card
               key={stat.label}
               className="text-center bg-white/90 dark:bg-black/40 backdrop-blur-sm border-2 border-purple-200 dark:border-purple-700 hover:shadow-2xl transition-all duration-500 hover:scale-110 group cursor-pointer"
               style={{ animationDelay: `${index * 200}ms` }}
             >
-              <CardContent className="pt-8 pb-6">
-                <div className="text-5xl mb-4 group-hover:animate-bounce">{stat.icon}</div>
-                <div className={`text-5xl font-black mb-3 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent group-hover:animate-pulse`}>{stat.number}</div>
-                <div className="text-gray-700 dark:text-gray-300 font-bold text-lg">{stat.label}</div>
+              <CardContent className="pt-4 sm:pt-6 md:pt-8 pb-4 sm:pb-6 px-3 sm:px-6">
+                <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4 group-hover:animate-bounce">{stat.icon}</div>
+                <div
+                  className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black mb-2 sm:mb-3 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent group-hover:animate-pulse`}
+                >
+                  {stat.number}
+                </div>
+                <div className="text-gray-700 dark:text-gray-300 font-bold text-sm sm:text-base md:text-lg leading-tight">{stat.label}</div>
               </CardContent>
             </Card>
           ))}
