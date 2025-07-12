@@ -69,30 +69,28 @@ export const AppSidebar = ({ sidebarData }: AppSidebarProps) => {
     return () => observer.disconnect()
   }, [sidebarData])
   return (
-    <>
-      <Sidebar className={"w-64 border-r top-(--header-height) h-[calc(100svh-var(--header-height))]!"}>
-        <SidebarContent className={"px-2 pt-2"}>
-          <SidebarMenu>
-            {sidebarData?.data.map((featureData) => (
-              <SidebarMenuItem key={`sidebar-${featureData.feature}`}>
-                <SidebarMenuButton isActive={currentAnchor === featureData.feature} className={"font-bold"} onClick={() => handleToIdClick(featureData.feature)}>
-                  {featureData.feature}
-                </SidebarMenuButton>
-                {featureData.item.length > 0 &&
-                  featureData.item.map((detailData) => (
-                    <SidebarMenuSub key={`detail-${detailData.detail}`}>
-                      <SidebarMenuSubItem>
-                        <SidebarMenuSubButton isActive={currentAnchor === detailData.detail} onClick={() => handleToIdClick(detailData.detail)}>
-                          {detailData.detail}
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    </SidebarMenuSub>
-                  ))}
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarContent>
-      </Sidebar>
-    </>
+    <Sidebar className={"w-64 border-r top-(--header-height) h-[calc(100svh-var(--header-height))]!"}>
+      <SidebarContent className={"px-2 pt-2"}>
+        <SidebarMenu>
+          {sidebarData?.data.map((featureData) => (
+            <SidebarMenuItem key={`sidebar-${featureData.feature}`}>
+              <SidebarMenuButton isActive={currentAnchor === featureData.feature} className={"font-bold"} onClick={() => handleToIdClick(featureData.feature)}>
+                {featureData.feature}
+              </SidebarMenuButton>
+              {featureData.item.length > 0 &&
+                featureData.item.map((detailData) => (
+                  <SidebarMenuSub key={`detail-${detailData.detail}`}>
+                    <SidebarMenuSubItem>
+                      <SidebarMenuSubButton isActive={currentAnchor === detailData.detail} onClick={() => handleToIdClick(detailData.detail)}>
+                        {detailData.detail}
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
+                  </SidebarMenuSub>
+                ))}
+            </SidebarMenuItem>
+          ))}
+        </SidebarMenu>
+      </SidebarContent>
+    </Sidebar>
   )
 }

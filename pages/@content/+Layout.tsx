@@ -4,13 +4,15 @@ import { Link } from "@/components/link"
 import { ThemeSwitch } from "@/components/theme-switch"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { Toggle } from "@/components/ui/toggle"
+import { useIsMobile } from "@/hooks/use-mobile"
 import { useStore } from "@/lib/store"
 import { REPO_PREFIX } from "@/lib/utils"
 import type { ContentData } from "@/pages/@content/+data"
 import { AppSidebar } from "@/pages/@content/components/app-sidebar"
 import { SiGithub } from "@icons-pack/react-simple-icons"
-import { Menu, Sparkles } from "lucide-react"
+import { Menu } from "lucide-react"
 import type React from "react"
 import { useEffect } from "react"
 import { useData } from "vike-react/useData"
@@ -20,6 +22,7 @@ const FRAMEWORK_KEY = "frameworks"
 const ContentLayout = ({ children }: { children: React.ReactNode }) => {
   const contentData = useData<ContentData>()
   const { activeFrameworks, setActiveFrameworks } = useStore()
+  const isMobile = useIsMobile()
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const frameworks = urlParams.get("frameworks")
@@ -113,6 +116,13 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
           </div>
         </div>
       </div>
+
+      {/* 移动端浮动按钮 */}
+      {isMobile && (
+        <div className="fixed bottom-4 left-4 z-50">
+          <SidebarTrigger className="size-12 cursor-pointer rounded-full bg-background text-primary shadow-gray-500 shadow-lg hover:shadow-xl transition-shadow" />
+        </div>
+      )}
     </div>
   )
 }
