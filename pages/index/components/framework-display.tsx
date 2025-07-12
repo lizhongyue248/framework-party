@@ -1,5 +1,4 @@
 import { Link } from "@/components/link"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getFrameworkConfig } from "@/lib/utils"
 import type { PartyInfo } from "@/types"

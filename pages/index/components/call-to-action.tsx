@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import type { I18nData } from "@/types/i18n"
 import { SiGithub } from "@icons-pack/react-simple-icons"
-import { Rocket } from "lucide-react"
 import type React from "react"
 
 interface CallToActionProps {

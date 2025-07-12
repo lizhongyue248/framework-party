@@ -12,8 +12,6 @@ interface WelcomeBannerProps {
 }
 
 export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ i18n, party }) => {
-  const repoName = getRepoName(party?.repo ?? "")
-
   return (
     <section className="relative z-10 text-center py-12 sm:py-16 md:py-24 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
