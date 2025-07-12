@@ -13,9 +13,6 @@ export default {
   Head,
 
   // https://vike.dev/head-tags
-  title: "✨Framework Party✨",
-  description:
-    "A modern frontend framework showcase platform built with Vike + React. Demonstrates features and best practices across multiple frontend frameworks (React, Vue, Svelte, Solid, Qwik, Lit). Features internationalization, theme switching, responsive design, and is built with TypeScript + Tailwind CSS + shadcn/ui stack.",
   passToClient: ["nav", "sidebar", "locale", "urlLogical"],
   prerender: true,
   // https://vike.dev/stream

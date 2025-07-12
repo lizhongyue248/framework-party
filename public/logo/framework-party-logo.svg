@@ -1,0 +1,27 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="400" height="400" fill="#000000" rx="50"/>
+
+  <!-- 🥳 Emoji -->
+  <text x="200" y="160" font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif"
+        font-size="120" text-anchor="middle" fill="currentColor">🥳</text>
+
+  <!-- Framework Party 文字 -->
+  <text x="200" y="240" font-family="Inter, system-ui, sans-serif" font-weight="bold"
+        font-size="28" text-anchor="middle" fill="#ffffff">Framework</text>
+  <text x="200" y="280" font-family="Inter, system-ui, sans-serif" font-weight="bold"
+        font-size="28" text-anchor="middle" fill="#ffffff">Party</text>
+
+  <!-- 装饰元素 -->
+  <circle cx="80" cy="80" r="8" fill="#ff6b6b" opacity="0.8"/>
+  <circle cx="320" cy="80" r="6" fill="#4ecdc4" opacity="0.8"/>
+  <circle cx="80" cy="320" r="6" fill="#45b7d1" opacity="0.8"/>
+  <circle cx="320" cy="320" r="8" fill="#f9ca24" opacity="0.8"/>
+
+  <!-- 小星星 -->
+  <text x="120" y="120" font-size="16" fill="#feca57">✨</text>
+  <text x="280" y="120" font-size="16" fill="#feca57">✨</text>
+  <text x="120" y="350" font-size="16" fill="#feca57">✨</text>
+  <text x="280" y="350" font-size="16" fill="#feca57">✨</text>
+</svg>
+
