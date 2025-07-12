@@ -1,4 +1,3 @@
-import { Link } from "@/components/link"
 import type { I18nData } from "@/types/i18n"
 import { Sparkles } from "lucide-react"
 import type React from "react"

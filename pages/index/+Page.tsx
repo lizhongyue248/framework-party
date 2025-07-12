@@ -1,4 +1,4 @@
-import { AppHeader } from "@/components/app-nav"
+import { AppHeader } from "@/components/app-header"
 import { ConfettiEffect } from "@/components/effect/confetti-effect"
 import { FireworksEffect } from "@/components/effect/fireworks-effect"
 import { FrameworkComparison } from "@/components/effect/framework-comparison"
