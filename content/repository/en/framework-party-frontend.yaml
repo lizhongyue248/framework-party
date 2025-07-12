@@ -4,8 +4,7 @@ definitions:
     name: "Reactivity"
     description: >
       Reactivity is the mechanism that allows the framework to detect when data used on the page is changed (mutated), 
-      and to update the page optimally to reflect these changes. It is therefore a crucial mechanism for any web framework, 
-      so we are going to analyze it to understand its strengths and limitations.
+      and to update the page optimally to reflect these changes.
     detail-list:
       - "Declaring State"
       - "Updating State"
@@ -64,8 +63,7 @@ definitions:
     type: "group"
     name: "Web App Features"
     description: >
-      This section covers essential features for building full-fledged web applications, including how to bootstrap the application 
-      and interact with external data sources.
+      Web features refer to the core functionalities that modern web applications need to implement,
     detail-list:
       - "Render App"
       - "Fetch Data"
@@ -73,7 +71,7 @@ definitions:
 name: "Frontend"
 repository: "https://github.com/lizhongyue248/framework-party-frontend"
 code: "https://codesandbox.io/p/github/lizhongyue248/framework-party-frontend/main"
-description: "This is frontend framework."
+description: "Front-end frameworks are collections of tools and libraries for building user interfaces for modern Web applications. They provide core features such as componentized development, state management, responsive updates, event handling, etc. to help developers efficiently create interactive and high-performing web applications. Mainstream front-end frameworks such as React, Vue, Svelte, etc. have their own features and are suitable for different project requirements and development scenarios."
 framework:
   - name: "React"
     description: "A JavaScript library for building user interfaces with a component-based architecture."

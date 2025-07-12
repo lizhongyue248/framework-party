@@ -21,7 +21,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ i18n }) => {
         </div>
 
         <div className="relative">
-          <h1 className="font-black mb-8 sm:mb-12 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight animate-pulse text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl">
+          <h1 className="font-black mb-8 sm:mb-12 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight animate-pulse text-4xl sm:text-6xl md:text-7xl lg:text-8xl ">
             🎉 {i18n.home.title} 🎉
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto font-medium px-4 sm:px-0">{i18n.home.description}</p>

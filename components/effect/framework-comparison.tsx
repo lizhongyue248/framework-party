@@ -30,15 +30,12 @@ export function FrameworkComparison({ data, i18n }: FrameworkComparisonProps) {
     "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 border-red-300 dark:border-red-700",
     "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 border-gray-300 dark:border-gray-700"
   ]
-  const frameworkEmojis = ["⚛️", "💚", "🔥", "💡", "🗿", "⚡", "🍃", "🚀", "🔬"]
 
   // 按索引循环取色和 emoji
   const getFrameworkColor = (index: number) => frameworkColors[index % frameworkColors.length]
-  const getFrameworkEmoji = (index: number) => frameworkEmojis[index % frameworkEmojis.length]
 
   // Show first 10 features or all based on state
   const displayedFeatures = showAllFeatures ? data.detailList : data.detailList.slice(0, 10)
-
   return (
     <>
       <div className="text-center mb-20">

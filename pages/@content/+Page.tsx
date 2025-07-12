@@ -4,6 +4,7 @@ import React, { useMemo } from "react"
 import { useData } from "vike-react/useData"
 import "./page.css"
 import { FeatureSection } from "@/pages/@content/components/feature-section"
+import { SiGithub } from "@icons-pack/react-simple-icons"
 
 export const Page = () => {
   const { currentContent, sidebar } = useData<ContentData>()
@@ -21,7 +22,12 @@ export const Page = () => {
 
   return (
     <div className={"py-4 h-full flex flex-col gap-2"}>
-      <h2 className="scroll-m-20 bg-transparent border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">{currentContent.name}</h2>
+      <h2 className="scroll-m-20 bg-transparent border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        {currentContent.name}
+        <a href={currentContent.repository} target={"_blank"} rel="noreferrer">
+          <SiGithub className={"inline ml-3"} />
+        </a>
+      </h2>
       <div>{currentContent.description}</div>
       {sidebar.data.map((feature) => (
         <FeatureSection key={`page-${feature.feature}`} feature={feature} filteredContent={filteredContent} />

@@ -111,7 +111,7 @@ const CodeBlock = ({ files, selectedFileIndex, onFileSelect, repository }: CodeB
           className="h-2 w-2 opacity-30 hover:opacity-80 transition-all"
           onClick={() => {
             const fileUrl = currentFile.path
-            const repoUrl = repository.replace(/\.git$/, "")
+            const repoUrl = currentContent?.repository.replace(/\.git$/, "")
             window.open(`${repoUrl}/blob/main/${fileUrl}`, "_blank")
           }}
         >

@@ -4,7 +4,7 @@ definitions:
     name: "响应式"
     description: >
       响应式是框架检测页面上使用的数据何时发生变化(突变),并优化更新页面以反映这些变化的机制。
-      因此,它是任何 Web 框架的关键机制,所以我们将分析它以了解其优势和局限性。
+      因此,它是任何 Web 框架的关键机制。
     detail-list:
       - "声明状态"
       - "更新状态"
@@ -17,7 +17,7 @@ definitions:
       模板指的是框架允许开发人员构建和渲染 UI 的方式。
       它包括如何创建类似 HTML 的结构、如何插入动态内容以及 UI 如何对数据变化做出反应。
     detail-list:
-      - "最小模板"
+      - "模板"
       - "样式"
       - "循环"
       - "点击事件"
@@ -44,7 +44,7 @@ definitions:
       - "属性"
       - "向父组件发送事件"
       - "插槽"
-      - "插槽后备内容"
+      - "默认插槽"
       - "上下文"
 
   form-input: &form-input
@@ -57,14 +57,13 @@ definitions:
       - "文本输入"
       - "复选框"
       - "单选按钮"
-      - "选择框"
+      - "下拉选择"
 
   webapp-features: &webapp-features
     type: "group"
     name: "Web 应用功能"
     description: >
-      本节涵盖了构建完整 Web 应用程序的基本功能,包括如何引导应用程序
-      以及与外部数据源交互。
+      常见的 web 应用功能。
     detail-list:
       - "渲染应用"
       - "获取数据"
@@ -72,7 +71,7 @@ definitions:
 name: "前端"
 repository: "https://github.com/lizhongyue248/framework-party-frontend"
 code: "https://codesandbox.io/p/github/lizhongyue248/framework-party-frontend/main"
-description: "这是一个前端框架。"
+description: "前端框架是用于构建现代 Web 应用程序用户界面的工具和库集合。它们提供了组件化开发、状态管理、响应式更新、事件处理等核心功能，帮助开发者高效地创建交互性强、性能优异的 Web 应用。主流的前端框架如 React、Vue、Svelte 等各有特色，适用于不同的项目需求和开发场景。"
 framework:
   - name: "React"
     description: "一个使用基于组件架构构建用户界面的JavaScript库。"
@@ -104,7 +103,7 @@ framework:
                 language: "tsx"
       - <<: *templating
         detail:
-          - name: "简约模板"
+          - name: "模板"
             description: "React使用JSX, 这是一种语法扩展，让你可以在JavaScript中编写类似HTML的代码。"
             link: "https://react.dev/learn/writing-markup-with-jsx"
             file:
@@ -124,13 +123,13 @@ framework:
             file:
               - path: "apps/react-party/src/components/1-templating/2-loop/count-list.tsx"
                 language: "tsx"
-          - name: "事件点击"
+          - name: "点击事件"
             description: "React通过类似onClick的属性处理事件。"
             link: "https://react.dev/learn/adding-interactivity#responding-to-events"
             file:
               - path: "apps/react-party/src/components/1-templating/3-event-click/count-increment.tsx"
                 language: "tsx"
-          - name: "dom引用"
+          - name: "DOM 引用"
             description: "React提供useRef钩子来创建对DOM元素的引用。"
             link: "https://react.dev/learn/manipulating-the-dom-with-refs"
             file:
@@ -166,7 +165,7 @@ framework:
                 language: "tsx"
               - path: "apps/react-party/src/components/3-component-composition/0-props/count-display.tsx"
                 language: "tsx"
-          - name: "向父组件发射事件"
+          - name: "向父组件发送事件"
             description: "React组件可以调用作为props传递的函数，与父组件进行通信。"
             link: "https://react.dev/learn/responding-to-events#passing-event-handlers-as-props"
             file:
@@ -182,7 +181,7 @@ framework:
                 language: "tsx"
               - path: "apps/react-party/src/components/3-component-composition/2-slot/custom-button.tsx"
                 language: "tsx"
-          - name: "插槽回退"
+          - name: "默认插槽"
             description: "在React中，可以使用条件渲染为插槽提供默认内容。"
             link: "https://react.dev/learn/conditional-rendering"
             file:
@@ -202,7 +201,7 @@ framework:
                 language: "tsx"
       - <<: *form-input
         detail:
-          - name: "输入文本"
+          - name: "文本输入"
             description: "React通过使用value和onChange属性的受控组件处理表单输入。"
             link: "https://react.dev/reference/react-dom/components/input"
             file:
@@ -220,8 +219,8 @@ framework:
             file:
               - path: "apps/react-party/src/components/4-form-input/2-radio/radio.tsx"
                 language: "tsx"
-          - name: "选择元素"
-            description: "在React中，选择元素使用<select>和<option>标签，采用受控组件模式创建。"
+          - name: "下拉选择"
+            description: "在React中，下拉选择使用<select>和<option>标签，采用受控组件模式创建。"
             link: "https://react.dev/reference/react-dom/components/select"
             file:
               - path: "apps/react-party/src/components/4-form-input/3-select/select.tsx"
@@ -275,7 +274,7 @@ framework:
                 language: "vue"
       - <<: *templating
         detail:
-          - name: "简约模板"
+          - name: "模板"
             description: "Vue使用一种扩展HTML的模板语法，让你可以声明式地将渲染的DOM绑定到组件的数据。"
             link: "https://vuejs.org/guide/essentials/template-syntax.html"
             file:
@@ -293,13 +292,13 @@ framework:
             file:
               - path: "apps/vue-party/src/components/1-templating/2-loop/CountList.vue"
                 language: "vue"
-          - name: "事件点击"
+          - name: "点击事件"
             description: "Vue使用v-on指令（或@简写）来监听DOM事件，并在事件触发时运行方法。"
             link: "https://vuejs.org/guide/essentials/event-handling.html"
             file:
               - path: "apps/vue-party/src/components/1-templating/3-event-click/CountIncrement.vue"
                 language: "vue"
-          - name: "dom引用"
+          - name: "DOM 引用"
             description: "Vue允许你通过ref属性和ref函数直接访问DOM元素。"
             link: "https://vuejs.org/guide/essentials/template-refs.html"
             file:
@@ -335,7 +334,7 @@ framework:
                 language: "vue"
               - path: "apps/vue-party/src/components/3-component-composition/0-props/CountContent.vue"
                 language: "vue"
-          - name: "向父组件发射事件"
+          - name: "向父组件发送事件"
             description: "子组件可以使用defineEmits宏和发射事件与父组件进行通信。"
             link: "https://vuejs.org/guide/components/events.html"
             file:
@@ -351,7 +350,7 @@ framework:
                 language: "vue"
               - path: "apps/vue-party/src/components/3-component-composition/2-slot/ButtonContent.vue"
                 language: "vue"
-          - name: "插槽回退"
+          - name: "默认插槽"
             description: "Vue中的插槽可以具有后备内容，当父组件未提供内容时显示这些内容。"
             link: "https://vuejs.org/guide/components/slots.html#fallback-content"
             file:
@@ -373,7 +372,7 @@ framework:
                 language: "typescript"
       - <<: *form-input
         detail:
-          - name: "输入文本"
+          - name: "文本输入"
             description: "Vue提供v-model指令用于表单输入的双向数据绑定。"
             link: "https://vuejs.org/guide/components/v-model.html"
             file:
@@ -391,8 +390,8 @@ framework:
             file:
               - path: "apps/vue-party/src/components/4-form-input/2-radio/Radio.vue"
                 language: "vue"
-          - name: "选择元素"
-            description: "Vue中的选择元素可以通过v-model绑定到值。"
+          - name: "下拉选择"
+            description: "Vue中的下拉选择可以通过v-model绑定到值。"
             link: "https://vuejs.org/guide/form-input-bindings.html#select"
             file:
               - path: "apps/vue-party/src/components/4-form-input/3-select/Select.vue"
@@ -447,7 +446,7 @@ framework:
                 language: "svelte"
       - <<: *templating
         detail:
-          - name: "简约模板"
+          - name: "模板"
             description: "Svelte使用一种扩展HTML的模板语法，让你可以声明式地描述组件的标记。"
             link: "https://svelte.dev/docs/introduction#components"
             file:
@@ -465,13 +464,13 @@ framework:
             file:
               - path: "apps/svelte-party/src/components/1-templating/2-loop/CountList.svelte"
                 language: "svelte"
-          - name: "事件点击"
+          - name: "点击事件"
             description: "Svelte使用on:click指令监听DOM事件，并在触发事件时运行JavaScript。"
             link: "https://svelte.dev/docs/element-directives#on-eventname"
             file:
               - path: "apps/svelte-party/src/components/1-templating/3-event-click/CountIncrement.svelte"
                 language: "svelte"
-          - name: "dom引用"
+          - name: "DOM 引用"
             description: "Svelte允许你通过bind:this指令直接访问DOM元素。"
             link: "https://svelte.dev/docs/element-directives#bind-this"
             file:
@@ -507,8 +506,8 @@ framework:
                 language: "svelte"
               - path: "apps/svelte-party/src/components/3-component-composition/0-props/CountDisplay.svelte"
                 language: "svelte"
-          - name: "向父组件发射事件"
-            description: "子组件可以使用createEventDispatcher函数向父组件发射事件。"
+          - name: "向父组件发送事件"
+            description: "子组件可以使用createEventDispatcher函数向父组件发送事件。"
             link: "https://svelte.dev/docs/component-directives#on-eventname"
             file:
               - path: "apps/svelte-party/src/components/3-component-composition/1-emit-to-parent/CountContent.svelte"
@@ -523,7 +522,7 @@ framework:
                 language: "svelte"
               - path: "apps/svelte-party/src/components/3-component-composition/2-slot/ButtonContent.svelte"
                 language: "svelte"
-          - name: "插槽回退"
+          - name: "默认插槽"
             description: "Svelte中的插槽可以具有后备内容，当父组件未提供内容时显示这些内容。"
             link: "https://svelte.dev/docs/special-elements#slot"
             file:
@@ -543,7 +542,7 @@ framework:
                 language: "svelte"
       - <<: *form-input
         detail:
-          - name: "输入文本"
+          - name: "文本输入"
             description: "Svelte通过使用bind:value指令提供表单输入的双向数据绑定。"
             link: "https://svelte.dev/docs/element-directives#bind-property"
             file:
@@ -561,8 +560,8 @@ framework:
             file:
               - path: "apps/svelte-party/src/components/4-form-input/2-radio/Radio.svelte"
                 language: "svelte"
-          - name: "选择元素"
-            description: "Svelte中的选择元素可以通过bind:value绑定到值。"
+          - name: "下拉选择"
+            description: "Svelte中的下拉选择可以通过bind:value绑定到值。"
             link: "https://svelte.dev/docs/element-directives#bind-property"
             file:
               - path: "apps/svelte-party/src/components/4-form-input/3-select/Select.svelte"
@@ -617,7 +616,7 @@ framework:
                 language: "typescript"
       - <<: *templating
         detail:
-          - name: "简约模板"
+          - name: "模板"
             description: "Lit使用标记模板文字定义模板。"
             link: "https://lit.dev/docs/templates/overview/"
             file:
@@ -635,13 +634,13 @@ framework:
             file:
               - path: "apps/lit-party/src/components/1-templating/2-loop/count-list.ts"
                 language: "typescript"
-          - name: "事件点击"
+          - name: "点击事件"
             description: "在Lit中，事件处理通过@click属性或类似的事件绑定完成。"
             link: "https://lit.dev/docs/components/events/"
             file:
               - path: "apps/lit-party/src/components/1-templating/3-event-click/count-increment.ts"
                 language: "typescript"
-          - name: "dom引用"
+          - name: "DOM 引用"
             description: "Lit使用@query装饰器创建DOM元素的引用。"
             link: "https://lit.dev/docs/components/shadow-dom/#querying"
             file:
@@ -677,7 +676,7 @@ framework:
                 language: "typescript"
               - path: "apps/lit-party/src/components/3-component-composition/0-props/count-content.ts"
                 language: "typescript"
-          - name: "向父组件发射事件"
+          - name: "向父组件发送事件"
             description: "Lit使用自定义事件进行子组件与父组件之间的通信。"
             link: "https://lit.dev/docs/components/events/"
             file:
@@ -693,7 +692,7 @@ framework:
                 language: "typescript"
               - path: "apps/lit-party/src/components/3-component-composition/2-slot/button-content.ts"
                 language: "typescript"
-          - name: "插槽回退"
+          - name: "默认插槽"
             description: "在<slot>元素中提供候补内容。"
             link: "https://lit.dev/docs/components/shadow-dom/#fallback-content"
             file:
@@ -713,7 +712,7 @@ framework:
                 language: "typescript"
       - <<: *form-input
         detail:
-          - name: "输入文本"
+          - name: "文本输入"
             description: "Lit通过属性和事件监听器处理表单输入。"
             link: "https://lit.dev/docs/components/events/#input-example"
             file:
@@ -731,8 +730,8 @@ framework:
             file:
               - path: "apps/lit-party/src/components/4-form-input/2-radio/radio.ts"
                 language: "typescript"
-          - name: "选择元素"
-            description: "在Lit中，选择元素可以在组件内创建和管理。"
+          - name: "下拉选择"
+            description: "在Lit中，下拉选择可以在组件内创建和管理。"
             link: "https://lit.dev/docs/components/events/#select-example"
             file:
               - path: "apps/lit-party/src/components/4-form-input/3-select/select.ts"
@@ -785,7 +784,7 @@ framework:
                 language: "tsx"
       - <<: *templating
         detail:
-          - name: "简约模板"
+          - name: "模板"
             description: "Solid使用JSX进行模板设置，类似于React，但具备其独特的响应式系统。"
             link: "https://www.solidjs.com/docs/latest/api#jsx"
             file:
@@ -803,13 +802,13 @@ framework:
             file:
               - path: "apps/solid-party/src/components/1-templating/2-loop/count-list.tsx"
                 language: "tsx"
-          - name: "事件点击"
+          - name: "点击事件"
             description: "在Solid中，事件处理通过on:click或类似的事件绑定完成。"
             link: "https://www.solidjs.com/docs/latest/api#on___"
             file:
               - path: "apps/solid-party/src/components/1-templating/3-event-click/count-increment.tsx"
                 language: "tsx"
-          - name: "dom引用"
+          - name: "DOM 引用"
             description: "Solid使用ref属性创建DOM元素的引用。"
             link: "https://www.solidjs.com/docs/latest/api#ref"
             file:
@@ -845,7 +844,7 @@ framework:
                 language: "tsx"
               - path: "apps/solid-party/src/components/3-component-composition/0-props/count-display.tsx"
                 language: "tsx"
-          - name: "向父组件发射事件"
+          - name: "向父组件发送事件"
             description: "Solid使用属性将函数从父传递到子进行通信。"
             link: "https://www.solidjs.com/docs/latest/api#passing-functions"
             file:
@@ -859,7 +858,7 @@ framework:
             file:
               - path: "apps/solid-party/src/components/3-component-composition/2-slot/button-content.tsx"
                 language: "tsx"
-          - name: "插槽回退"
+          - name: "默认插槽"
             description: "可以通过条件渲染为插槽提供后备内容。"
             link: "https://www.solidjs.com/docs/latest/api#children"
             file:
@@ -879,7 +878,7 @@ framework:
                 language: "tsx"
       - <<: *form-input
         detail:
-          - name: "输入文本"
+          - name: "文本输入"
             description: "Solid通过信号和事件绑定处理表单输入。"
             link: "https://www.solidjs.com/docs/latest/api#createSignal"
             file:
@@ -897,8 +896,8 @@ framework:
             file:
               - path: "apps/solid-party/src/components/4-form-input/2-radio/radio.tsx"
                 language: "tsx"
-          - name: "选择元素"
-            description: "在Solid中，选择元素可在组件内创建和管理。"
+          - name: "下拉选择"
+            description: "在Solid中，下拉选择可在组件内创建和管理。"
             link: "https://www.solidjs.com/docs/latest/api#createSignal"
             file:
               - path: "apps/solid-party/src/components/4-form-input/3-select/select.tsx"
@@ -952,7 +951,7 @@ framework:
                 language: "tsx"
       - <<: *templating
         detail:
-          - name: "简约模板"
+          - name: "模板"
             description: "Qwik使用JSX进行模板设置，类似于React。"
             link: "https://qwik.builder.io/docs/components/overview/"
             file:
@@ -970,13 +969,13 @@ framework:
             file:
               - path: "apps/qwik-party/src/components/1-templating/2-loop/count-list.tsx"
                 language: "tsx"
-          - name: "事件点击"
+          - name: "点击事件"
             description: "在Qwik中，事件处理通过on:click属性或类似的事件绑定完成。"
             link: "https://qwik.builder.io/docs/components/events/"
             file:
               - path: "apps/qwik-party/src/components/1-templating/3-event-click/count-increment.tsx"
                 language: "tsx"
-          - name: "dom引用"
+          - name: "DOM 引用"
             description: "Qwik使用useSignal钩子创建DOM元素的引用。"
             link: "https://qwik.builder.io/docs/components/events/#element-events"
             file:
@@ -1012,7 +1011,7 @@ framework:
                 language: "tsx"
               - path: "apps/qwik-party/src/components/3-component-composition/0-props/count-display.tsx"
                 language: "tsx"
-          - name: "向父组件发射事件"
+          - name: "向父组件发送事件"
             description: "Qwik使用属性将函数从父组件传递给子组件进行通信。"
             link: "https://qwik.builder.io/docs/components/events/#component-events"
             file:
@@ -1028,7 +1027,7 @@ framework:
                 language: "tsx"
               - path: "apps/qwik-party/src/components/3-component-composition/2-slot/custom-button.tsx"
                 language: "tsx"
-          - name: "插槽回退"
+          - name: "默认插槽"
             description: "可以通过条件渲染为插槽提供候补内容。"
             link: "https://qwik.builder.io/docs/components/projection/#fallback-content"
             file:
@@ -1048,7 +1047,7 @@ framework:
                 language: "tsx"
       - <<: *form-input
         detail:
-          - name: "输入文本"
+          - name: "文本输入"
             description: "Qwik通过useSignal钩子和事件绑定处理表单输入。"
             link: "https://qwik.builder.io/docs/components/events/#input-binding"
             file:
@@ -1066,8 +1065,8 @@ framework:
             file:
               - path: "apps/qwik-party/src/components/4-form-input/2-radio/radio.tsx"
                 language: "tsx"
-          - name: "选择元素"
-            description: "在Qwik中，选择元素可在组件内创建和管理。"
+          - name: "下拉选择"
+            description: "在Qwik中，下拉选择可在组件内创建和管理。"
             link: "https://qwik.builder.io/docs/components/events/#select-binding"
             file:
               - path: "apps/qwik-party/src/components/4-form-input/3-select/select.tsx"
