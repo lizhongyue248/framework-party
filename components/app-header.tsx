@@ -3,7 +3,7 @@ import { Link } from "@/components/link"
 import { ThemeSwitch } from "@/components/theme-switch"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { REPO_PREFIX } from "@/lib/utils"
+import { REPO_PREFIX, cn } from "@/lib/utils"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 import { Menu } from "lucide-react"
 import React from "react"
@@ -21,16 +21,16 @@ interface AppHeaderProps {
 export const AppHeader = ({ navItems, className }: AppHeaderProps) => {
   return (
     <header
-      className={
-        className ||
-        "sticky top-0 z-50 bg-white/20 dark:bg-black/20 backdrop-blur-lg border-b-2 border-purple-200/50 dark:border-purple-700/50 p-4 sm:p-6 transition-all duration-300"
-      }
+      className={cn(
+        "sticky top-0 z-50 bg-white/20 dark:bg-black/20 backdrop-blur-lg border-b-2 border-purple-200/50 dark:border-purple-700/50 transition-all duration-300 px-4 py-2",
+        className
+      )}
     >
       <nav className="flex justify-between items-center max-w-7xl mx-auto w-full">
         <div className="flex items-center space-x-2 sm:space-x-3">
-          <div className="text-xl sm:text-2xl md:text-4xl text-purple-600 dark:text-purple-400">🥳</div>
+          <div className="text-xl sm:text-2xl md:text-3xl text-purple-600 dark:text-purple-400">🥳</div>
           <Link href={"/"}>
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent animate-pulse">
+            <h1 className="text-xl sm:text-2xl font-black bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent animate-pulse">
               <span className="hidden sm:inline">Framework Party</span>
               <span className="sm:hidden">Framework</span>
             </h1>

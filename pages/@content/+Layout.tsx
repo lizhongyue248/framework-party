@@ -49,7 +49,7 @@ const ContentLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={"w-full min-h-screen flex flex-col [--header-height:calc(--spacing(14))]"}>
       <PartyEffects line={false} />
-      <AppHeader navItems={contentData.nav} className="flex border-purple-200/50 dark:border-purple-700/50 justify-between p-4 md:p-6 items-center border-b-2 backdrop-blur-sm" />
+      <AppHeader navItems={contentData.nav} className="flex border-purple-200/50 dark:border-purple-700/50 justify-between items-center border-b-2 backdrop-blur-sm" />
 
       <div className={"flex-1 flex flex-row"}>
         <AppSidebar sidebarData={contentData.sidebar} />
