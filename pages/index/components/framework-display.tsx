@@ -15,15 +15,14 @@ export const FrameworkDisplay: React.FC<FrameworkDisplayProps> = ({ i18n, curren
   if (!currentParty) return null
 
   return (
-    <Card className="bg-white/90 dark:bg-black/40 backdrop-blur-sm border-3 border-purple-200 dark:border-purple-700 shadow-2xl">
+    <Card className="bg-white/90 dark:bg-black/40 backdrop-blur-sm border-3 border-purple-200 dark:border-purple-700 shadow-2xl gap-0">
       <CardHeader className="text-center p-4 sm:p-6">
         <CardTitle className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100">
           <span className="mr-2 sm:mr-3">🎨</span>
           {currentParty.name} Party
         </CardTitle>
-        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-2">{currentParty.description}</p>
       </CardHeader>
-      <CardContent className="flex flex-col items-center gap-4 sm:gap-6 p-4 sm:p-6">
+      <CardContent className="flex flex-col items-center sm:gap-6 p-4 sm:p-6">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 w-full">
           {currentParty.frameworkSupport.map((framework, index: number) => {
             const config = getFrameworkConfig(framework.name)

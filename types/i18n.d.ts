@@ -1,5 +1,6 @@
 export interface I18nData {
   common: {
+    base: string
     error: {
       notFound: string
       serverError: string

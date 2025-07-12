@@ -52,7 +52,7 @@ const Page = () => {
       {showConfetti && <ConfettiEffect />}
       {showFireworks && <FireworksEffect />}
       <AppHeader />
-      <WelcomeBanner i18n={i18n} />
+      <WelcomeBanner i18n={i18n} party={partyList[0]} />
       <StatsSection i18n={i18n} framersCount={framersCount} featureDetailCount={featureDetailCount} />
 
       <section id="main" className="relative z-10 py-12 sm:py-16 md:py-24 px-4 sm:px-6">

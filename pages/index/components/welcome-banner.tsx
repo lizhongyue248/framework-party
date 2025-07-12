@@ -1,13 +1,19 @@
+import { Link } from "@/components/link"
 import { Button } from "@/components/ui/button"
+import { getRepoName } from "@/lib/file"
+import type { PartyInfo } from "@/types"
 import type { I18nData } from "@/types/i18n"
-import { Code } from "lucide-react"
+import { Code, Sparkles } from "lucide-react"
 import type React from "react"
 
 interface WelcomeBannerProps {
   i18n: I18nData
+  party?: PartyInfo
 }
 
-export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ i18n }) => {
+export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ i18n, party }) => {
+  const repoName = getRepoName(party?.repo ?? "")
+
   return (
     <section className="relative z-10 text-center py-12 sm:py-16 md:py-24 px-4 sm:px-6">
       <div className="max-w-7xl mx-auto">
@@ -27,6 +33,15 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ i18n }) => {
           <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto font-medium px-4 sm:px-0">{i18n.home.description}</p>
 
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-6 sm:mt-8 justify-center items-center">
+            <Link href={`/${party?.link}`}>
+              <Button
+                size="lg"
+                className="w-full sm:w-auto max-w-sm bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 hover:from-purple-700 hover:via-pink-700 hover:to-red-600 text-white rounded-full px-8 sm:px-12 py-3 sm:py-4 text-lg sm:text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse"
+              >
+                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
+                {party?.name} {i18n.common.base}
+              </Button>
+            </Link>
             <Button
               size="lg"
               className="w-full sm:w-auto max-w-sm bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 hover:from-purple-700 hover:via-pink-700 hover:to-red-600 text-white rounded-full px-8 sm:px-12 py-3 sm:py-4 text-lg sm:text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse"

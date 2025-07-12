@@ -1,5 +1,6 @@
 {
   "common": {
+    "base": "Party",
     "error": {
       "notFound": "Page Not Found",
       "serverError": "Server Error",
@@ -28,7 +29,7 @@
   "home": {
     "title": "Let's Party",
     "description": "Choose to join different parties and experience different experiences!",
-    "action": "Join Party",
+    "action": "All Party",
     "welcome": "Welcome to the Ultimate Framework Showdown!",
     "summary": {
       "frameworks": "Frameworks",
