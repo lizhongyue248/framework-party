@@ -84,7 +84,7 @@ const Page = () => {
         <div className="max-w-7xl mx-auto">{currentParty && <FrameworkComparison i18n={i18n} data={currentParty} />}</div>
       </section>
 
-      <FeaturesSection i18n={i18n} />
+      {/*<FeaturesSection i18n={i18n} />*/}
       <CallToAction i18n={i18n} />
       <Footer i18n={i18n} />
     </div>
