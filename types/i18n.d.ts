@@ -29,6 +29,7 @@ export interface I18nData {
   home: {
     title: string
     description: string
+    join: string
     action: string
     welcome: string
     summary: {

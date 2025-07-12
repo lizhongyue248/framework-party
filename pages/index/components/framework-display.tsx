@@ -59,7 +59,7 @@ export const FrameworkDisplay: React.FC<FrameworkDisplayProps> = ({ i18n, curren
           href={`/${currentParty.link}`}
           className="w-full text-center max-w-sm bg-gradient-to-r from-purple-600 via-pink-600 to-red-500 hover:from-purple-700 hover:via-pink-700 hover:to-red-600 text-white rounded-full px-8 sm:px-12 py-3 sm:py-4 text-lg sm:text-xl font-bold shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all duration-300 animate-pulse"
         >
-          {i18n.home.action}
+          {i18n.home.join}
         </Link>
       </CardContent>
     </Card>
