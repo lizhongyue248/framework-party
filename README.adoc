@@ -1,0 +1,21 @@
+= 🥳 Framework Party 🥳
+:toc:
+:toc-placement: manual
+
+image:https://img.shields.io/badge/Framework-Party-ff69b4[Framework Party]
+image:https://img.shields.io/badge/vike-powered-blue[Vike]
+image:https://img.shields.io/badge/react-19.1.0-61dafb[React]
+
+toc::[]
+
+https://framework-parth.dev[Framework Party] is a comprehensive comparison platform that helps developers choose the right framework for their projects. We provide a direct comparison of front-end, back-end and database frameworks with real code examples.
+
+== Progress
+
+* [*] Fronted Framework
+* [ ] Java Web Framework
+* [ ] Database
+
+== Thanks
+
+Referring to the design and functionality of https://component-party.dev/[Component Party], a replica of Framework Party that supports repository linking, multi-theme and multi-language, joining the comparison of frameworks other than front-end, focusing on content creation and community building.

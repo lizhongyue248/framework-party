@@ -1,0 +1,22 @@
+= 🥳 Framework Party 🥳
+:toc:
+:toc-placement: manual
+
+image:https://img.shields.io/badge/Framework-Party-ff69b4[Framework Party]
+image:https://img.shields.io/badge/vike-powered-blue[Vike]
+image:https://img.shields.io/badge/react-19.1.0-61dafb[React]
+
+toc::[]
+
+https://framework-parth.dev[Framework Party] 是一个综合比较平台，可帮助开发人员为其项目选择合适的框架。我们通过真实代码示例,对前端、后端和数据库框架进行直接比较。
+
+== 计划
+
+* [*] 前端框架
+* [ ] Java Web 框架
+* [ ] 数据库
+
+== 感谢
+
+参考 https://component-party.dev/[Component Party] 的设计和功能，复刻了一个支持仓库链接，多主题多语言的 Framework Party，加入除前端以外的其他框架对比，专注于内容创作和社区建设。
+
