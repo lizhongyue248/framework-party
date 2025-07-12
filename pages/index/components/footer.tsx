@@ -8,15 +8,17 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ i18n }) => {
   return (
-    <footer className="relative z-10 bg-black text-white py-16 px-6 mt-24">
+    <footer className="relative z-10 bg-black text-white py-8 sm:py-12 md:py-16 px-4 sm:px-6 mt-12 sm:mt-16 md:mt-24">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <div className="flex items-center justify-center space-x-3 mb-6">
-            <Sparkles className="h-8 w-8 text-purple-400 animate-pulse" />
-            <span className="text-3xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Framework Party</span>
-            <Sparkles className="h-8 w-8 text-pink-400 animate-pulse" />
+        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <div className="flex items-center justify-center space-x-2 sm:space-x-3 mb-4 sm:mb-6">
+            <Sparkles className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-purple-400 animate-pulse flex-shrink-0" />
+            <span className="text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight">
+              Framework Party
+            </span>
+            <Sparkles className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-pink-400 animate-pulse flex-shrink-0" />
           </div>
-          <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">{i18n.home.footer.description}</p>
+          <p className="text-gray-400 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed px-2">{i18n.home.footer.description}</p>
         </div>
 
         {/*<div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">*/}
@@ -82,10 +84,15 @@ export const Footer: React.FC<FooterProps> = ({ i18n }) => {
         {/*  </div>*/}
         {/*</div>*/}
 
-        <div className="border-t border-gray-800 pt-8 text-center">
-          <p className="text-gray-500">
+        <div className="border-t border-gray-800 pt-6 sm:pt-8 text-center">
+          <p className="text-gray-500 text-sm sm:text-base leading-relaxed">
             © 2025 Framework Party. Made with ❤️ by the{" "}
-            <a href={"https://github.com/lizhongyue248"} target={"_blank"} rel={"noreferrer"}>
+            <a
+              href={"https://github.com/lizhongyue248"}
+              target={"_blank"}
+              rel={"noreferrer"}
+              className="text-purple-400 hover:text-purple-300 transition-colors duration-200 underline decoration-purple-400/50 hover:decoration-purple-300"
+            >
               ZYUE
             </a>
             .

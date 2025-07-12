@@ -1,6 +1,5 @@
 import { Link } from "@/components/link"
 import { Button } from "@/components/ui/button"
-import { getRepoName } from "@/lib/file"
 import type { PartyInfo } from "@/types"
 import type { I18nData } from "@/types/i18n"
 import { Code, Sparkles } from "lucide-react"
@@ -30,7 +29,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({ i18n, party }) => 
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto font-medium px-4 sm:px-0">{i18n.home.description}</p>
 
-          <div className="flex gap-4 flex-row sm:gap-6 mt-6 sm:mt-8 justify-center items-center">
+          <div className="flex gap-4 flex-row flex-wrap sm:gap-6 mt-6 sm:mt-8 justify-center items-center">
             <Link href={`/${party?.link}`}>
               <Button
                 size="lg"

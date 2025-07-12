@@ -46,7 +46,7 @@ const Page = () => {
   const featureDetailCount = partyList.reduce((count, party) => count + (party.detailList?.length || 0), 0)
 
   return (
-    <div className={`min-h-screen transition-all duration-700 ${isDark ? "dark bg-black" : "bg-gradient-to-br from-pink-100 via-purple-50 to-cyan-100"}`}>
+    <div className={`min-h-screen transition-all duration-700 ${isDark ? "dark bg-black" : "bg-gradient-to-br from-pink-100 via-purple-50 to-cyan-100"} overflow-x-hidden`}>
       <PartyEffects />
       {showConfetti && <ConfettiEffect />}
       {showFireworks && <FireworksEffect />}
