@@ -29,6 +29,8 @@ export const Page = () => {
         </a>
       </h2>
       <div>{currentContent.description}</div>
+      {/* biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation> */}
+      <div className={"mt-4"} dangerouslySetInnerHTML={{ __html: currentContent.readmeContent ?? "" }} />
       {sidebar.data.map((feature) => (
         <FeatureSection key={`page-${feature.feature}`} feature={feature} filteredContent={filteredContent} />
       ))}

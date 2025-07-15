@@ -26,7 +26,7 @@ export const AppHeader = ({ navItems, className }: AppHeaderProps) => {
         className
       )}
     >
-      <nav className="flex justify-between items-center max-w-7xl mx-auto w-full">
+      <nav className="flex justify-between items-center  mx-auto w-full">
         <div className="flex items-center space-x-2 sm:space-x-3">
           <div className="text-xl sm:text-2xl md:text-3xl text-purple-600 dark:text-purple-400">🥳</div>
           <Link href={"/"}>

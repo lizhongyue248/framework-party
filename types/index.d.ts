@@ -41,6 +41,7 @@ export interface ContentInformation {
 
 export interface Content extends ContentInformation {
   code?: string
+  readmeContent?: string
   framework: Framework[]
   definitions?: Record<
     string,

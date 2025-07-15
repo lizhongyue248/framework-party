@@ -9,6 +9,7 @@ import type { Plugin } from "vite"
 import YAML from "yaml"
 import { getRepoName } from "../lib/file"
 import type { Content, ContentSidebarData, File, NavData, SidebarItemData, SidebarListData } from "../types"
+import { processReadmeFile } from "./asciidoc-processor"
 
 const readContentFile = () => {
   const contentDir = path.resolve("content/repository")
@@ -87,6 +88,12 @@ const processRepository = async (content: Content, repoName: string, sidebarCont
       if (status.behind > 0) {
         await repoGit.pull("origin")
       }
+    }
+
+    // 处理 README 文件
+    const readmeContent = processReadmeFile(targetDir, locale)
+    if (readmeContent) {
+      content.readmeContent = readmeContent
     }
 
     for (const framework of content.framework) {
@@ -198,4 +205,5 @@ const contentPlugin = async (): Promise<Plugin> => {
     }
   }
 }
+
 export default contentPlugin
